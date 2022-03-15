@@ -13,7 +13,7 @@ OBJ = $(SRC:.c=.o)
 
 NAME = arcade
 
-CFLAGS = -Wall -Wextra -std=c++20
+CFLAGS = -Wall -Wextra -std=c++20 -fno-gnu-unique
 
 all:    $(NAME)
 
