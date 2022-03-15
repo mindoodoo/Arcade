@@ -5,21 +5,23 @@
 ## wtf?
 ##
 
-FILES = src/main.cpp
+CORE_SRC =  src/main.cpp
 
-SRC =  $(FILES)
+CORE_OBJ = $(CORE_SRC:.c=.o)
 
-OBJ = $(SRC:.c=.o)
-
-NAME = arcade
+CORE_NAME = arcade
 
 CFLAGS = -Wall -Wextra -std=c++20 -fno-gnu-unique
 
-all:    $(NAME)
+all:    core games graphicals
 
-$(NAME): 	$(OBJ)
-			g++ $(OBJ) $(CFLAGS) -o $(NAME) -I include;
-			@make clean
+core: 	$(CORE_OBJ)
+		g++ $(CORE_OBJ) $(CFLAGS) -o $(CORE_NAME) -I include;
+		@make clean
+
+games:
+
+graphicals:
 
 clean:
 		find -regex ".*/.*\.o" -delete;
