@@ -16,7 +16,7 @@ CORE_OBJ = $(CORE_SRC:.c=.o)
 
 CORE_NAME = arcade
 
-CFLAGS = -Wall -Wextra -std=c++20 -fno-gnu-unique
+CFLAGS = -Wall -Wextra -std=c++2a -fno-gnu-unique -ldl
 
 all:    core games graphicals
 
