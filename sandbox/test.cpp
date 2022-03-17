@@ -5,15 +5,15 @@
 ** Description
 */
 
-#include <stdio.h>
+#include <string>
 
-void prints(void)
+void *make(void)
 {
-    printf("Hello");
+    return new std::string("Hello");
 }
 
 struct export_vtable {
-    void (*prints)(void);
+    void *(*prints)(void);
 };
 
-struct export_vtable exports = { prints };
+struct export_vtable exports = { make };

@@ -1,3 +1,5 @@
 *.so
 .idea
 arcade
+*.out
+CMakeLists.txt

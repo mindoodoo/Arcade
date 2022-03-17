@@ -5,7 +5,8 @@
 ## wtf?
 ##
 
-CORE_SRC =  src/main.cpp
+CORE_SRC =  src/core/main.cpp\
+			src/graphic/LdLoader.cpp
 
 CORE_OBJ = $(CORE_SRC:.c=.o)
 
