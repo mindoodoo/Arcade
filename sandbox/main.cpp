@@ -8,9 +8,9 @@
 #include <dlfcn.h>
 #include <iostream>
 
-
-struct export_vtable {
-    void (*prints)();
+struct export_vtable
+{
+    void (*make)();
 };
 
 int main(int argc, char *argv[])
@@ -21,13 +21,13 @@ int main(int argc, char *argv[])
     }
 
     void *p;
-    struct export_vtable* imports;
+    struct export_vtable *imports;
 
     if ((p = dlopen(argv[1], RTLD_NOW)) == nullptr)
         return 84;
 
     imports = static_cast<export_vtable *>(dlsym(p, "exports"));
 
-    imports->prints();
+    imports->make();
     return 0;
 }

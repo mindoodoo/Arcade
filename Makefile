@@ -27,9 +27,9 @@ core: 	$(CORE_OBJ)
 games:
 
 graphicals:
-	gcc $(GRAPH_SRC)/sfml/SfmlGraphicsLib.cpp  -Wall -Wextra -shared -fPIC -o $(GRAPH_DEST)/arcade_sfml.so
+	g++ $(GRAPH_SRC)/sfml/SfmlGraphicsLib.cpp  -Wall -Wextra -shared -fPIC -o $(GRAPH_DEST)/arcade_sfml.so
 	#gcc $(GRAPH_SRC)/sdl2/Sdl2GraphicsLib.cpp  -Wall -Wextra -shared -fPIC -o $(GRAPH_DEST)/arcade_sdl2.so
-	#gcc $(GRAPH_SRC)/ncurses/NcursesGraphicsLib.cpp  -Wall -Wextra -shared -fPIC -o $(GRAPH_DEST)/arcade_ncurses.so
+	g++ $(GRAPH_SRC)/ncurses/NcursesGraphicsLib.cpp  -Wall -Wextra -shared -fPIC -o $(GRAPH_DEST)/arcade_ncurses.so
 
 clean:
 		find -regex ".*/.*\.o" -delete;
