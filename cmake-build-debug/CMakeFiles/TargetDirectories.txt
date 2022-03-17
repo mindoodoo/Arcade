@@ -1,3 +1,0 @@
-/home/nlatt/Documents/Epitech/Projects/4-sem/B-OOP-400-BER-4-1-arcade-nicolas.lattemann/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/nlatt/Documents/Epitech/Projects/4-sem/B-OOP-400-BER-4-1-arcade-nicolas.lattemann/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/nlatt/Documents/Epitech/Projects/4-sem/B-OOP-400-BER-4-1-arcade-nicolas.lattemann/cmake-build-debug/CMakeFiles/B_OOP_400_BER_4_1_arcade_nicolas_lattemann.dir
