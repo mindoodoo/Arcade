@@ -1,0 +1,4 @@
+/home/nlatt/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6777.58/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/nlatt/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/213.6777.58/bin/ninja/linux/ninja -G Ninja /home/nlatt/Documents/Epitech/Projects/4-sem/B-OOP-400-BER-4-1-arcade-nicolas.lattemann
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/nlatt/Documents/Epitech/Projects/4-sem/B-OOP-400-BER-4-1-arcade-nicolas.lattemann/cmake-build-debug
