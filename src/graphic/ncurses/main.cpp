@@ -17,7 +17,7 @@ void draw_street(IGraphicsLib *lib, int x, int y)
 int main(int argc, char *argv[])
 {
 
-    auto glib = new NcursesGraphicsLib();
+    IGraphicsLib * glib = new NcursesGraphicsLib();
 
     int i = 1;
 

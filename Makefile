@@ -18,6 +18,14 @@ CORE_NAME = arcade
 
 CFLAGS = -Wall -Wextra -std=c++20 -fno-gnu-unique
 
+DYN_LIB_FLAGS = -Wall -Wextra -shared -fPIC
+
+SFML_FLAGS = -lsfml-graphics -lsfml-window -lsfml-system $(DYN_LIB_FLAGS)
+
+NCURSES_FLAGS = -lncurses $(DYN_LIB_FLAGS)
+
+SDL2_FLAGS = -lSDL2 -lSDL2main $(DYN_LIB_FLAGS)
+
 all:    core games graphicals
 
 core: 	$(CORE_OBJ)
@@ -27,9 +35,9 @@ core: 	$(CORE_OBJ)
 games:
 
 graphicals:
-	g++ $(GRAPH_SRC)/sfml/SfmlGraphicsLib.cpp  -Wall -Wextra -shared -fPIC -o $(GRAPH_DEST)/arcade_sfml.so
-	#gcc $(GRAPH_SRC)/sdl2/Sdl2GraphicsLib.cpp  -Wall -Wextra -shared -fPIC -o $(GRAPH_DEST)/arcade_sdl2.so
-	g++ $(GRAPH_SRC)/ncurses/NcursesGraphicsLib.cpp  -Wall -Wextra -shared -fPIC -o $(GRAPH_DEST)/arcade_ncurses.so
+	g++ $(GRAPH_SRC)/sfml/SfmlGraphicsLib.cpp -o $(GRAPH_DEST)/arcade_sfml.so $(SFML_FLAGS)
+	gcc $(GRAPH_SRC)/sdl2/Sdl2GraphicsLib.cpp -o $(GRAPH_DEST)/arcade_sdl2.so $(SDL2_FLAGS)
+	g++ $(GRAPH_SRC)/ncurses/NcursesGraphicsLib.cpp -o $(GRAPH_DEST)/arcade_ncurses.so $(NCURSES_FLAGS)
 
 clean:
 		find -regex ".*/.*\.o" -delete;

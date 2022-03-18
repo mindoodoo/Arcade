@@ -27,6 +27,8 @@ class NcursesGraphicsLib : virtual public IGraphicsLib
         void drawTile(int x, int y, int h, int w, char c) override;
 
         void drawTile(const std::string &path, int x, int y, int h, int w) override;
+
+        void event() override;
 };
 
 #endif //B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_NCURSESGRAPHICSLIB_HPP

@@ -17,7 +17,7 @@ void draw_street(IGraphicsLib *lib, int x, int y)
 int main(int argc, char *argv[])
 {
 
-    auto glib = new SfmlGraphicsLib();
+    IGraphicsLib *glib = new SfmlGraphicsLib();
 
     int i = 1;
 

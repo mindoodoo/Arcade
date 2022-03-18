@@ -52,3 +52,7 @@ void NcursesGraphicsLib::flush()
 {
     clear();
 }
+
+void NcursesGraphicsLib::event()
+{
+}
