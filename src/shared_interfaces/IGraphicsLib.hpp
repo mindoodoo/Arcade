@@ -14,13 +14,7 @@ class IGraphicsLib
 
         virtual void display() = 0;
 
-        virtual void flush() = 0;
-
-        virtual void showText(const std::string &text, int x, int y) = 0;
-
-        virtual void drawTile(int x, int y, int h, int w, char c) = 0;
-
-        virtual void drawTile(const std::string &text, int x, int y, int h, int w) = 0;
-
-        virtual void event() = 0;
+        virtual void drawTile(int x, int y, int tile) = 0;
+        // Note : Could add possibility for rotation of tile in the future
+        // if needed
 };
