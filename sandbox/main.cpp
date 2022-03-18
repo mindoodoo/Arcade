@@ -1,33 +1,21 @@
 /*
 ** EPITECH PROJECT, 2022
-** Project
+** main.cpp
 ** File description:
-** Description
+** .
 */
 
-#include <dlfcn.h>
-#include <iostream>
+#include "Interface.hpp"
+#include "LdLoader.hpp"
 
-
-struct export_vtable {
-    void (*prints)();
-};
-
-int main(int argc, char *argv[])
+int main(int ac, char **av)
 {
-    if (argc != 2) {
-        std::cout << "Please provide a graphics library." << std::endl;
-        return 84;
-    }
+    LDLoader<Interface> loader;
 
-    void *p;
-    struct export_vtable* imports;
-
-    if ((p = dlopen(argv[1], RTLD_NOW)) == nullptr)
-        return 84;
-
-    imports = static_cast<export_vtable *>(dlsym(p, "exports"));
-
-    imports->prints();
-    return 0;
+    loader.loadLib("./test.so");
+    Interface *instance = loader.getInstance();
+    if (instance)
+        instance->hello();
 }
+
+// template class LDLoader<Interface>;

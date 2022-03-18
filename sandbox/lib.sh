@@ -1,0 +1,1 @@
+gcc Child.cpp -Wall -Wextra -shared -fPIC -g3 -o test.so
