@@ -5,19 +5,18 @@
 ** Description
 */
 
-#ifndef B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_GRAPHICSLIB_HPP
-#define B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_GRAPHICSLIB_HPP
+#ifndef B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_NCURSESGRAPHICSLIB_HPP
+#define B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_NCURSESGRAPHICSLIB_HPP
 
 #include "../IGraphicsLib.hpp"
-#include <SFML/Graphics.hpp>
+#include <curses.h>
 
-class SfmlGraphicsLib : public virtual IGraphicsLib
+class NcursesGraphicsLib : virtual public IGraphicsLib
 {
-        sf::RenderWindow *_window;
     public:
-        SfmlGraphicsLib();
+        NcursesGraphicsLib();
 
-        ~SfmlGraphicsLib() override;
+        ~NcursesGraphicsLib() override;
 
         void display() override;
 
@@ -32,4 +31,4 @@ class SfmlGraphicsLib : public virtual IGraphicsLib
         void event() override;
 };
 
-#endif //B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_GRAPHICSLIB_HPP
+#endif //B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_NCURSESGRAPHICSLIB_HPP

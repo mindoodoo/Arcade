@@ -5,19 +5,17 @@
 ** Description
 */
 
-#ifndef B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_GRAPHICSLIB_HPP
-#define B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_GRAPHICSLIB_HPP
+#ifndef B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_SDL2GRAPHICSLIB_HPP
+#define B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_SDL2GRAPHICSLIB_HPP
 
 #include "../IGraphicsLib.hpp"
-#include <SFML/Graphics.hpp>
 
-class SfmlGraphicsLib : public virtual IGraphicsLib
+class Sdl2GraphicsLib : public virtual IGraphicsLib
 {
-        sf::RenderWindow *_window;
     public:
-        SfmlGraphicsLib();
+        Sdl2GraphicsLib();
 
-        ~SfmlGraphicsLib() override;
+        ~Sdl2GraphicsLib();
 
         void display() override;
 
@@ -32,4 +30,4 @@ class SfmlGraphicsLib : public virtual IGraphicsLib
         void event() override;
 };
 
-#endif //B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_GRAPHICSLIB_HPP
+#endif //B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_SDL2GRAPHICSLIB_HPP
