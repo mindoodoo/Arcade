@@ -5,3 +5,6 @@ arcade
 CMakeLists.txt
 cmake-build-debug
 .vscode
+lib/*
+!.gitkeep
+src/games/nibbler/main.cpp
