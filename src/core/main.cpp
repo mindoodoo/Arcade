@@ -6,7 +6,7 @@
 */
 
 #include <iostream>
-#include "../graphic/LdLoader.hpp"
+// #include "../loader/LdLoader.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -14,7 +14,5 @@ int main(int argc, char *argv[])
         std::cout << "Please provide a graphics library." << std::endl;
         return 84;
     }
-
-    auto x = new LDLoader(argv[1]);
     return 0;
 }

@@ -5,10 +5,9 @@
 ** Description
 */
 
-#ifndef B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_NCURSESGRAPHICSLIB_HPP
-#define B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_NCURSESGRAPHICSLIB_HPP
+#pragma once
 
-#include "../IGraphicsLib.hpp"
+#include "IGraphicsLib.hpp"
 #include <curses.h>
 
 class NcursesGraphicsLib : virtual public IGraphicsLib
@@ -30,5 +29,3 @@ class NcursesGraphicsLib : virtual public IGraphicsLib
 
         void event() override;
 };
-
-#endif //B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_NCURSESGRAPHICSLIB_HPP
