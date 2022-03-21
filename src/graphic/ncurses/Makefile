@@ -5,7 +5,7 @@
 ## .
 ##
 
-CXXFLAGS = -Wall -Wextra -Werror -g3 -I../../shared_interfaces -shared -fPIC \
+CXXFLAGS = -Wall -Wextra -Werror -g3 -I../../shared -shared -fPIC \
 	-g3	-lncurses 
 
 NAME = ncurseslib.so
