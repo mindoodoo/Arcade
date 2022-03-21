@@ -39,5 +39,7 @@ class IGraphicsLib
         // Queue of events
         virtual std::queue<char> getInput() const = 0;
 
+        // Checks if game config is currently loaded config
+        // If not : calls config loading methods
         virtual void checkConfig(const gfx_config_t &config) = 0;
 };
