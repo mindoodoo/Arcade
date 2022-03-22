@@ -31,6 +31,9 @@ class IGraphicsLib
         // Updates screen with buffer (called at the end of all draw tiles)
         virtual void display() const = 0;
 
+        // Clear screen/window
+        virtual void flush(void) const = 0;
+
         // Draw tile of index tile_index, at x tile and y tile
         // (tile is the unit)
         // Note : Could add possibility for rotation of tile in the future

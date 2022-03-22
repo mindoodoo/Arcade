@@ -48,3 +48,8 @@ void NcursesGraphicsLib::loadConfig(void)
     curs_set(0);
     halfdelay(1);
 }
+
+void NcursesGraphicsLib::flush(void) const
+{
+    clear();
+}

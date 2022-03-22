@@ -22,6 +22,9 @@ class NcursesGraphicsLib : virtual public IGraphicsLib
 
         void loadConfig(void);
 
+        // Runtime methods
+        void flush(void) const override;
+
     private:
         gfx_config_t _config;
         std::vector<char> _tileset;
