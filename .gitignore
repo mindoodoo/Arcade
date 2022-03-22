@@ -8,3 +8,4 @@ cmake-build-debug
 lib/*
 !.gitkeep
 src/games/nibbler/main.cpp
+**/*.o

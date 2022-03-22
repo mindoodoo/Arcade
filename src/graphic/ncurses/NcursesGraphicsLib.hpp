@@ -7,25 +7,31 @@
 
 #pragma once
 
-#include "IGraphicsLib.hpp"
 #include <curses.h>
+#include <vector>
+#include "IGraphicsLib.hpp"
 
 class NcursesGraphicsLib : virtual public IGraphicsLib
 {
     public:
+        // Constructor
         NcursesGraphicsLib();
 
-        ~NcursesGraphicsLib() override;
+        // Config / view setup
+        void checkConfig(const gfx_config_t &config) override;
 
-        void display() override;
+        void loadConfig(void);
 
-        void flush() override;
+        // Runtime methods
+        void flush(void) const override;
+        void drawTile(int tile_index, int x, int y) const override;
+        void drawText(const std::string &text, int x, int y) const override;
 
-        void showText(const std::string &text, int x, int y) override;
+        // Input
+        std::queue<char> &getInput() override;
 
-        void drawTile(int x, int y, int h, int w, char c) override;
-
-        void drawTile(const std::string &path, int x, int y, int h, int w) override;
-
-        void event() override;
+    private:
+        gfx_config_t _config;
+        std::vector<char> _tileset;
+        std::queue<char> _inputQueue;
 };

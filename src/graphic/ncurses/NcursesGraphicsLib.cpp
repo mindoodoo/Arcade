@@ -7,9 +7,41 @@
 
 
 #include "NcursesGraphicsLib.hpp"
+#include "shared.hpp"
 
 NcursesGraphicsLib::NcursesGraphicsLib()
 {
+    // Initialize empty config
+    this->_config = {
+        "",
+        "",
+        "",
+        0,
+        0,
+        0,
+        0
+    };
+}
+
+void NcursesGraphicsLib::checkConfig(const gfx_config_t &config)
+{
+    // Check if config is same
+    if (config != this->_config) {
+        this->_config = config;
+        this->loadConfig();
+    }
+}
+
+void NcursesGraphicsLib::loadConfig(void)
+{
+    auto csv = csvToTable(this->_config.asciiTilesetPath);
+
+    // Load tileset
+    for (int i = 0; i < csv.size(); i++)
+        for (int j = 0; j < csv[i].size(); j++)
+            this->_tileset.push_back(csv[i][j][0]); // [0] as it's a str
+
+    // Ncurses initialization
     initscr();
     raw();
     noecho();
@@ -17,42 +49,25 @@ NcursesGraphicsLib::NcursesGraphicsLib()
     halfdelay(1);
 }
 
-void NcursesGraphicsLib::display()
-{
-    refresh();
-}
-
-void NcursesGraphicsLib::showText(const std::string &text, int x, int y)
-{
-    mvaddstr(x, y, text.c_str());
-}
-
-NcursesGraphicsLib::~NcursesGraphicsLib()
-{
-    endwin();
-}
-
-void NcursesGraphicsLib::drawTile(const std::string &path, int x, int y, int h, int w)
-{
-    this->drawTile(x, y, h, w, '#');
-}
-
-void NcursesGraphicsLib::drawTile(int x, int y, int h, int w, char c)
-{
-    for (int i = 0; i < h; i++) {
-        for (int j = 0; j < w * 2; j += 2) {
-            mvaddch(y + i, x + j, c);
-            if (i + 1 < w)
-                mvaddch(y + i + 1, x + j, ' ');
-        }
-    }
-}
-
-void NcursesGraphicsLib::flush()
+void NcursesGraphicsLib::flush(void) const
 {
     clear();
 }
 
-void NcursesGraphicsLib::event()
+void NcursesGraphicsLib::drawTile(int tile_index, int x, int y) const
 {
+    mvaddch(y, x * 2, this->_tileset[tile_index]);
+}
+
+void NcursesGraphicsLib::drawText(const std::string &text, int x, int y) const
+{
+    mvprintw(y, x * 2, text.c_str());
+}
+
+std::queue<char> &NcursesGraphicsLib::getInput()
+{
+    // Add new input to queue
+    this->_inputQueue.push(getch());
+
+    return this->_inputQueue;
 }

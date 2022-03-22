@@ -5,7 +5,7 @@
 ## .
 ##
 
-CXXFLAGS = -Wall -Wextra -Werror -g3 -I../../shared_interfaces -shared -fPIC \
+CXXFLAGS = -Wall -Wextra -Werror -g3 -I../../shared -shared -fPIC \
 	-lsfml-graphics -lsfml-window -lsfml-system
 
 NAME = sfmllib.so

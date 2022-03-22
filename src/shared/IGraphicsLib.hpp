@@ -19,6 +19,10 @@ typedef struct {
     int windowHeight; // In tiles
 } gfx_config_t;
 
+// Overloads
+bool operator==(gfx_config_t const &left, gfx_config_t const &right);
+bool operator!=(gfx_config_t const &left, gfx_config_t const &right);
+
 class IGraphicsLib
 {
     public:
@@ -26,6 +30,9 @@ class IGraphicsLib
 
         // Updates screen with buffer (called at the end of all draw tiles)
         virtual void display() const = 0;
+
+        // Clear screen/window
+        virtual void flush(void) const = 0;
 
         // Draw tile of index tile_index, at x tile and y tile
         // (tile is the unit)
@@ -37,7 +44,9 @@ class IGraphicsLib
 
         // Get events that happened since last frame
         // Queue of events
-        virtual std::queue<char> getInput() const = 0;
+        virtual std::queue<char> &getInput() = 0;
 
+        // Checks if game config is currently loaded config
+        // If not : calls config loading methods
         virtual void checkConfig(const gfx_config_t &config) = 0;
 };
