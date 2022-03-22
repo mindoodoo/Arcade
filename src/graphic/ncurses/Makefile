@@ -5,8 +5,7 @@
 ## .
 ##
 
-CXXFLAGS = -Wall -Wextra -Werror -g3 -I../../shared -shared -fPIC \
-	-g3	-lncurses 
+CXXFLAGS = -Wall -Wextra -Werror -g3 -I../../shared -shared -fPIC -lncurses 
 
 NAME = ncurseslib.so
 
@@ -14,7 +13,8 @@ DEST = ../../../lib
 
 CC = g++
 
-SRC = NcursesGraphicsLib.cpp
+SRC = NcursesGraphicsLib.cpp \
+	../../operators.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

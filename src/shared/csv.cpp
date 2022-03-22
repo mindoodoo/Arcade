@@ -17,6 +17,7 @@ std::vector<std::string> csv_read_row(std::istream &in, char delimiter)
     std::stringstream ss;
     bool inquotes = false;
     std::vector<std::string> row;
+    
     while(in.good())
     {
         char c = in.get();
