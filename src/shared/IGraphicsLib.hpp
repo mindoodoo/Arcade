@@ -19,6 +19,10 @@ typedef struct {
     int windowHeight; // In tiles
 } gfx_config_t;
 
+// Overloads
+bool operator==(gfx_config_t const &left, gfx_config_t const &right);
+bool operator!=(gfx_config_t const &left, gfx_config_t const &right);
+
 class IGraphicsLib
 {
     public:

@@ -7,13 +7,22 @@
 
 #pragma once
 
-#include "IGraphicsLib.hpp"
 #include <curses.h>
+#include <vector>
+#include "IGraphicsLib.hpp"
 
 class NcursesGraphicsLib : virtual public IGraphicsLib
 {
     public:
+        // Constructor
         NcursesGraphicsLib();
 
-        ~NcursesGraphicsLib() override;
+        // Config / view setup
+        void checkConfig(const gfx_config_t &config) override;
+
+        void loadConfig(void);
+
+    private:
+        gfx_config_t _config;
+        std::vector<char> _tileset;
 };
