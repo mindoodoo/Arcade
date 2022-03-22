@@ -17,11 +17,6 @@
 #define TERRAIN_WALL 20
 #define TERRAIN_FLOOR 21
 
-
+#define GFX (*this->_gfx)
 
 #include <string>
-void mockDrawTile(int tile, int x, int y);
-
-void mockInitGfxLib();
-
-void mockShowText(const std::string &text, int x, int y);

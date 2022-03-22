@@ -7,14 +7,13 @@
 
 #pragma once
 
-#include "../../../shared_interfaces/IGraphicsLib.hpp"
 #include "Nibbler.hpp"
+#include "../../../shared/IGraphicsLib.hpp"
 
 class GameManager
 {
     public:
-        //        GameManager(IGraphicsLib& gfxLib);
-        GameManager(int map);
+        GameManager(IGraphicsLib **gfx);
 
         ~GameManager() = default;
 
@@ -37,7 +36,7 @@ class GameManager
         std::vector<Item *> _items;
         size_t _gameHeight;
         size_t _gameWidth;
-
+        IGraphicsLib **_gfx;
         int _score;
 
         int _timeLeft;

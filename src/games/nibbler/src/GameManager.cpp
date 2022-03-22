@@ -10,14 +10,15 @@
 #include "Core.hpp"
 #include "../include/NibblerMacros.hpp"
 
-GameManager::GameManager(int map)
+GameManager::GameManager(IGraphicsLib **gfx)
 {
     this->_score = 0;
     this->_gameHeight = 30;
     this->_gameWidth = 30;
-    this->_scene = new Terrain(this->_gameHeight, this->_gameWidth);
-    this->_nibbler = new Nibbler(this->_gameHeight / 2, this->_gameWidth / 2, this->_scene);
+    this->_scene = new Terrain(this->_gameHeight, this->_gameWidth, gfx);
+    this->_nibbler = new Nibbler(this->_gameHeight / 2, this->_gameWidth / 2, this->_scene, gfx);
     this->generateItems(ITEM_FRUIT, this->_gameHeight * this->_gameWidth * 0.01);
+    this->_gfx = gfx;
 }
 
 void GameManager::draw()
@@ -32,7 +33,7 @@ void GameManager::draw()
 
 int GameManager::frame()
 {
-    switch (getch()) {
+    switch (GFX->getInput().front()) {
         case 'z':
         case 'w':
         case KEY_UP:

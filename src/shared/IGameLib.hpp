@@ -14,6 +14,7 @@ class IGameLib {
         ~IGameLib() = default;
 
         virtual void frame() = 0;
+
         virtual void setGfx(IGraphicsLib **_gfx) = 0;
 
     protected:

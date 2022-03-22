@@ -10,7 +10,7 @@
 #include "Nibbler.hpp"
 #include "../include/NibblerMacros.hpp"
 
-Nibbler::Nibbler(int nibbler_start_x, int nibbler_start_y, Terrain *scene)
+Nibbler::Nibbler(int nibbler_start_x, int nibbler_start_y, Terrain *scene, IGraphicsLib **gfx)
 {
     this->_scene = scene;
     this->_body.push_back({.x = nibbler_start_x, .y = nibbler_start_y++});
@@ -19,6 +19,7 @@ Nibbler::Nibbler(int nibbler_start_x, int nibbler_start_y, Terrain *scene)
     this->_body.push_back({.x = nibbler_start_x, .y = nibbler_start_y});
     this->_xMovement = 0;
     this->_yMovement = -1;
+    this->_gfx = gfx;
 }
 
 void Nibbler::appendSegment()
@@ -72,11 +73,11 @@ void Nibbler::draw()
 {
     for (int i = 0; i < this->_body.size(); i++) {
         if (i == 0)
-            mockDrawTile(NIBBLER_HEAD, this->_body[i].x, this->_body[i].y);
+            GFX->drawTile(NIBBLER_HEAD, this->_body[i].x, this->_body[i].y);
         else if (i == this->_body.size() - 1)
-            mockDrawTile(NIBBLER_TAIL, this->_body[i].x, this->_body[i].y);
+            GFX->drawTile(NIBBLER_TAIL, this->_body[i].x, this->_body[i].y);
         else
-            mockDrawTile(NIBBLER_BODY, this->_body[i].x, this->_body[i].y);
+            GFX->drawTile(NIBBLER_BODY, this->_body[i].x, this->_body[i].y);
     }
 }
 

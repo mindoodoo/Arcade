@@ -9,8 +9,8 @@
 #include "Nibbler.hpp"
 #include "../include/NibblerMacros.hpp"
 
-Fruit::Fruit(int x, int y)
-    : Item(x, y, ITEM_FRUIT)
+Fruit::Fruit(int x, int y, IGraphicsLib **gfx)
+    : Item(x, y, ITEM_FRUIT, gfx)
 {
 }
 

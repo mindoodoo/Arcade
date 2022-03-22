@@ -8,13 +8,14 @@
 #pragma once
 
 #include <utility>
+#include "../../../shared/IGraphicsLib.hpp"
 
 class Nibbler;
 
 class Item
 {
     public:
-        Item(int x, int y, char c);
+        Item(int x, int y, char c, IGraphicsLib **gfx);
 
         std::pair<int, int> getLocation();
 
@@ -29,4 +30,5 @@ class Item
         int _x;
         int _y;
         char _symbol;
+        IGraphicsLib **_gfx;
 };

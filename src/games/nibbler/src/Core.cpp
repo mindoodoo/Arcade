@@ -66,3 +66,8 @@ void Core::setHighScore(int highScore)
         this->_highScore = highScore;
     }
 }
+
+void Core::setGfx(IGraphicsLib **gfx)
+{
+    this->_gfx = gfx;
+}

@@ -21,7 +21,7 @@ typedef struct
 class Nibbler
 {
     public:
-        Nibbler(int nibbler_start_x, int nibbler_start_y, Terrain *scene);
+        Nibbler(int nibbler_start_x, int nibbler_start_y, Terrain *scene, IGraphicsLib **gfx);
 
         ~Nibbler() = default;
 
@@ -40,6 +40,7 @@ class Nibbler
         bool nibblerCollision(int x, int y);
 
         size_t length();
+
     private:
         std::deque<segment_t> _body;
 
@@ -50,4 +51,6 @@ class Nibbler
         int _xMovement = -1;
 
         int _yMovement = 0;
+
+        IGraphicsLib **_gfx;
 };

@@ -9,11 +9,12 @@
 #include "Item.hpp"
 #include "../include/NibblerMacros.hpp"
 
-Item::Item(int x, int y, char c)
+Item::Item(int x, int y, char c, IGraphicsLib **gfx)
 {
     this->_x = x;
     this->_y = y;
     this->_symbol = c;
+    this->_gfx = gfx;
 }
 
 std::pair<int, int> Item::getLocation()
@@ -23,7 +24,7 @@ std::pair<int, int> Item::getLocation()
 
 void Item::draw()
 {
-    mockDrawTile(this->_symbol, this->_x, this->_y);
+    GFX->drawTile(this->_symbol, this->_x, this->_y);
 }
 
 bool Item::itemCollision(int x, int y) const

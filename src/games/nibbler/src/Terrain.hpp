@@ -9,6 +9,7 @@
 
 #include <vector>
 #include "Fruit.hpp"
+#include "../../../shared/IGraphicsLib.hpp"
 #include <stddef.h>
 
 class Terrain
@@ -19,7 +20,7 @@ class Terrain
          * @param height height in tiles
          * @param width width in tiles
          */
-        Terrain(size_t height, size_t width);
+        Terrain(size_t height, size_t width, IGraphicsLib **gfx);
 
         ~Terrain() = default;
 
@@ -31,4 +32,6 @@ class Terrain
         std::vector<std::vector<char>> _map;
 
         std::vector<char> _walkable;
+
+        IGraphicsLib **_gfx;
 };

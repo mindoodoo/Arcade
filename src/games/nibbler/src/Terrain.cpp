@@ -12,7 +12,7 @@
 
 #define RANGE(a) a.begin(), a.end()
 
-Terrain::Terrain(size_t height, size_t width)
+Terrain::Terrain(size_t height, size_t width, IGraphicsLib **gfx)
 {
     this->_map = std::vector<std::vector<char>>(height);
 
@@ -26,6 +26,7 @@ Terrain::Terrain(size_t height, size_t width)
         }
     }
 
+    this->_gfx = gfx;
     this->_walkable.push_back(TERRAIN_FLOOR);
 }
 
@@ -43,7 +44,7 @@ void Terrain::draw()
 {
     for (int x = 0; x < this->_map.size(); x++) {
         for (int y = 0; y < this->_map[x].size(); y++) {
-            mockDrawTile(this->_map[x][y], x, y);
+            GFX->drawTile(this->_map[x][y], x, y);
         }
     }
 }
