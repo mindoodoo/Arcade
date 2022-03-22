@@ -15,45 +15,41 @@
 std::vector<std::string> csv_read_row(std::istream &in, char delimiter)
 {
     std::stringstream ss;
-    bool inquotes = false;
+    bool inQuotes = false;
+    char c;
     std::vector<std::string> row;
     
-    while(in.good())
-    {
-        char c = in.get();
-        if (!inquotes && c=='"')
-            inquotes=true;
-        else if (inquotes && c=='"')
-        {
-            if ( in.peek() == '"')
+    while(in.good()) {
+        c = in.get();
+        if (!inQuotes && c == '"')
+            inQuotes=true;
+        else if (inQuotes && c == '"') {
+            if (in.peek() == '"')
                 ss << (char)in.get();
             else
-                inquotes=false;
-        }
-        else if (!inquotes && c==delimiter)
-        {
-            row.push_back( ss.str() );
+                inQuotes=false;
+        } else if (!inQuotes && c == delimiter) {
+            row.push_back(ss.str());
             ss.str("");
-        }
-        else if (!inquotes && (c=='\r' || c=='\n') )
-        {
-            if(in.peek()=='\n') { in.get(); }
-            row.push_back( ss.str() );
+        } else if (!inQuotes && (c == '\r' || c == '\n')) {
+            if (in.peek()=='\n')
+                in.get();
+            row.push_back(ss.str());
             return row;
-        }
-        else
+        } else
             ss << c;
     }
 }
 
-std::vector<std::vector<std::string>> csvToTable(const std::string &filepath) {
-
+std::vector<std::vector<std::string>> csvToTable(const std::string &filepath)
+{
     std::vector<std::string> row;
     std::vector<std::vector<std::string>> table;
     std::ifstream myFile(filepath);
 
-    if(!myFile.is_open()) throw std::runtime_error("Could not open file");
-    while (myFile.good()){
+    if(!myFile.is_open())
+        throw std::runtime_error("Could not open file");
+    while (myFile.good()) {
         row = csv_read_row(myFile, ',');
         table.push_back(row);
     }
