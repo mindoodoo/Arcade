@@ -64,10 +64,10 @@ void NcursesGraphicsLib::drawText(const std::string &text, int x, int y) const
     mvprintw(y, x * 2, text.c_str());
 }
 
-std::queue<char> NcursesGraphicsLib::getInput()
+std::queue<char> &NcursesGraphicsLib::getInput()
 {
     // Add new input to queue
     this->_inputQueue.push(getch());
 
-    return this->_inputQueue
+    return this->_inputQueue;
 }

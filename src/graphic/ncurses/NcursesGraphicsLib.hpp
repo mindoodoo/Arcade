@@ -28,7 +28,7 @@ class NcursesGraphicsLib : virtual public IGraphicsLib
         void drawText(const std::string &text, int x, int y) const override;
 
         // Input
-        std::queue<char> getInput() override;
+        std::queue<char> &getInput() override;
 
     private:
         gfx_config_t _config;
