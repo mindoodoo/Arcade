@@ -5,3 +5,4 @@ arcade
 CMakeLists.txt
 cmake-build-debug
 .vscode
+**/*.o
