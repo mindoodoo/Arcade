@@ -27,7 +27,11 @@ class NcursesGraphicsLib : virtual public IGraphicsLib
         void drawTile(int tile_index, int x, int y) const override;
         void drawText(const std::string &text, int x, int y) const override;
 
+        // Input
+        std::queue<char> getInput() override;
+
     private:
         gfx_config_t _config;
         std::vector<char> _tileset;
+        std::queue<char> _inputQueue;
 };

@@ -44,7 +44,7 @@ class IGraphicsLib
 
         // Get events that happened since last frame
         // Queue of events
-        virtual std::queue<char> getInput() const = 0;
+        virtual std::queue<char> getInput() = 0;
 
         // Checks if game config is currently loaded config
         // If not : calls config loading methods
