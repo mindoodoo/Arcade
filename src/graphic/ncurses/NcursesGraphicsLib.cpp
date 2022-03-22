@@ -53,3 +53,13 @@ void NcursesGraphicsLib::flush(void) const
 {
     clear();
 }
+
+void NcursesGraphicsLib::drawTile(int tile_index, int x, int y) const
+{
+    mvaddch(y, x * 2, this->_tileset[tile_index]);
+}
+
+void NcursesGraphicsLib::drawText(const std::string &text, int x, int y) const
+{
+    mvprintw(y, x * 2, text.c_str());
+}
