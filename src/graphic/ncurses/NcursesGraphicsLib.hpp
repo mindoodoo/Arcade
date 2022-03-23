@@ -10,6 +10,7 @@
 #include <curses.h>
 #include <vector>
 #include "../../shared/IGraphicsLib.hpp"
+#include "../../shared/shared.hpp"
 
 class NcursesGraphicsLib : virtual public IGraphicsLib
 {

@@ -36,8 +36,8 @@ void NcursesGraphicsLib::loadConfig(void)
     auto csv = csvToTable(this->_config.asciiTilesetPath);
 
     // Load tileset
-    for (int i = 0; i < csv.size(); i++)
-        for (int j = 0; j < csv[i].size(); j++)
+    for (unsigned int i = 0; i < csv.size(); i++)
+        for (unsigned int j = 0; j < csv[i].size(); j++)
             this->_tileset.push_back(csv[i][j][0]); // [0] as it's a str
 
     // Ncurses initialization
