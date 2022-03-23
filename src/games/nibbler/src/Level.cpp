@@ -10,14 +10,19 @@
 #include "GameCore.hpp"
 #include "../include/NibblerMacros.hpp"
 
-Nibbler::Level::Level(IGraphicsLib **gfx)
+Nibbler::Level::Level(IGraphicsLib **gfx, gfx_config_t levelConf)
 {
     this->_score = 0;
+    this->_levelConf = levelConf;
+
     this->_gameHeight = 30;
     this->_gameWidth = 30;
+
     this->_scene = new Terrain(this->_gameHeight, this->_gameWidth, gfx);
     this->_nibbler = new Player(this->_gameHeight / 2, this->_gameWidth / 2, this->_scene, gfx);
+
     this->_gfx = gfx;
+
     this->generateItems(ITEM_FRUIT, this->_gameHeight * this->_gameWidth * 0.01);
 }
 
@@ -33,6 +38,8 @@ void Nibbler::Level::draw()
 
 int Nibbler::Level::frame()
 {
+    // GFX->checkConfig(this->_levelConf);
+
     std::queue<char> inputs = GFX->getInput();
 
     if (!inputs.empty()) {

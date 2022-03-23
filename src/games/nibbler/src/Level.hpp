@@ -16,7 +16,7 @@ namespace Nibbler
     class Level : public virtual ILevel
     {
         public:
-            explicit Level(IGraphicsLib **gfx);
+            explicit Level(IGraphicsLib **gfx, gfx_config_t levelConf);
 
             ~Level() = default;
 
@@ -42,5 +42,6 @@ namespace Nibbler
             size_t _gameWidth;
             IGraphicsLib **_gfx;
             int _score;
+            gfx_config_t _levelConf;
     };
 }

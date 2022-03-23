@@ -12,6 +12,17 @@ Nibbler::GameCore::GameCore()
     : BaseGameCore()
 {
     this->_highScore = 0;  // TODO: Read from file where we save scores
+
+    // Hardcoded for the time being, we can add multiple level parsing in the future
+    this->_levelConf = {
+        "./src/games/nibbler/assets/asciiTileset.csv",
+        "", // These other elements will be implemented later
+        "",
+        0,
+        0,
+        0,
+        0
+    };
 }
 
 void Nibbler::GameCore::showMenu()
@@ -30,5 +41,5 @@ void Nibbler::GameCore::showGameOver()
 
 void Nibbler::GameCore::startGame()
 {
-    this->_game = new Level(this->_gfx);
+    this->_game = new Level(this->_gfx, this->_levelConf);
 }
