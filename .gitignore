@@ -9,3 +9,4 @@ lib/*
 !.gitkeep
 src/games/nibbler/main.cpp
 **/*.o
+arcade_*
