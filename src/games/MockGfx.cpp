@@ -53,3 +53,8 @@ void MockGfx::loadTileset(std::map<int, char> tileset)
 {
     this->_tileset = std::move(tileset);
 }
+
+void MockGfx::popInput()
+{
+    this->_inputQueue.pop();
+}

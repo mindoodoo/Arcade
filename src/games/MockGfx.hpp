@@ -30,6 +30,8 @@ class MockGfx : public virtual IGraphicsLib
 
         void loadTileset(std::map<int, char> tileset);
 
+        void popInput() override;
+
         void checkConfig(const gfx_config_t &config) override {
             std::string(config.graphicalTilesetPath) ;
         };

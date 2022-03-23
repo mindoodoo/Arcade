@@ -19,7 +19,6 @@ GameManager::GameManager(IGraphicsLib **gfx)
     this->_nibbler = new Nibbler(this->_gameHeight / 2, this->_gameWidth / 2, this->_scene, gfx);
     this->_gfx = gfx;
     this->generateItems(ITEM_FRUIT, this->_gameHeight * this->_gameWidth * 0.01);
-
 }
 
 void GameManager::draw()
@@ -34,11 +33,12 @@ void GameManager::draw()
 
 int GameManager::frame()
 {
-    auto inputs = GFX->getInput();
+    std::queue<char> inputs = GFX->getInput();
+
     if (!inputs.empty()) {
         char c = inputs.back();
-        auto f = std::string(&c);
-        GFX->drawText(f, 50, 50);
+        GFX->popInput();
+
         switch (c) {
             case 'z':
             case 'w':

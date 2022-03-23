@@ -37,6 +37,7 @@ int GenericCore::frame()
         auto inputs = GFX->getInput();
         if (!inputs.empty()) {
             char c = inputs.back();
+            GFX->popInput();
             switch (c) {
                 case 's':
                     this->startGame();
@@ -44,7 +45,6 @@ int GenericCore::frame()
                     GFX->flush();
                     break;
                 case 'q':
-                default:
                     return QUIT_SIGNAL;
             }
         }
