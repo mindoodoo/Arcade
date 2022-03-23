@@ -7,7 +7,6 @@
 
 #include "GenericCore.hpp"
 #include "pacman/include/PacmanMacros.hpp"
-#include "ncurses.h"
 
 GenericCore::GenericCore()
 {
@@ -28,21 +27,26 @@ int GenericCore::frame()
             this->setHighScore(this->_game->getScore());
             this->_state = GS_GAME_OVER;
             this->_game = nullptr;
-            clear();
+            GFX->flush();
         }
     } else {
         if (this->_state == GS_MENU)
             this->showMenu();
         else if (this->_state == GS_GAME_OVER)
             this->showGameOver();
-        switch (getch()) {
-            case 's':
-                this->startGame();
-                this->_state = GS_IN_GAME;
-                clear();
-                break;
-            case 'q':
-                return QUIT_SIGNAL;
+        auto inputs = GFX->getInput();
+        if (!inputs.empty()) {
+            char c = inputs.back();
+            switch (c) {
+                case 's':
+                    this->startGame();
+                    this->_state = GS_IN_GAME;
+                    GFX->flush();
+                    break;
+                case 'q':
+                default:
+                    return QUIT_SIGNAL;
+            }
         }
     }
     return SUCCESS_SIGNAL;
