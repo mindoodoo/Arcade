@@ -20,7 +20,7 @@ core:
 	@make clean
 
 games:
-	echo "No game libraries to compile."
+	make -C ./src/games/nibbler
 
 graphicals:
 	make -C ./src/graphic/ncurses
