@@ -38,4 +38,5 @@ T *LDLoader<T>::getInstance()
     }
 }
 
-template class LDLoader<Interface>;
+template class LDLoader<IGraphicsLib>;
+template class LDLoader<IGameLib>;

@@ -10,7 +10,8 @@
 #include <string>
 #include <dlfcn.h>
 #include <iostream>
-#include "Interface.hpp"
+#include "IGameLib.hpp"
+#include "IGraphicsLib.hpp"
 
 // typedef IGraphicsLib *(*entry)();
 
