@@ -14,7 +14,7 @@
 class MockGfx : public virtual IGraphicsLib
 {
     public:
-        ~MockGfx() override = default;
+        ~MockGfx() override;
 
         MockGfx();
 

@@ -69,3 +69,8 @@ std::queue<char> &NcursesGraphicsLib::getInput()
 
     return this->_inputQueue;
 }
+
+NcursesGraphicsLib::~NcursesGraphicsLib()
+{
+    curs_set(2);
+}

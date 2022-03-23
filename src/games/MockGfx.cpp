@@ -58,3 +58,8 @@ void MockGfx::popInput()
 {
     this->_inputQueue.pop();
 }
+
+MockGfx::~MockGfx()
+{
+    curs_set(2);
+}

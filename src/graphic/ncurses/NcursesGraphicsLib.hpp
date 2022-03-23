@@ -15,16 +15,18 @@
 class NcursesGraphicsLib : virtual public IGraphicsLib
 {
     public:
+        ~NcursesGraphicsLib() override;
+
         // Constructor
         NcursesGraphicsLib();
 
         // Config / view setup
         void checkConfig(const gfx_config_t &config) override;
 
-        void loadConfig(void);
+        void loadConfig();
 
         // Runtime methods
-        void flush(void) const override;
+        void flush() const override;
 
         void drawTile(int tile_index, int x, int y) const override;
 

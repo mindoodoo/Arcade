@@ -32,4 +32,6 @@ int main()
     do {
         refresh();
     } while (core->frame() != QUIT_SIGNAL);
+
+    delete gfx;
 }
