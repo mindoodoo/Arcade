@@ -21,11 +21,14 @@ core:
 	@make clean
 
 games:
-	make -C ./src/games/nibbler
-	make -C ./src/games/pacman
+	make -C ./src/games/nibbler --no-print-directory
+
+	make -C ./src/games/pacman --no-print-directory
+
 
 graphicals:
-	make -C ./src/graphic/ncurses
+	make -C ./src/graphic/ncurses --no-print-directory
+
 	# make -C ./src/graphic/sdl2
 	# make -C ./src/graphic/sfml
 
@@ -37,6 +40,6 @@ fclean: clean;
 	find -regex ".*/*.so" -delete;
 
 re: fclean
-	@make $(NAME)
+	@make $(NAME) --no-print-directory
 
 .PHONY: all clean
