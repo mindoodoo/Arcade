@@ -22,13 +22,10 @@ core:
 
 games:
 	make -C ./src/games/nibbler --no-print-directory
-
 	make -C ./src/games/pacman --no-print-directory
-
 
 graphicals:
 	make -C ./src/graphic/ncurses --no-print-directory
-
 	# make -C ./src/graphic/sdl2
 	# make -C ./src/graphic/sfml
 
