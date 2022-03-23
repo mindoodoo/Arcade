@@ -5,7 +5,7 @@
 ** Description
 */
 
-#include "Arcade.hpp"
+#include "ArcadeError.hpp"
 
 Error::Arcade::Arcade(const std::string &message)
 {

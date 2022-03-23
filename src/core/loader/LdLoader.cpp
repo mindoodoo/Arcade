@@ -6,7 +6,7 @@
 */
 
 #include "./LdLoader.hpp"
-#include "../../shared/Arcade.hpp"
+#include "../../shared/ArcadeError.hpp"
 
 template<class T>
 LDLoader<T>::~LDLoader()
