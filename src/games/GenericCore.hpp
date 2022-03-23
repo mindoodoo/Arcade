@@ -32,6 +32,7 @@ class GenericCore : public virtual IGameLib
         virtual void showMenu() = 0;
 
         virtual void showGameOver() = 0;
+        
     protected:
         int _highScore;
 
