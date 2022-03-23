@@ -39,7 +39,7 @@ $(NAME):
 	@make clean
 
 standalone:
-	$(CC) -o nibbler $(STDL_SRC) $(STDL_FLAGS)
+	$(CC) -o arcade_nibbler $(STDL_SRC) $(STDL_FLAGS)
 
 clean:
 	rm -rf $(OBJ)

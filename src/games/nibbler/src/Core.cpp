@@ -16,16 +16,16 @@ Core::Core()
 
 void Core::showMenu()
 {
-    GFX->drawText("IN MENU, PRESS S TO PLAY\n PRESS Q TO QUIT", 0, 0);
-
-    GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 1);
+    GFX->drawText("IN MENU, PRESS S TO PLAY", 0, 0);
+    GFX->drawText("PRESS Q TO QUIT", 0, 1);
+    GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 2);
 }
 
 void Core::showGameOver()
 {
-    GFX->drawText("YOU LOST, PRESS S TO TRY AGAIN\n PRESS Q TO QUIT", 0, 0);
-
-    GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 1);
+    GFX->drawText("YOU LOST, PRESS S TO TRY AGAIN", 0, 0);
+    GFX->drawText("PRESS Q TO QUIT", 0, 1);
+    GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 2);
 }
 
 void Core::startGame()

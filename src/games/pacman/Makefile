@@ -32,7 +32,7 @@ $(NAME):
 	@make clean
 
 standalone:
-	$(CC) -o pacman $(STDL_SRC) $(STDL_FLAGS)
+	$(CC) -o arcade_pacman $(STDL_SRC) $(STDL_FLAGS)
 
 clean:
 	rm -rf $(OBJ)

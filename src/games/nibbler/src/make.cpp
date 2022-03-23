@@ -10,8 +10,8 @@
 
 extern "C"
 {
-IGameLib *make()
-{
-    return new Core();
-}
+    IGameLib *make()
+    {
+        return new Core();
+    }
 }

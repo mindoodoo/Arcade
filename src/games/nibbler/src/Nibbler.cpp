@@ -46,7 +46,7 @@ int Nibbler::moveForward()
     const int nextY = this->head().y + this->_yMovement;
 
     if (!this->_scene->validLocation(nextX, nextY))
-        return true;
+        return false;
     if (this->nibblerCollision(nextX, nextY))
         return false;
 
