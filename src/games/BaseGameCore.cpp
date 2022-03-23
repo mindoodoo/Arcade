@@ -20,8 +20,10 @@ int BaseGameCore::frame()
     if (this->_state == GS_IN_GAME) {
         if (!this->_game)
             this->startGame();
+
         GFX->drawText("SCORE: " + std::to_string(this->_game->getScore()), 60, 0);
         GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 60, 1);
+
         if (this->_game->frame() == GS_GAME_OVER) {
             this->setHighScore(this->_game->getScore());
             this->_state = GS_GAME_OVER;
@@ -31,12 +33,16 @@ int BaseGameCore::frame()
     } else {
         if (this->_state == GS_MENU)
             this->showMenu();
+
         else if (this->_state == GS_GAME_OVER)
             this->showGameOver();
+
         auto inputs = GFX->getInput();
+
         if (!inputs.empty()) {
             char c = inputs.back();
             GFX->popInput();
+            
             switch (c) {
                 case 's':
                     this->startGame();
