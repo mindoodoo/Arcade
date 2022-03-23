@@ -7,7 +7,7 @@
 
 #include "Core.hpp"
 
-Core::Core(IGraphicsLib **gfx)
+Pacman::Core::Core(IGraphicsLib **gfx)
 {
     this->_state = GS_MENU;
     this->_game = nullptr;
@@ -16,7 +16,7 @@ Core::Core(IGraphicsLib **gfx)
     this->_gfx = gfx;
 }
 
-void Core::showMenu()
+void Pacman::Core::showMenu()
 {
     GFX->drawText("IN MENU, PRESS S TO PLAY", 0, 0);
     GFX->drawText("PRESS Q TO QUIT", 0, 1);
@@ -24,14 +24,14 @@ void Core::showMenu()
     GFX->drawText("GS: " + std::to_string(this->_state), 0, 3);
 }
 
-void Core::showGameOver()
+void Pacman::Core::showGameOver()
 {
     GFX->drawText("YOU LOST, PRESS S TO TRY AGAIN", 0, 0);
     GFX->drawText("PRESS Q TO QUIT", 0, 1);
     GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 2);
 }
 
-void Core::startGame()
+void Pacman::Core::startGame()
 {
-    this->_game = new GameManager();
+    this->_game = new Level();
 }

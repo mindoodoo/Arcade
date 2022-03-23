@@ -6,7 +6,6 @@
 */
 
 #include "GenericCore.hpp"
-#include "pacman/include/PacmanMacros.hpp"
 
 GenericCore::GenericCore()
 {
