@@ -1,1 +1,0 @@
-g++ main.cpp LdLoader.cpp -ldl -g3
