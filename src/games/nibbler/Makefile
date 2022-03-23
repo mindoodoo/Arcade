@@ -15,9 +15,9 @@ DEST = ../../../lib
 
 CC = g++
 
-SRC = 	src/Core.cpp\
-		src/GameManager.cpp\
-		src/Nibbler.cpp\
+SRC = 	src/GameCore.cpp\
+		src/Level.cpp\
+		src/Player.cpp\
 		src/Terrain.cpp\
 		src/Fruit.cpp\
 		src/Item.cpp\

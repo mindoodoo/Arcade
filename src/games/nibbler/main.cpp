@@ -5,7 +5,7 @@
 ** Description
 */
 
-#include "src/Core.hpp"
+#include "src/GameCore.hpp"
 
 #include "../MockGfx.hpp"
 #include "include/NibblerMacros.hpp"
@@ -24,7 +24,7 @@ int main()
     tileset[TERRAIN_FLOOR] = ' ';
 
     gfx->loadTileset(tileset);
-    Core *core = new Core();
+    Nibbler::GameCore *core = new Nibbler::GameCore();
 
     IGraphicsLib *igfx = gfx;
     core->setGfx(&igfx);

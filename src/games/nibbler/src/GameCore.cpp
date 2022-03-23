@@ -5,30 +5,30 @@
 ** Description
 */
 
-#include "Core.hpp"
+#include "GameCore.hpp"
 #include "../include/NibblerMacros.hpp"
 
-Core::Core()
+Nibbler::GameCore::GameCore()
     : GenericCore()
 {
     this->_highScore = 0;  // TODO: Read from file where we save scores
 }
 
-void Core::showMenu()
+void Nibbler::GameCore::showMenu()
 {
     GFX->drawText("IN MENU, PRESS S TO PLAY", 0, 0);
     GFX->drawText("PRESS Q TO QUIT", 0, 1);
     GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 2);
 }
 
-void Core::showGameOver()
+void Nibbler::GameCore::showGameOver()
 {
     GFX->drawText("YOU LOST, PRESS S TO TRY AGAIN", 0, 0);
     GFX->drawText("PRESS Q TO QUIT", 0, 1);
     GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 2);
 }
 
-void Core::startGame()
+void Nibbler::GameCore::startGame()
 {
-    this->_game = new GameManager(this->_gfx);
+    this->_game = new Level(this->_gfx);
 }

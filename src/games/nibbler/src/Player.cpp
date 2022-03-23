@@ -7,10 +7,10 @@
 
 #include <iostream>
 #include <ncurses.h>
-#include "Nibbler.hpp"
+#include "Player.hpp"
 #include "../include/NibblerMacros.hpp"
 
-Nibbler::Nibbler(int nibbler_start_x, int nibbler_start_y, Terrain *scene, IGraphicsLib **gfx)
+Nibbler::Player::Player(int nibbler_start_x, int nibbler_start_y, Terrain *scene, IGraphicsLib **gfx)
 {
     this->_scene = scene;
     this->_body.push_back({.x = nibbler_start_x, .y = nibbler_start_y++});
@@ -22,12 +22,12 @@ Nibbler::Nibbler(int nibbler_start_x, int nibbler_start_y, Terrain *scene, IGrap
     this->_gfx = gfx;
 }
 
-void Nibbler::appendSegment()
+void Nibbler::Player::appendSegment()
 {
     this->_body.push_back({.x = this->_pastTile.x, .y = this->_pastTile.y});
 }
 
-void Nibbler::turn(int xOffset, int yOffset)
+void Nibbler::Player::turn(int xOffset, int yOffset)
 {
     if (!(xOffset == 0 || yOffset == 0)) {
         std::cout << "Vertical movements not allowed" << std::endl;
@@ -40,7 +40,7 @@ void Nibbler::turn(int xOffset, int yOffset)
     this->_yMovement = yOffset;
 }
 
-int Nibbler::moveForward()
+int Nibbler::Player::moveForward()
 {
     const int nextX = this->head().x + this->_xMovement;
     const int nextY = this->head().y + this->_yMovement;
@@ -59,17 +59,17 @@ int Nibbler::moveForward()
     return true;
 }
 
-segment_t Nibbler::head()
+Nibbler::segment_t Nibbler::Player::head()
 {
     return this->_body.front();
 }
 
-segment_t Nibbler::tail()
+Nibbler::segment_t Nibbler::Player::tail()
 {
     return this->_body.back();
 }
 
-void Nibbler::draw()
+void Nibbler::Player::draw()
 {
     for (size_t i = 0; i < this->_body.size(); i++) {
         if (i == 0)
@@ -81,7 +81,7 @@ void Nibbler::draw()
     }
 }
 
-bool Nibbler::nibblerCollision(int x, int y)
+bool Nibbler::Player::nibblerCollision(int x, int y)
 {
     for (const auto &segment: this->_body) {
         if (segment.x == x && segment.y == y)
@@ -90,7 +90,7 @@ bool Nibbler::nibblerCollision(int x, int y)
     return false;
 }
 
-size_t Nibbler::length()
+size_t Nibbler::Player::length()
 {
     return this->_body.size();
 }

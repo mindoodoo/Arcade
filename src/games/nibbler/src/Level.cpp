@@ -6,22 +6,22 @@
 */
 
 #include <ncurses.h>
-#include "GameManager.hpp"
-#include "Core.hpp"
+#include "Level.hpp"
+#include "GameCore.hpp"
 #include "../include/NibblerMacros.hpp"
 
-GameManager::GameManager(IGraphicsLib **gfx)
+Nibbler::Level::Level(IGraphicsLib **gfx)
 {
     this->_score = 0;
     this->_gameHeight = 30;
     this->_gameWidth = 30;
     this->_scene = new Terrain(this->_gameHeight, this->_gameWidth, gfx);
-    this->_nibbler = new Nibbler(this->_gameHeight / 2, this->_gameWidth / 2, this->_scene, gfx);
+    this->_nibbler = new Player(this->_gameHeight / 2, this->_gameWidth / 2, this->_scene, gfx);
     this->_gfx = gfx;
     this->generateItems(ITEM_FRUIT, this->_gameHeight * this->_gameWidth * 0.01);
 }
 
-void GameManager::draw()
+void Nibbler::Level::draw()
 {
     this->_scene->draw();
     this->_nibbler->draw();
@@ -31,7 +31,7 @@ void GameManager::draw()
     }
 }
 
-int GameManager::frame()
+int Nibbler::Level::frame()
 {
     std::queue<char> inputs = GFX->getInput();
 
@@ -63,7 +63,7 @@ int GameManager::frame()
     return 0;
 }
 
-void GameManager::checkItemCollision()
+void Nibbler::Level::checkItemCollision()
 {
     const segment_t head = this->_nibbler->head();
 
@@ -78,7 +78,7 @@ void GameManager::checkItemCollision()
     }
 }
 
-void GameManager::generateItems(int item_id, size_t amount)
+void Nibbler::Level::generateItems(int item_id, size_t amount)
 {
     for (size_t i = 0; i < amount; i++) {
         std::pair<int, int> coords = this->randomLocation();
@@ -93,7 +93,7 @@ void GameManager::generateItems(int item_id, size_t amount)
     }
 }
 
-bool GameManager::isTileEmpty(int x, int y)
+bool Nibbler::Level::isTileEmpty(int x, int y)
 {
     for (auto item: this->_items)
         if (item->itemCollision(x, y))
@@ -105,7 +105,7 @@ bool GameManager::isTileEmpty(int x, int y)
     return true;
 }
 
-std::pair<int, int> GameManager::randomLocation()
+std::pair<int, int> Nibbler::Level::randomLocation()
 {
     int x;
     int y;
@@ -120,7 +120,7 @@ std::pair<int, int> GameManager::randomLocation()
     return {x, y};
 }
 
-int GameManager::getScore() const
+int Nibbler::Level::getScore() const
 {
     return this->_score;
 }

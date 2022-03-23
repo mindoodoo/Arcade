@@ -6,12 +6,12 @@
 */
 
 #include "../../../shared/IGameLib.hpp"
-#include "Core.hpp"
+#include "GameCore.hpp"
 
 extern "C"
 {
     IGameLib *make()
     {
-        return new Core();
+        return new Nibbler::GameCore();
     }
 }

@@ -12,26 +12,30 @@
 #include "../../../shared/IGraphicsLib.hpp"
 #include <stddef.h>
 
-class Terrain
+namespace Nibbler
 {
-    public:
+    class Terrain
+    {
+        public:
 
-        /**
-         * @param height height in tiles
-         * @param width width in tiles
-         */
-        Terrain(size_t height, size_t width, IGraphicsLib **gfx);
+            /**
+             * @param height height in tiles
+             * @param width  width in tiles
+             * @param gfx
+             */
+            Terrain(size_t height, size_t width, IGraphicsLib **gfx);
 
-        ~Terrain() = default;
+            ~Terrain() = default;
 
-        bool validLocation(size_t x, size_t y);
+            bool validLocation(size_t x, size_t y);
 
-        void draw();
+            void draw();
 
-    private:
-        std::vector<std::vector<char>> _map;
+        private:
+            std::vector<std::vector<char>> _map;
 
-        std::vector<char> _walkable;
+            std::vector<char> _walkable;
 
-        IGraphicsLib **_gfx;
-};
+            IGraphicsLib **_gfx;
+    };
+}
