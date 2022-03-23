@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
         return 84;
     }
 
-    Core *coreInstance = new Core();
+    Core *coreInstance = new Core(argv[1]);
     coreInstance->mainLoop();
 
     return 0;

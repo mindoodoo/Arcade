@@ -7,17 +7,21 @@
 
 #pragma once
 
-#include "IGraphicsLib.hpp"
-#include "IGameLib.hpp"
 #include "./loader/LdLoader.hpp"
+#include "IGameLib.hpp"
+#include "IGraphicsLib.hpp"
 
-class Core {
+
+
+class Core
+{
     public:
-        Core();
-        ~Core();
+        explicit Core(const std::string &gfxPath = "./lib/arcade_ncurses.so");
+
+        ~Core() = default;
 
         // Main loop
-        void mainLoop(void);
+        void mainLoop();
 
     private:
         IGraphicsLib *_gfxPtr;

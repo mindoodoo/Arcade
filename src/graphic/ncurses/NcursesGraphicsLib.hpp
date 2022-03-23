@@ -33,13 +33,17 @@ class NcursesGraphicsLib : virtual public IGraphicsLib
         void drawText(const std::string &text, int x, int y) const override;
 
         // Do nothing function
-        virtual void display() const;
+        void display() const override;
+
+        void loadTileset(std::map<int, char> tileset) override;
 
         // Input
         std::queue<char> &getInput() override;
 
+        void popInput() override;
+
     private:
         gfx_config_t _config;
-        std::vector<char> _tileset;
+        std::map<int, char> _tileset;
         std::queue<char> _inputQueue;
 };

@@ -8,6 +8,7 @@
 #pragma once
 #include <string>
 #include <queue>
+#include <map>
 
 #define GFX (*this->_gfx)
 
@@ -52,6 +53,8 @@ class IGraphicsLib
         virtual std::queue<char> &getInput() = 0;
 
         virtual void popInput() = 0;
+
+        virtual void loadTileset(std::map<int, char> tileset) = 0;
 
         // Checks if game config is currently loaded config
         // If not : calls config loading methods

@@ -7,7 +7,8 @@
 
 CORE_SRC =  src/core/main.cpp \
 	src/core/Core.cpp \
-	src/core/loader/LdLoader.cpp
+	src/core/loader/LdLoader.cpp\
+	src/shared/ArcadeError.cpp
 
 CORE_NAME = arcade
 
@@ -33,7 +34,7 @@ clean:
 
 fclean: clean;
 	find -regex "./$(NAME)" -delete;
-	find -regex ".*\.so" -delete;
+	find -regex ".*/*.so" -delete;
 
 re: fclean
 	@make $(NAME)

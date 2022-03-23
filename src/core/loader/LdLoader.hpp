@@ -12,19 +12,20 @@
 #include <iostream>
 #include "IGameLib.hpp"
 #include "IGraphicsLib.hpp"
-
-// typedef IGraphicsLib *(*entry)();
+#include <filesystem>
 
 template <class T>
 class LDLoader {
     public:
         LDLoader() = default;
+
         ~LDLoader();
 
         T *getInstance();
-        void loadLib(std::string libpath);
+
+        void loadLib(const std::string &libpath);
 
     private:
         T *(*_lib_factory)();
-        void *_handle;
+        void *_handle = nullptr;
 };

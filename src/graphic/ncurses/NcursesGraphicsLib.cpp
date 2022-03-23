@@ -41,10 +41,10 @@ void NcursesGraphicsLib::loadConfig(void)
 {
     auto csv = csvToTable(this->_config.asciiTilesetPath);
 
-    // Load tileset
-    for (unsigned int i = 0; i < csv.size(); i++)
-        for (unsigned int j = 0; j < csv[i].size(); j++)
-            this->_tileset.push_back(csv[i][j][0]); // [0] as it's a str
+//    // Load tileset
+//    for (unsigned int i = 0; i < csv.size(); i++)
+//        for (unsigned int j = 0; j < csv[i].size(); j++)
+//            this->_tileset.push_back(csv[i][j][0]); // [0] as it's a str
 }
 
 void NcursesGraphicsLib::flush(void) const
@@ -54,7 +54,9 @@ void NcursesGraphicsLib::flush(void) const
 
 void NcursesGraphicsLib::drawTile(int tile_index, int x, int y) const
 {
-    mvaddch(y, x * 2, this->_tileset[tile_index]);
+    char c = this->_tileset.find(tile_index)->second;
+
+    mvaddch(y, x * 2, c);
 }
 
 void NcursesGraphicsLib::drawText(const std::string &text, int x, int y) const
@@ -73,4 +75,19 @@ std::queue<char> &NcursesGraphicsLib::getInput()
 NcursesGraphicsLib::~NcursesGraphicsLib()
 {
     curs_set(2);
+}
+
+void NcursesGraphicsLib::display() const
+{
+    refresh();
+}
+
+void NcursesGraphicsLib::popInput()
+{
+    this->_inputQueue.pop();
+}
+
+void NcursesGraphicsLib::loadTileset(std::map<int, char> tileset)
+{
+    this->_tileset = std::move(tileset);
 }
