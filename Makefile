@@ -21,6 +21,7 @@ core:
 
 games:
 	make -C ./src/games/nibbler
+	make -C ./src/games/pacman
 
 graphicals:
 	make -C ./src/graphic/ncurses

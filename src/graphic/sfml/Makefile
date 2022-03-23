@@ -8,7 +8,7 @@
 CXXFLAGS = -Wall -Wextra -Werror -g3 -I../../shared -shared -fPIC \
 	-lsfml-graphics -lsfml-window -lsfml-system
 
-NAME = sfmllib.so
+NAME = arcade_sfml.so
 
 DEST = ../../../lib
 

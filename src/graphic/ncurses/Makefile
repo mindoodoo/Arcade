@@ -7,7 +7,7 @@
 
 CXXFLAGS = -Wall -Wextra -Werror -g3 -I../../shared/ -shared -fPIC -lncurses
 
-NAME = ncurseslib.so
+NAME = arcade_ncurses.so
 
 DEST = ../../../lib
 
