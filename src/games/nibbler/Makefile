@@ -23,7 +23,7 @@ SRC = 	src/GameCore.cpp\
 		src/Item.cpp\
 		src/make.cpp\
 		../GameErrors.cpp\
-		../GenericCore.cpp
+		../BaseGameCore.cpp
 
 STDL_SRC = 	$(SRC)\
 			main.cpp\

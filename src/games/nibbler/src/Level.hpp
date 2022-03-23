@@ -9,11 +9,11 @@
 
 #include "Player.hpp"
 #include "../../../shared/IGraphicsLib.hpp"
-#include "../../IGameManager.hpp"
+#include "../../ILevel.hpp"
 
 namespace Nibbler
 {
-    class Level : public virtual IGameManager
+    class Level : public virtual ILevel
     {
         public:
             explicit Level(IGraphicsLib **gfx);

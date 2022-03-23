@@ -9,7 +9,7 @@
 #include "../include/NibblerMacros.hpp"
 
 Nibbler::GameCore::GameCore()
-    : GenericCore()
+    : BaseGameCore()
 {
     this->_highScore = 0;  // TODO: Read from file where we save scores
 }

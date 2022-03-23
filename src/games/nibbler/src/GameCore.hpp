@@ -10,11 +10,11 @@
 #include "Level.hpp"
 #include "../../../shared/IGraphicsLib.hpp"
 #include "../../../shared/IGameLib.hpp"
-#include "../../GenericCore.hpp"
+#include "../../BaseGameCore.hpp"
 
 namespace Nibbler
 {
-    class GameCore : virtual public GenericCore
+    class GameCore : virtual public BaseGameCore
     {
         public:
             GameCore();
