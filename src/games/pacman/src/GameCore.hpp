@@ -8,15 +8,15 @@
 #pragma once
 
 #include "../../../shared/IGameLib.hpp"
-#include "PacmanLevel.hpp"
-#include "../../GenericCore.hpp"
+#include "Level.hpp"
+#include "../../BaseGameCore.hpp"
 
 namespace Pacman
 {
-    class Core : virtual public GenericCore
+    class GameCore : virtual public BaseGameCore
     {
         public:
-            explicit Core(IGraphicsLib **gfx);
+            explicit GameCore(IGraphicsLib **gfx);
 
             void showMenu() override;
 

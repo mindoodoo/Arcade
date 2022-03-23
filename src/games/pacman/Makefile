@@ -13,9 +13,9 @@ DEST = ../../../lib
 
 CC = g++
 
-SRC = 	src/Core.cpp\
-		src/GameManager.cpp\
-		../GenericCore.cpp
+SRC = 	src/GameCore.cpp\
+		src/Level.cpp\
+		../BaseGameCore.cpp
 
 STDL_SRC = 	$(SRC)\
 			main.cpp\

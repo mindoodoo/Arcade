@@ -5,9 +5,9 @@
 ** Description
 */
 
-#include "GenericCore.hpp"
+#include "BaseGameCore.hpp"
 
-GenericCore::GenericCore()
+BaseGameCore::BaseGameCore()
 {
     this->_highScore = 0;
     this->_state = GS_MENU;
@@ -15,7 +15,7 @@ GenericCore::GenericCore()
     this->_gfx = nullptr;
 }
 
-int GenericCore::frame()
+int BaseGameCore::frame()
 {
     if (this->_state == GS_IN_GAME) {
         if (!this->_game)
@@ -51,12 +51,12 @@ int GenericCore::frame()
     return SUCCESS_SIGNAL;
 }
 
-void GenericCore::setHighScore(int highScore)
+void BaseGameCore::setHighScore(int highScore)
 {
     this->_highScore = highScore;
 }
 
-void GenericCore::setGfx(IGraphicsLib **gfx)
+void BaseGameCore::setGfx(IGraphicsLib **gfx)
 {
     this->_gfx = gfx;
 }

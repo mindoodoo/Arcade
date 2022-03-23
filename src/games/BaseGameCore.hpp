@@ -8,18 +8,18 @@
 #pragma once
 
 #include "../shared/IGameLib.hpp"
-#include "IGameManager.hpp"
+#include "ILevel.hpp"
 
 #define GS_MENU 1
 #define GS_IN_GAME 2
 #define GS_GAME_OVER 3
 
-class GenericCore : public virtual IGameLib
+class BaseGameCore : public virtual IGameLib
 {
     public:
-        GenericCore();
+        BaseGameCore();
 
-        ~GenericCore() = default;
+        ~BaseGameCore() = default;
 
         int frame() override;
 
@@ -37,7 +37,7 @@ class GenericCore : public virtual IGameLib
 
         int _state;
 
-        IGameManager *_game;
+        ILevel *_game;
 
         IGraphicsLib **_gfx;
 };

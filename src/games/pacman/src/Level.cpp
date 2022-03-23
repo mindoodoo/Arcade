@@ -5,17 +5,17 @@
 ** Description
 */
 
-#include "GameManager.hpp"
-#include "../../GenericCore.hpp"
+#include "Level.hpp"
+#include "../../BaseGameCore.hpp"
 
-GameManager::GameManager() {
+Pacman::Level::Level() {
     this->_score = 0;
     this->_gameHeight = 0;
     this->_gameWidth = 0;
 
 }
 
-int GameManager::frame()
+int Pacman::Level::frame()
 {
     this->_score++;
 
@@ -26,7 +26,7 @@ int GameManager::frame()
     return GS_IN_GAME;
 }
 
-int GameManager::getScore() const
+int Pacman::Level::getScore() const
 {
     return this->_score;
 }

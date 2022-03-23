@@ -1,16 +1,21 @@
 /*
 ** EPITECH PROJECT, 2022
-** Core.hpp
+** GameCore.hpp
 ** File description:
 ** .
 */
 
 #pragma once
 
+#include <unordered_map>
 #include "./loader/LdLoader.hpp"
 #include "IGameLib.hpp"
 #include "IGraphicsLib.hpp"
 
+typedef struct
+{
+    std::string name;
+} game_meta_t;
 
 
 class Core
@@ -20,11 +25,14 @@ class Core
 
         ~Core() = default;
 
+        void launchGame();
+
+
         // Main loop
         void mainLoop();
 
     private:
-        IGraphicsLib *_gfxPtr;
+        IGraphicsLib *_gfx;
         IGameLib *_gamePtr;
         LDLoader<IGraphicsLib> _gfxLoader;
         LDLoader<IGameLib> _gameLoader;

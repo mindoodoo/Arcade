@@ -5,7 +5,7 @@
 ** Description
 */
 
-#include "src/Core.hpp"
+#include "src/GameCore.hpp"
 
 #include "../MockGfx.hpp"
 

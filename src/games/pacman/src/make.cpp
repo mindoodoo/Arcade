@@ -6,12 +6,12 @@
 */
 
 #include "../../../shared/IGameLib.hpp"
-#include "Core.hpp"
+#include "GameCore.hpp"
 
 extern "C"
 {
-Core *make()
-{
-    return new Core();
-}
+    IGameLib *make()
+    {
+        return new Pacman::GameCore();
+    }
 }

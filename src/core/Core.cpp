@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2022
-** Core.cpp
+** GameCore.cpp
 ** File description:
 ** .
 */
@@ -23,14 +23,12 @@ Core::Core(const std::string &gfxPath)
         // THIS IS HARDCODED AND WILL CHANGE
         // Load libraries
         this->_gfxLoader.loadLib(gfxPath);
-        this->_gameLoader.loadLib("./lib/arcade_nibbler.so");
 
         // Get instances of game and gfx libraries
-        this->_gfxPtr = this->_gfxLoader.getInstance();
-        this->_gamePtr = this->_gameLoader.getInstance();
+        this->_gfx = this->_gfxLoader.getInstance();
+        this->_gamePtr = nullptr;
 
         // Set game ptr
-        this->_gamePtr->setGfx(&this->_gfxPtr);
 
         std::map<int, char> tileset;
 
@@ -41,14 +39,14 @@ Core::Core(const std::string &gfxPath)
         tileset[TERRAIN_WALL] = '$';
         tileset[TERRAIN_FLOOR] = ' ';
 
-        this->_gfxPtr->loadTileset(tileset);
+        this->_gfx->loadTileset(tileset);
     } catch (std::exception &err) {
         std::cerr << err.what() << std::endl;
         exit(84);
     }
 }
 
-void Core::mainLoop(void)
+void Core::mainLoop()
 {
 
     while (this->_gamePtr->frame() == 0);

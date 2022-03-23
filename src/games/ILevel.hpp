@@ -7,9 +7,9 @@
 
 #pragma once
 
-class IGameManager {
+class ILevel {
     public:
-        ~IGameManager() = default;
+        ~ILevel() = default;
 
         virtual int frame() = 0;
 
