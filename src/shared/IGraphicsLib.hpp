@@ -12,8 +12,6 @@
 
 #define GFX (*this->_gfx)
 
-
-
 // Optionally add tileset width/height in tiles
 typedef struct {
     std::string asciiTilesetPath;

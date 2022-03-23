@@ -24,5 +24,8 @@ namespace Nibbler
             void showGameOver() override;
 
             void startGame() override;
+
+        private:
+            gfx_config_t _levelConf;
     };
 }
