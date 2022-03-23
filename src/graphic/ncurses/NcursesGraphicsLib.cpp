@@ -20,6 +20,12 @@ NcursesGraphicsLib::NcursesGraphicsLib()
         0,
         0
     };
+
+    initscr();
+    raw();
+    noecho();
+    curs_set(0);
+    halfdelay(1);
 }
 
 void NcursesGraphicsLib::checkConfig(const gfx_config_t &config)
@@ -39,13 +45,6 @@ void NcursesGraphicsLib::loadConfig(void)
     for (int i = 0; i < csv.size(); i++)
         for (int j = 0; j < csv[i].size(); j++)
             this->_tileset.push_back(csv[i][j][0]); // [0] as it's a str
-
-    // Ncurses initialization
-    initscr();
-    raw();
-    noecho();
-    curs_set(0);
-    halfdelay(1);
 }
 
 void NcursesGraphicsLib::flush(void) const

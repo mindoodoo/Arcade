@@ -5,37 +5,27 @@
 ## .
 ##
 
-FLAGS = -Wall -Wextra -Werror -g3 -lncurses
+FLAGS = -Wall -Wextra -Werror -g3 -fPIC -shared -Iinclude
 
-NAME = nibbler
+NAME = arcade_pacman.so
 
 DEST = ../../../lib
 
 CC = g++
 
-SRC = 	src/Core.cpp\
-		src/GameManager.cpp\
-		src/Nibbler.cpp\
-		src/Terrain.cpp\
-		src/Fruit.cpp\
-		src/Item.cpp\
-		../GameErrors.cpp
+SRC = 	src/Core.cpp
 
-STANDALONE_SRC = 	$(SRC)\
-					main.cpp\
-					mockGfxLib.cpp
-
-OBJ = $(STANDALONE_SRC:.cpp=.o)
+OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	#$(CC) -o $(DEST)/$(NAME) $(OBJ) $(FLAGS)
-	$(CC) -o $(NAME) $(OBJ) $(FLAGS)
+$(NAME):
+	$(CC) -o $(DEST)/$(NAME) $(SRC) $(FLAGS)
 	@make clean
 
-standalone: $(OBJ)
-
+standalone:
+	$(CC) -o pacman $(SRC) main.cpp -Wall -Wextra -Werror -g3 -lncurses;
+	@make clean
 clean:
 	rm -rf $(OBJ)
 
