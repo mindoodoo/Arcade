@@ -5,9 +5,9 @@
 ## .
 ##
 
-FLAGS = -Wall -Wextra -Werror -g3 -fPIC -shared -Iinclude
+FLAGS = -Wall -Wextra -Werror -g3 -lncurses
 
-NAME = arcade_nibbler.so
+NAME = nibbler
 
 DEST = ../../../lib
 
@@ -19,16 +19,22 @@ SRC = 	src/Core.cpp\
 		src/Terrain.cpp\
 		src/Fruit.cpp\
 		src/Item.cpp\
-		src/make.cpp\
 		../GameErrors.cpp
 
-OBJ = $(SRC:.cpp=.o)
+STANDALONE_SRC = 	$(SRC)\
+					main.cpp\
+					mockGfxLib.cpp
+
+OBJ = $(STANDALONE_SRC:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME):
-	$(CC) -o $(DEST)/$(NAME) $(SRC) $(FLAGS)
+$(NAME): $(OBJ)
+	#$(CC) -o $(DEST)/$(NAME) $(OBJ) $(FLAGS)
+	$(CC) -o $(NAME) $(OBJ) $(FLAGS)
 	@make clean
+
+standalone: $(OBJ)
 
 clean:
 	rm -rf $(OBJ)

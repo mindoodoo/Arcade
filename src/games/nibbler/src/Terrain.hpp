@@ -24,7 +24,7 @@ class Terrain
 
         ~Terrain() = default;
 
-        bool validLocation(int x, int y);
+        bool validLocation(size_t x, size_t y);
 
         void draw();
 

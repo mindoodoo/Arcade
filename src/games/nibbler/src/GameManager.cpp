@@ -36,20 +36,16 @@ int GameManager::frame()
     switch (GFX->getInput().front()) {
         case 'z':
         case 'w':
-        case KEY_UP:
             this->_nibbler->turn(0, -1);
             break;
         case 's':
-        case KEY_DOWN:
             this->_nibbler->turn(0, 1);
             break;
         case 'q':
         case 'a':
-        case KEY_LEFT:
             this->_nibbler->turn(-1, 0);
             break;
         case 'd':
-        case KEY_RIGHT:
             this->_nibbler->turn(1, 0);
             break;
     }
@@ -58,6 +54,7 @@ int GameManager::frame()
         return GAME_OVER;
     this->checkItemCollision();
     this->draw();
+    return 0;
 }
 
 void GameManager::checkItemCollision()
@@ -77,13 +74,13 @@ void GameManager::checkItemCollision()
 
 void GameManager::generateItems(int item_id, size_t amount)
 {
-    for (int i = 0; i < amount; i++) {
+    for (size_t i = 0; i < amount; i++) {
         std::pair<int, int> coords = this->randomLocation();
         Item *item = nullptr;
 
         switch (item_id) {
             case ITEM_FRUIT:
-                item = new Fruit(coords.first, coords.second);
+                item = new Fruit(coords.first, coords.second, this->_gfx);
         }
 
         this->_items.push_back(item);
@@ -109,7 +106,7 @@ std::pair<int, int> GameManager::randomLocation()
 
     size_t maxTries = (this->_gameHeight - 2) * (this->_gameWidth - 2) - this->_nibbler->length() - this->_items.size();
 
-    for (int i = 0; i < maxTries || !this->isTileEmpty(x, y); i++) {
+    for (size_t i = 0; i < maxTries || !this->isTileEmpty(x, y); i++) {
         x = random() % (this->_gameWidth - 2) + 1;
         y = random() % (this->_gameHeight - 2) + 1;
     }

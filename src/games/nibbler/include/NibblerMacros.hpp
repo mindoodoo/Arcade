@@ -17,6 +17,4 @@
 #define TERRAIN_WALL 20
 #define TERRAIN_FLOOR 21
 
-#define GFX (*this->_gfx)
-
 #include <string>

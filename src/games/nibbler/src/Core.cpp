@@ -9,22 +9,23 @@
 #include "Core.hpp"
 #include "../include/NibblerMacros.hpp"
 
-Core::Core()
+Core::Core(IGraphicsLib **gfx)
 {
     this->_state = MENU;
     this->_game = nullptr;
     this->_level = 0;
-    mockInitGfxLib();
+    this->_highScore = 0;  // TODO: Read from file where we save scores
+    this->_gfx = gfx;
 }
 
-void Core::frame()
+int Core::frame()
 {
 
     if (this->_state == IN_GAME) {
         if (!this->_game)
-            this->_game = new GameManager(this->_level);
-        mockShowText("SCORE: " + std::to_string(this->_game->getScore()), 60, 0);
-        mockShowText("HIGHSCORE: " + std::to_string(this->_highScore), 60, 1);
+            this->_game = new GameManager(this->_gfx);
+        GFX->drawText("SCORE: " + std::to_string(this->_game->getScore()), 60, 0);
+        GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 60, 1);
         if (this->_game->frame() == GAME_OVER) {
             this->setHighScore(this->_game->getScore());
             this->_state = GAME_OVER;
@@ -40,24 +41,28 @@ void Core::frame()
         switch (getch()) {
             case 's':
                 clear();
-                this->_game = new GameManager(this->_level);
+                this->_game = new GameManager(this->_gfx);
                 this->_state = IN_GAME;
+                break;
+            case 'q':
+                return QUIT_SIGNAL;
         }
     }
+    return SUCCESS_SIGNAL;
 }
 
 void Core::showMenu()
 {
-    mockShowText("IN MENU, PRESS S TO PLAY", 0, 0);
+    GFX->drawText("IN MENU, PRESS S TO PLAY\n PRESS Q TO QUIT", 0, 0);
 
-    mockShowText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 1);
+    GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 1);
 }
 
 void Core::showGameOver()
 {
-    mockShowText("YOU LOST, PRESS S TO TRY AGAIN", 0, 0);
+    GFX->drawText("YOU LOST, PRESS S TO TRY AGAIN\n PRESS Q TO QUIT", 0, 0);
 
-    mockShowText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 1);
+    GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 1);
 }
 
 void Core::setHighScore(int highScore)

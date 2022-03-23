@@ -18,9 +18,9 @@
 class Core : virtual public IGameLib
 {
     public:
-        Core();
+        explicit Core(IGraphicsLib **gfx);
 
-        void frame() override;
+        int frame() override;
 
         void showMenu();
 
@@ -33,11 +33,11 @@ class Core : virtual public IGameLib
     private:
         int _state;
 
-        GameManager *_game;
-
         int _level;
 
         int _highScore;
+
+        GameManager *_game;
 
         IGraphicsLib **_gfx;
 };

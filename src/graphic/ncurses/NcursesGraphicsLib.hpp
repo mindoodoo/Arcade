@@ -9,7 +9,7 @@
 
 #include <curses.h>
 #include <vector>
-#include "IGraphicsLib.hpp"
+#include "../../shared/IGraphicsLib.hpp"
 
 class NcursesGraphicsLib : virtual public IGraphicsLib
 {
@@ -24,7 +24,9 @@ class NcursesGraphicsLib : virtual public IGraphicsLib
 
         // Runtime methods
         void flush(void) const override;
+
         void drawTile(int tile_index, int x, int y) const override;
+
         void drawText(const std::string &text, int x, int y) const override;
 
         // Input

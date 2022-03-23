@@ -7,7 +7,6 @@
 
 
 #include "NcursesGraphicsLib.hpp"
-#include "shared.hpp"
 
 NcursesGraphicsLib::NcursesGraphicsLib()
 {

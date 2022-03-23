@@ -30,6 +30,7 @@ class GameManager
         std::pair<int, int> randomLocation();
 
         int getScore();
+
     private:
         Nibbler *_nibbler;
         Terrain *_scene;
@@ -38,8 +39,4 @@ class GameManager
         size_t _gameWidth;
         IGraphicsLib **_gfx;
         int _score;
-
-        int _timeLeft;
-
-
 };

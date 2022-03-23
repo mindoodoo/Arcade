@@ -71,7 +71,7 @@ segment_t Nibbler::tail()
 
 void Nibbler::draw()
 {
-    for (int i = 0; i < this->_body.size(); i++) {
+    for (size_t i = 0; i < this->_body.size(); i++) {
         if (i == 0)
             GFX->drawTile(NIBBLER_HEAD, this->_body[i].x, this->_body[i].y);
         else if (i == this->_body.size() - 1)
