@@ -8,23 +8,22 @@
 #pragma once
 
 #include "../../../shared/IGameLib.hpp"
+#include "GameManager.hpp"
+#include "../../GenericCore.hpp"
 
-class Core
+class Core : virtual public GenericCore
 {
     public:
-        Core();
+        explicit Core(IGraphicsLib **gfx);
 
-        int frame();
+        void showMenu() override;
 
+        void showGameOver() override ;
+
+        void startGame() override;
     private:
-        int _state;
-        void *_game;
+
         int _level;
-        int _highScore;
 
-        void showMenu();
 
-        void showGameOver();
-
-        void setHighScore(int highScore);
 };

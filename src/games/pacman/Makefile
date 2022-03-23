@@ -13,7 +13,15 @@ DEST = ../../../lib
 
 CC = g++
 
-SRC = 	src/Core.cpp
+SRC = 	src/Core.cpp\
+		src/GameManager.cpp\
+		../GenericCore.cpp
+
+STDL_SRC = 	$(SRC)\
+			main.cpp\
+			../MockGfx.cpp
+
+STDL_FLAGS = -Wall -Wextra -Werror -g3 -lncurses;
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -24,8 +32,8 @@ $(NAME):
 	@make clean
 
 standalone:
-	$(CC) -o pacman $(SRC) main.cpp -Wall -Wextra -Werror -g3 -lncurses;
-	@make clean
+	$(CC) -o pacman $(STDL_SRC) $(STDL_FLAGS)
+
 clean:
 	rm -rf $(OBJ)
 

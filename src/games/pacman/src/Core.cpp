@@ -6,38 +6,32 @@
 */
 
 #include "Core.hpp"
-#include "../include/PacmanMacros.hpp"
 
-Core::Core()
+Core::Core(IGraphicsLib **gfx)
 {
     this->_state = GS_MENU;
     this->_game = nullptr;
     this->_level = 0;
     this->_highScore = 0;  // TODO: Read from file where we save scores
-}
-
-int Core::frame()
-{
-    return QUIT_SIGNAL;
+    this->_gfx = gfx;
 }
 
 void Core::showMenu()
 {
-    GFX->drawText("IN MENU, PRESS S TO PLAY\n PRESS Q TO QUIT", 0, 0);
-
-    GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 1);
+    GFX->drawText("IN MENU, PRESS S TO PLAY", 0, 0);
+    GFX->drawText("PRESS Q TO QUIT", 0, 1);
+    GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 2);
+    GFX->drawText("GS: " + std::to_string(this->_state), 0, 3);
 }
 
 void Core::showGameOver()
 {
-    GFX->drawText("YOU LOST, PRESS S TO TRY AGAIN\n PRESS Q TO QUIT", 0, 0);
-
-    GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 1);
+    GFX->drawText("YOU LOST, PRESS S TO TRY AGAIN", 0, 0);
+    GFX->drawText("PRESS Q TO QUIT", 0, 1);
+    GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 2);
 }
 
-void Core::setHighScore(int highScore)
+void Core::startGame()
 {
-    if (highScore > this->_highScore) {
-        this->_highScore = highScore;
-    }
+    this->_game = new GameManager();
 }

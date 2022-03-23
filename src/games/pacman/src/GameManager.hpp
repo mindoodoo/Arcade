@@ -7,14 +7,15 @@
 
 #pragma once
 
-#include "Nibbler.hpp"
-#include "../../../shared/IGraphicsLib.hpp"
+#include <utility>
+#include <string>
+#include "../include/PacmanMacros.hpp"
 #include "../../IGameManager.hpp"
 
-class GameManager : public virtual IGameManager
+class GameManager : virtual public IGameManager
 {
     public:
-        explicit GameManager(IGraphicsLib **gfx);
+        GameManager();
 
         ~GameManager() = default;
 
@@ -33,11 +34,11 @@ class GameManager : public virtual IGameManager
         int getScore() const override;
 
     private:
-        Nibbler *_nibbler;
-        Terrain *_scene;
-        std::vector<Item *> _items;
+//        Nibbler *_nibbler;
+//        Terrain *_scene;
+//        std::vector<Item *> _items;
         size_t _gameHeight;
         size_t _gameWidth;
-        IGraphicsLib **_gfx;
+//        IGraphicsLib **_gfx;
         int _score;
 };

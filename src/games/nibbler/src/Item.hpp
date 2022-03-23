@@ -25,7 +25,8 @@ class Item
 
         virtual void effect(Nibbler *nibbler) = 0;
 
-        void relocate(int x, int y );
+        void relocate(int x, int y);
+
     protected:
         int _x;
         int _y;

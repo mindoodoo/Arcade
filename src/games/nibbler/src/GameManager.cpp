@@ -17,8 +17,9 @@ GameManager::GameManager(IGraphicsLib **gfx)
     this->_gameWidth = 30;
     this->_scene = new Terrain(this->_gameHeight, this->_gameWidth, gfx);
     this->_nibbler = new Nibbler(this->_gameHeight / 2, this->_gameWidth / 2, this->_scene, gfx);
-    this->generateItems(ITEM_FRUIT, this->_gameHeight * this->_gameWidth * 0.01);
     this->_gfx = gfx;
+    this->generateItems(ITEM_FRUIT, this->_gameHeight * this->_gameWidth * 0.01);
+
 }
 
 void GameManager::draw()
@@ -33,25 +34,30 @@ void GameManager::draw()
 
 int GameManager::frame()
 {
-    switch (GFX->getInput().front()) {
-        case 'z':
-        case 'w':
-            this->_nibbler->turn(0, -1);
-            break;
-        case 's':
-            this->_nibbler->turn(0, 1);
-            break;
-        case 'q':
-        case 'a':
-            this->_nibbler->turn(-1, 0);
-            break;
-        case 'd':
-            this->_nibbler->turn(1, 0);
-            break;
+    auto inputs = GFX->getInput();
+    if (!inputs.empty()) {
+        char c = inputs.back();
+        auto f = std::string(&c);
+        GFX->drawText(f, 50, 50);
+        switch (c) {
+            case 'z':
+            case 'w':
+                this->_nibbler->turn(0, -1);
+                break;
+            case 's':
+                this->_nibbler->turn(0, 1);
+                break;
+            case 'q':
+            case 'a':
+                this->_nibbler->turn(-1, 0);
+                break;
+            case 'd':
+                this->_nibbler->turn(1, 0);
+                break;
+        }
     }
-
     if (!this->_nibbler->moveForward())
-        return GAME_OVER;
+        return GS_GAME_OVER;
     this->checkItemCollision();
     this->draw();
     return 0;
@@ -114,7 +120,7 @@ std::pair<int, int> GameManager::randomLocation()
     return {x, y};
 }
 
-int GameManager::getScore()
+int GameManager::getScore() const
 {
     return this->_score;
 }

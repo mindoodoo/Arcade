@@ -10,8 +10,8 @@
 
 extern "C"
 {
-IGameLib *make(IGraphicsLib **gfx)
+IGameLib *make()
 {
-    return new Core(gfx);
+    return new Core();
 }
 }

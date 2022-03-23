@@ -5,7 +5,9 @@
 ## .
 ##
 
-FLAGS = -Wall -Wextra -Werror -g3 -fPIC -shared -Iinclude
+DEFAULT_FLAGS = -Wall -Wextra -g3
+
+FLAGS = $(DEFAULT_FLAGS) -fPIC -shared -Iinclude
 
 NAME = arcade_nibbler.so
 
@@ -20,15 +22,24 @@ SRC = 	src/Core.cpp\
 		src/Fruit.cpp\
 		src/Item.cpp\
 		src/make.cpp\
-		../GameErrors.cpp
+		../GameErrors.cpp\
+		../GenericCore.cpp
 
-OBJ = $(SRC:.cpp=.o)
+STDL_SRC = 	$(SRC)\
+			main.cpp\
+			../MockGfx.cpp
+
+STDL_FLAGS = $(DEFAULT_FLAGS) -lncurses -Iinclude;
+
 
 all: $(NAME)
 
 $(NAME):
 	$(CC) -o $(DEST)/$(NAME) $(SRC) $(FLAGS)
 	@make clean
+
+standalone:
+	$(CC) -o nibbler $(STDL_SRC) $(STDL_FLAGS)
 
 clean:
 	rm -rf $(OBJ)

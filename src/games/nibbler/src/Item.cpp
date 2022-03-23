@@ -24,7 +24,7 @@ std::pair<int, int> Item::getLocation()
 
 void Item::draw()
 {
-    GFX->drawTile(this->_symbol, this->_x, this->_y);
+    (*this->_gfx)->drawTile(this->_symbol, this->_x, this->_y);
 }
 
 bool Item::itemCollision(int x, int y) const
