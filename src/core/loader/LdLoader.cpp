@@ -19,6 +19,7 @@ void LDLoader<T>::loadLib(std::string libPath)
     if (this->_handle)
         dlclose(this->_handle);
     this->_handle = dlopen(libPath.c_str(), RTLD_NOW);
+    std::cout << dlerror() << std::endl;
     if (!this->_handle)
         std::cerr << "Error opening shared library" << std::endl;
     else

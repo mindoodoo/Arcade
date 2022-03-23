@@ -32,6 +32,9 @@ class NcursesGraphicsLib : virtual public IGraphicsLib
 
         void drawText(const std::string &text, int x, int y) const override;
 
+        // Do nothing function
+        virtual void display() const;
+
         // Input
         std::queue<char> &getInput() override;
 

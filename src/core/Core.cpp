@@ -17,6 +17,9 @@ Core::Core()
     // Get instances of game and gfx libraries
     this->_gfxPtr = this->_gfxLoader.getInstance();
     this->_gamePtr = this->_gameLoader.getInstance();
+
+    // Set game ptr
+    this->_gamePtr->setGfx(&this->_gfxPtr);
 }
 
 Core::~Core()

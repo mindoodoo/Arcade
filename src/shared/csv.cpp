@@ -39,6 +39,7 @@ std::vector<std::string> csv_read_row(std::istream &in, char delimiter)
         } else
             ss << c;
     }
+    return row;
 }
 
 std::vector<std::vector<std::string>> csvToTable(const std::string &filepath)
@@ -57,18 +58,18 @@ std::vector<std::vector<std::string>> csvToTable(const std::string &filepath)
     return table;
 }
 
-int main (int argc, char** argv)
-{
-    int num;
-    std::vector<std::vector<std::string>> table = csvToTable(argv[1]);
+// int main (int argc, char** argv)
+// {
+//     int num;
+//     std::vector<std::vector<std::string>> table = csvToTable(argv[1]);
 
-    //double loop to acces the data AS INTS
-    for (int i = 0; i < table.size(); i++) {
-        for (int j = 0; j < table[0].size(); j++) {
-            num = atoi(table[i][j].c_str()); 
-            std::cout << table[i][j] << "\t";
-        }
-        std::cout << std::endl;
-    }
-    return 0;
-}
+//     //double loop to acces the data AS INTS
+//     for (unsigned int i = 0; i < table.size(); i++) {
+//         for (unsigned int j = 0; j < table[0].size(); j++) {
+//             num = atoi(table[i][j].c_str()); 
+//             std::cout << table[i][j] << "\t";
+//         }
+//         std::cout << std::endl;
+//     }
+//     return 0;
+// }

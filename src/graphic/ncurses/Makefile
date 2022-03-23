@@ -14,7 +14,9 @@ DEST = ../../../lib
 CC = g++
 
 SRC = NcursesGraphicsLib.cpp \
-	../../shared/operators.cpp
+	../../shared/operators.cpp \
+	make.cpp \
+	../../shared/csv.cpp
 
 all: $(NAME)
 
