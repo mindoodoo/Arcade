@@ -48,6 +48,14 @@ Core::Core(const std::string &gfxPath)
 
 void Core::mainLoop()
 {
-
     while (this->_gamePtr->frame() == 0);
+}
+
+void Core::launchGame()
+{
+    this->_gameLoader.loadLib("./lib/arcade_nibbler.so");
+
+    this->_gamePtr = this->_gameLoader.getInstance();
+
+    this->_gamePtr->setGfx(&this->_gfx);
 }

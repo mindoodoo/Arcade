@@ -27,7 +27,6 @@ class Core
 
         void launchGame();
 
-
         // Main loop
         void mainLoop();
 
