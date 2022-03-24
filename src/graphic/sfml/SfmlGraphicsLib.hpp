@@ -28,6 +28,7 @@ class SfmlGraphicsLib : public virtual IGraphicsLib
 
         //create window
         void createWindow(int width, int height);
+        sf::RenderWindow& getWindow();
 
         // Updates screen with buffer (called at the end of all draw tiles)
         virtual void display() const override;
@@ -45,13 +46,15 @@ class SfmlGraphicsLib : public virtual IGraphicsLib
         // Checks if game config is currently loaded config
         // If not : calls config loading methods
         virtual void checkConfig(const gfx_config_t &config) override;
+    
+    protected:
+        sf::RenderWindow window;
 
 
 
     private:
         gfx_config_t _config;
-        sf::RenderWindow window;
-
+        std::queue<char> _inputQueue;
 
 
 

@@ -22,6 +22,11 @@ SfmlGraphicsLib::SfmlGraphicsLib()
     this->window.setFramerateLimit(60);
 }
 
+sf::RenderWindow& SfmlGraphicsLib::getWindow()
+{
+    return this->window;
+}
+
 SfmlGraphicsLib::~SfmlGraphicsLib()
 {
     window.close();
@@ -29,20 +34,6 @@ SfmlGraphicsLib::~SfmlGraphicsLib()
 
 void SfmlGraphicsLib::createWindow(int width, int height)
 {
-    sf::CircleShape shape(200);
-
-    while (window.isOpen()) 
-    {
-        sf::Event event;
-        while (
-            window.pollEvent(event))
-            if (event.type == sf::Event::Closed)
-                window.close();
-  
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
 
 }
 
@@ -59,12 +50,12 @@ void SfmlGraphicsLib::drawTile(int tile_index, int x, int y) const
 
 void SfmlGraphicsLib::display() const
 {
-
+    //window.display();
 }
 
 void SfmlGraphicsLib::flush() const
 {
-
+    //window.clear(sf::Color::Black);
 }
 
 void SfmlGraphicsLib::drawText(const std::string &text, int x, int y) const
@@ -74,6 +65,27 @@ void SfmlGraphicsLib::drawText(const std::string &text, int x, int y) const
 
 std::queue<char> & SfmlGraphicsLib::getInput()
 {
+     sf::Event event{};
+
+    while (window.pollEvent(event)) {
+        if (event.type == sf::Event::Resized) {
+            sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+            window.setView(sf::View(visibleArea));
+        }
+        else if (event.type == sf::Event::Closed)
+            window.close();
+        else if (event.type == sf::Event::KeyPressed) {
+            if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Z)
+                this->_inputQueue.push('w');
+            else if (event.key.code == sf::Keyboard::S)
+                this->_inputQueue.push('s');
+            else if (event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::Q)
+                this->_inputQueue.push('a');
+            else if (event.key.code == sf::Keyboard::D)
+                this->_inputQueue.push('d');
+        }
+    }
+    return this->_inputQueue;
     
 
 }   
