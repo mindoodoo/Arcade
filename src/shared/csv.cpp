@@ -58,18 +58,18 @@ std::vector<std::vector<std::string>> csvToTable(const std::string &filepath)
     return table;
 }
 
-// int main (int argc, char** argv)
-// {
-//     int num;
-//     std::vector<std::vector<std::string>> table = csvToTable(argv[1]);
+std::vector<std::string> csvToVector(const std::string &filepath)
+{
+    std::vector<std::string> row;
+    std::vector<std::string> output;
+    std::ifstream myFile(filepath);
 
-//     //double loop to acces the data AS INTS
-//     for (unsigned int i = 0; i < table.size(); i++) {
-//         for (unsigned int j = 0; j < table[0].size(); j++) {
-//             num = atoi(table[i][j].c_str()); 
-//             std::cout << table[i][j] << "\t";
-//         }
-//         std::cout << std::endl;
-//     }
-//     return 0;
-// }
+    if(!myFile.is_open())
+        throw std::runtime_error("Could not open file");
+    while (myFile.good()) {
+        row = csv_read_row(myFile, ',');
+        output.insert(output.end(), row.begin(), row.end());
+    }
+    myFile.close();
+    return output;
+}
