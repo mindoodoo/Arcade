@@ -71,6 +71,7 @@ std::queue<char> &NcursesGraphicsLib::getInput()
 NcursesGraphicsLib::~NcursesGraphicsLib()
 {
     curs_set(2);
+    endwin();
 }
 
 void NcursesGraphicsLib::display() const

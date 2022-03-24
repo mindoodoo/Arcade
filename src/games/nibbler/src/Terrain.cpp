@@ -32,9 +32,8 @@ Nibbler::Terrain::Terrain(size_t height, size_t width, IGraphicsLib **gfx)
 
 bool Nibbler::Terrain::validLocation(size_t x, size_t y)
 {
-    if (!((y < (this->_map.size() - 1)) || (x < (this->_map[0].size() - 1))))
+    if (y >= this->_map.size() || x >= this->_map[0].size())
         return false;
-
     const char tile = this->_map[y][x];
 
     return std::find(RANGE(this->_walkable), tile) != this->_walkable.end();

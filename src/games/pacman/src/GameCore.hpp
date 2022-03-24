@@ -16,7 +16,7 @@ namespace Pacman
     class GameCore : virtual public BaseGameCore
     {
         public:
-            explicit GameCore(IGraphicsLib **gfx);
+            GameCore();
 
             void showMenu() override;
 

@@ -21,3 +21,8 @@ Error::FileNotFound::FileNotFound(const std::string &filePath)
     : Arcade("File not found: " + filePath)
 {
 }
+
+Error::GameNotFound::GameNotFound(size_t id)
+    : Arcade("Game number " + std::to_string(id) + " not found.")
+{
+}

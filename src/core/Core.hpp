@@ -15,8 +15,15 @@
 typedef struct
 {
     std::string name;
-} game_meta_t;
+    std::string path;
+} meta_t;
 
+enum ARCADE
+{
+    HALT = 0,
+    MENU = 1,
+    GAME = 2
+};
 
 class Core
 {
@@ -25,14 +32,41 @@ class Core
 
         ~Core() = default;
 
-        void launchGame();
-
-        // Main loop
+        /**
+         * main loop of the program
+         */
         void mainLoop();
 
     private:
+
+        /**
+         * launches the currently "selected" game
+         * the "selected" game is whichever is selected in the
+         * arcade menu during runtime
+         */
+        void launchGame();
+        /**
+         * Handles all the Arcade machine related inputs,
+         * is in charge of closing the program by setting _state to HALT
+         */
+        void handleInputs();
+
+        /**
+         * loads all game libraries in ./libs
+         * to display them in the menu
+         */
+        void loadAvailableLibs();
+
         IGraphicsLib *_gfx;
         IGameLib *_gamePtr;
+
         LDLoader<IGraphicsLib> _gfxLoader;
         LDLoader<IGameLib> _gameLoader;
+
+        std::deque<meta_t> _games;
+        std::deque<meta_t> _graphics;
+
+        int _state;
+
+        size_t _selectedGame = 0;
 };

@@ -27,4 +27,10 @@ namespace Error
         public:
             explicit FileNotFound(const std::string &filePath);
     };
+
+    class GameNotFound : virtual public Arcade
+    {
+        public:
+            explicit GameNotFound(size_t id);
+    };
 }

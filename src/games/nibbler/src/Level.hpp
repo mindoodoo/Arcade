@@ -34,6 +34,8 @@ namespace Nibbler
 
             int getScore() const override;
 
+            std::pair<int, int> circleScan(int r, int x, int y);
+
         private:
             Player *_nibbler;
             Terrain *_scene;
@@ -43,5 +45,6 @@ namespace Nibbler
             IGraphicsLib **_gfx;
             int _score;
             gfx_config_t _levelConf;
+            int _state = 0;
     };
 }

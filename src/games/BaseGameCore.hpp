@@ -14,6 +14,13 @@
 #define GS_IN_GAME 2
 #define GS_GAME_OVER 3
 
+enum LEVEL
+{
+    RUNNING = 0,
+    VICTORY = 1,
+    DEFEAT = 2,
+};
+
 class BaseGameCore : public virtual IGameLib
 {
     public:
@@ -32,7 +39,7 @@ class BaseGameCore : public virtual IGameLib
         virtual void showMenu() = 0;
 
         virtual void showGameOver() = 0;
-        
+
     protected:
         int _highScore;
 

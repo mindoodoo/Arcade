@@ -7,13 +7,13 @@
 
 #include "GameCore.hpp"
 
-Pacman::GameCore::GameCore(IGraphicsLib **gfx)
+Pacman::GameCore::GameCore()
 {
     this->_state = GS_MENU;
     this->_game = nullptr;
     this->_level = 0;
     this->_highScore = 0;  // TODO: Read from file where we save scores
-    this->_gfx = gfx;
+    this->_gfx = nullptr;
 }
 
 void Pacman::GameCore::showMenu()

@@ -24,9 +24,15 @@ int BaseGameCore::frame()
         GFX->drawText("SCORE: " + std::to_string(this->_game->getScore()), 60, 0);
         GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 60, 1);
 
-        if (this->_game->frame() == GS_GAME_OVER) {
+        int levelState = this->_game->frame();
+        if (levelState == LEVEL::DEFEAT) {
             this->setHighScore(this->_game->getScore());
             this->_state = GS_GAME_OVER;
+            this->_game = nullptr;
+            GFX->flush();
+        } else if (levelState == LEVEL::VICTORY) {
+            this->setHighScore(this->_game->getScore());
+            this->_state = GS_MENU;
             this->_game = nullptr;
             GFX->flush();
         }
@@ -42,7 +48,7 @@ int BaseGameCore::frame()
         if (!inputs.empty()) {
             char c = inputs.back();
             GFX->popInput();
-            
+
             switch (c) {
                 case 's':
                     this->startGame();

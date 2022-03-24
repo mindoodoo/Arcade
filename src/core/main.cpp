@@ -16,7 +16,6 @@ int main(int argc, char *argv[])
     }
 
     Core *coreInstance = new Core(argv[1]);
-    coreInstance->launchGame();
     coreInstance->mainLoop();
 
     return 0;

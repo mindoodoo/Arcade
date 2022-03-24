@@ -5,7 +5,9 @@
 ## .
 ##
 
-FLAGS = -Wall -Wextra -Werror -g3 -fPIC -shared -Iinclude
+DEFAULT_FLAGS = -Wall -Wextra -g3
+
+FLAGS = $(DEFAULT_FLAGS) -fPIC -shared -Iinclude
 
 NAME = arcade_pacman.so
 
@@ -15,13 +17,14 @@ CC = g++
 
 SRC = 	src/GameCore.cpp\
 		src/Level.cpp\
+		src/make.cpp\
 		../BaseGameCore.cpp
 
 STDL_SRC = 	$(SRC)\
 			main.cpp\
 			../MockGfx.cpp
 
-STDL_FLAGS = -Wall -Wextra -Werror -g3 -lncurses;
+STDL_FLAGS = $(DEFAULT_FLAGS) -lncurses -Iinclude;
 
 OBJ = $(SRC:.cpp=.o)
 

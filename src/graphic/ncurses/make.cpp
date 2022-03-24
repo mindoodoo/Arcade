@@ -7,6 +7,7 @@
 
 #include "IGraphicsLib.hpp"
 #include "NcursesGraphicsLib.hpp"
+#include "shared.hpp"
 
 extern "C"
 {
@@ -14,4 +15,6 @@ extern "C"
     {
         return new NcursesGraphicsLib();
     }
+
+    int id = GFX_iD;
 }
