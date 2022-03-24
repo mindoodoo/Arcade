@@ -39,12 +39,10 @@ void NcursesGraphicsLib::checkConfig(const gfx_config_t &config)
 
 void NcursesGraphicsLib::loadConfig(void)
 {
-    auto csv = csvToTable(this->_config.asciiTilesetPath);
+    std::vector<std::string> stringVector = csvToVector(this->_config.asciiTilesetPath);
 
-//    // Load tileset
-//    for (unsigned int i = 0; i < csv.size(); i++)
-//        for (unsigned int j = 0; j < csv[i].size(); j++)
-//            this->_tileset.push_back(csv[i][j][0]); // [0] as it's a str
+    for (unsigned int i = 0; i < stringVector.size(); ++i)
+        this->_tileset.push_back(stringVector[i][0]);
 }
 
 void NcursesGraphicsLib::flush(void) const
@@ -54,9 +52,7 @@ void NcursesGraphicsLib::flush(void) const
 
 void NcursesGraphicsLib::drawTile(int tile_index, int x, int y) const
 {
-    char c = this->_tileset.find(tile_index)->second;
-
-    mvaddch(y, x * 2, c);
+    mvaddch(y, x * 2, this->_tileset[tile_index]);
 }
 
 void NcursesGraphicsLib::drawText(const std::string &text, int x, int y) const

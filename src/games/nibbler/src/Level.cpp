@@ -38,7 +38,7 @@ void Nibbler::Level::draw()
 
 int Nibbler::Level::frame()
 {
-    // GFX->checkConfig(this->_levelConf);
+    GFX->checkConfig(this->_levelConf);
 
     std::queue<char> inputs = GFX->getInput();
 

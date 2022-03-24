@@ -42,6 +42,6 @@ class NcursesGraphicsLib : virtual public IGraphicsLib
 
     private:
         gfx_config_t _config;
-        std::map<int, char> _tileset;
+        std::vector<char> _tileset;
         std::queue<char> _inputQueue;
 };
