@@ -22,10 +22,10 @@ SfmlGraphicsLib::SfmlGraphicsLib()
     this->window.setFramerateLimit(60);
 }
 
-sf::RenderWindow& SfmlGraphicsLib::getWindow()
-{
-    return this->window;
-}
+// sf::RenderWindow SfmlGraphicsLib::getWindow()
+// {
+//     return this->window;
+// }
 
 SfmlGraphicsLib::~SfmlGraphicsLib()
 {
@@ -48,14 +48,14 @@ void SfmlGraphicsLib::drawTile(int tile_index, int x, int y) const
 
 }
 
-void SfmlGraphicsLib::display() const
+void SfmlGraphicsLib::display()
 {
-    //window.display();
+    window.display();
 }
 
-void SfmlGraphicsLib::flush() const
+void SfmlGraphicsLib::flush() 
 {
-    //window.clear(sf::Color::Black);
+    window.clear(sf::Color::Black);
 }
 
 void SfmlGraphicsLib::drawText(const std::string &text, int x, int y) const

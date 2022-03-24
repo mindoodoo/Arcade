@@ -28,14 +28,14 @@ class SfmlGraphicsLib : public virtual IGraphicsLib
 
         //create window
         void createWindow(int width, int height);
-        sf::RenderWindow& getWindow();
+        sf::RenderWindow getWindow();
 
         // Updates screen with buffer (called at the end of all draw tiles)
-        virtual void display() const override;
+        virtual void display() override;
         // Clear screen/window
 
         //Runtime methods
-        void flush(void) const override;
+        void flush(void)  override;
         void drawTile(int tile_index, int x, int y) const override;
         void drawText(const std::string &text, int x, int y) const override;
 
@@ -47,8 +47,8 @@ class SfmlGraphicsLib : public virtual IGraphicsLib
         // If not : calls config loading methods
         virtual void checkConfig(const gfx_config_t &config) override;
     
-    protected:
         sf::RenderWindow window;
+    protected:
 
 
 
