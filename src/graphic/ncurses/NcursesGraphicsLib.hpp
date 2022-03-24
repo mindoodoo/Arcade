@@ -35,8 +35,6 @@ class NcursesGraphicsLib : virtual public IGraphicsLib
         // Do nothing function
         void display() const override;
 
-        void loadTileset(std::map<int, char> tileset) override;
-
         // Input
         std::queue<char> &getInput() override;
 

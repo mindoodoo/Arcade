@@ -52,8 +52,6 @@ class IGraphicsLib
 
         virtual void popInput() = 0;
 
-        virtual void loadTileset(std::map<int, char> tileset) = 0;
-
         // Checks if game config is currently loaded config
         // If not : calls config loading methods
         virtual void checkConfig(const gfx_config_t &config) = 0;

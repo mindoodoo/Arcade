@@ -27,19 +27,6 @@ Core::Core(const std::string &gfxPath)
         // Get instances of game and gfx libraries
         this->_gfx = this->_gfxLoader.getInstance();
         this->_gamePtr = nullptr;
-
-        // Set game ptr
-
-        std::map<int, char> tileset;
-
-        tileset[NIBBLER_HEAD] = 'h';
-        tileset[NIBBLER_BODY] = 'b';
-        tileset[NIBBLER_TAIL] = 't';
-        tileset[ITEM_FRUIT] = 'a';
-        tileset[TERRAIN_WALL] = '$';
-        tileset[TERRAIN_FLOOR] = ' ';
-
-        this->_gfx->loadTileset(tileset);
     } catch (std::exception &err) {
         std::cerr << err.what() << std::endl;
         exit(84);
