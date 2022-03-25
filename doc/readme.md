@@ -8,15 +8,12 @@ graphical libraries:
 - SFML
 
 Arcade Machine Inputs:
-- while in menu:
-  - z / w: game selection up
-  - s: game selection down
-  - q / a: graphics selection left
-  - d: graphics selection right
+  - i: game selection up
+  - k: game selection down
+  - j / a: graphics selection left
+  - l: graphics selection right
   - q: quit program
   - space: launch selected game
-- while in game: 
-  - 
 
 Tools:
 - [Trello](https://trello.com/b/sS5j02Vy/arcade)

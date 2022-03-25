@@ -27,9 +27,10 @@ Nibbler::GameCore::GameCore()
 
 void Nibbler::GameCore::showMenu()
 {
-    GFX->drawText("IN MENU, PRESS S TO PLAY", 0, 0);
-    GFX->drawText("PRESS Q TO QUIT", 0, 1);
-    GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 2);
+    GFX->drawText("WELCOME TO NIBBLER", 0, 0);
+    GFX->drawText("IN MENU, PRESS S TO PLAY", 0, 1);
+    GFX->drawText("PRESS Q TO QUIT", 0, 2);
+    GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 3);
 }
 
 void Nibbler::GameCore::showGameOver()

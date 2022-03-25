@@ -47,16 +47,16 @@ class Core
         void launchGame();
 
         /**
-         * Handles all the Arcade machine related inputs,
+         * Handles all the menu only inputs, like launching a game with space
          * is in charge of closing the program by setting _state to HALT
          */
-        void handleInputs();
+        void handleMenuInputs();
 
         /**
          * Handles inputs for swapping game or graphics library
-         * while in game
+         * while in game or selected a game while in the arcade menu
          */
-        void handleInputsInGame();
+        void handleArcadeInputs();
 
         /**
          * loads all game libraries in ./libs
@@ -71,10 +71,13 @@ class Core
         LDLoader<IGraphicsLib> _gfxLoader;
         LDLoader<IGameLib> _gameLoader;
 
+        // holds all available games and graphical libraries
         std::deque<meta_t> _games;
         std::deque<meta_t> _graphics;
 
-        int _state;
+        // holds the arcade state, refer to the var type for more info
+        ARCADE _state;
 
+        // holds the index of the selected game
         size_t _selectedGame = 0;
 };

@@ -18,10 +18,11 @@ Pacman::GameCore::GameCore()
 
 void Pacman::GameCore::showMenu()
 {
-    GFX->drawText("IN MENU, PRESS S TO PLAY", 0, 0);
-    GFX->drawText("PRESS Q TO QUIT", 0, 1);
-    GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 2);
-    GFX->drawText("GS: " + std::to_string(this->_state), 0, 3);
+    GFX->drawText("WELCOME TO PACMAN", 0, 0);
+    GFX->drawText("IN MENU, PRESS S TO PLAY", 0, 1);
+    GFX->drawText("PRESS Q TO QUIT", 0, 2);
+    GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 3);
+    GFX->drawText("GS: " + std::to_string(this->_state), 0, 4);
 }
 
 void Pacman::GameCore::showGameOver()

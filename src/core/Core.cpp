@@ -33,16 +33,16 @@ void Core::mainLoop()
 {
     while (this->_state) {
         this->_gfx->recordInputs();
+        this->handleArcadeInputs();
+        this->_gfx->flush();
 
         if (this->_state == ARCADE::GAME) {
-            this->handleInputsInGame();
 
             if (this->_gamePtr->frame() != 0) {
                 this->_gfx->flush();
                 this->_state = ARCADE::MENU;
             }
         } else {
-            this->_gfx->flush();
 
             size_t i = 0;
             for (const auto &meta: this->_games) {
@@ -51,7 +51,7 @@ void Core::mainLoop()
                 i++;
             }
 
-            this->handleInputs();
+            this->handleMenuInputs();
         }
     }
 }
@@ -115,27 +115,13 @@ void Core::loadAvailableLibs()
     closedir(dir);
 }
 
-void Core::handleInputs()
+void Core::handleMenuInputs()
 {
     std::queue<char> inputs = this->_gfx->getInput();
 
     if (inputs.empty())
         return;
     switch (inputs.back()) {
-        // game selection section
-        case 'z': // goes up by one game
-        case 'w':
-            if (this->_selectedGame > 0)
-                this->_selectedGame--;
-            else
-                this->_selectedGame = this->_games.size() - 1;
-            break;
-        case 's': // goes down by one game
-            if (this->_selectedGame == (this->_games.size() - 1))
-                this->_selectedGame = 0;
-            else
-                this->_selectedGame++;
-            break;
         case ' ': // launches the selected game
             this->_gfx->popInput();
             this->launchGame();
@@ -143,10 +129,9 @@ void Core::handleInputs()
         case 'q': // quits the program
             this->_state = ARCADE::HALT;
     }
-    this->_gfx->popInput();
 }
 
-void Core::handleInputsInGame()
+void Core::handleArcadeInputs()
 {
     std::queue<char> inputs = this->_gfx->getInput();
 
