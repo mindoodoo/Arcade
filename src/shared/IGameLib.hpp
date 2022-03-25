@@ -15,7 +15,7 @@
 
 class IGameLib {
     public:
-        ~IGameLib() = default;
+        virtual ~IGameLib() = default;
 
         virtual int frame() = 0;
 

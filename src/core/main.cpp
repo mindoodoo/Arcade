@@ -18,5 +18,8 @@ int main(int argc, char *argv[])
     Core *coreInstance = new Core(argv[1]);
     coreInstance->mainLoop();
 
+
+    delete coreInstance;
+
     return 0;
 }

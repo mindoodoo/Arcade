@@ -86,30 +86,26 @@ void Core::loadAvailableLibs()
     }
 
     while ((entry = readdir(dir)) != nullptr) {
-        if (entry->d_name[0] != '.') {
-            std::string path = dirPath + "/" + std::string(entry->d_name);
+        try {
+            if (entry->d_name[0] != '.') {
+                std::string path = dirPath + "/" + std::string(entry->d_name);
 
-            void *handle = dlopen(path.c_str(), RTLD_NOW);
+                void *handle = LDLoader<void>::open(path);
 
-            if (handle == nullptr) {
-                std::cerr << dlerror();
-                continue;
+                void *result = LDLoader<void>::getSymbol(handle, "id");
+
+                int type = *(int *) result;
+
+                if (type == GAME_ID) {
+                    this->_games.push_back(meta_t{.name = path, .path = path});
+                } else if (type == GFX_iD) {
+                    this->_graphics.push_back(meta_t{.name = path, .path = path});
+                }
+
+                LDLoader<void>::close(handle);
             }
-
-            void *result = dlsym(handle, "id");
-
-            if (result == nullptr) {
-                std::cerr << dlerror();
-                continue;
-            }
-
-            int type = *(int *) result;
-
-            if (type == GAME_ID) {
-                this->_games.push_back(meta_t{.name = path, .path = path});
-            } else if (type == GFX_iD) {
-                this->_graphics.push_back(meta_t{.name = path, .path = path});
-            }
+        } catch (std::exception &err) {
+            std::cerr << err.what() << std::endl;
         }
     }
     closedir(dir);
@@ -164,4 +160,10 @@ void Core::handleArcadeInputs()
             this->_gfx->popInput();
             break;
     }
+}
+
+Core::~Core()
+{
+    delete this->_gfx;
+    delete this->_gamePtr;
 }

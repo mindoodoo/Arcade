@@ -30,7 +30,7 @@ class Core
     public:
         explicit Core(const std::string &gfxPath = "./lib/arcade_ncurses.so");
 
-        ~Core() = default;
+        ~Core();
 
         /**
          * main loop of the program
