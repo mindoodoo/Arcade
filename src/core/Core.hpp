@@ -45,6 +45,7 @@ class Core
          * arcade menu during runtime
          */
         void launchGame();
+
         /**
          * Handles all the Arcade machine related inputs,
          * is in charge of closing the program by setting _state to HALT
@@ -52,10 +53,17 @@ class Core
         void handleInputs();
 
         /**
+         * Handles inputs for swapping game or graphics library
+         * while in game
+         */
+        void handleInputsInGame();
+
+        /**
          * loads all game libraries in ./libs
          * to display them in the menu
          */
         void loadAvailableLibs();
+
 
         IGraphicsLib *_gfx;
         IGameLib *_gamePtr;

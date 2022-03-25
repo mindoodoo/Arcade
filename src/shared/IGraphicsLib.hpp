@@ -36,7 +36,7 @@ class IGraphicsLib
         virtual void display() const = 0;
 
         // Clear screen/window
-        virtual void flush(void) const = 0;
+        virtual void flush() const = 0;
 
         // Draw tile of index tile_index, at x tile and y tile
         // (tile is the unit)
@@ -46,8 +46,17 @@ class IGraphicsLib
         // Draws text, at x tile and y tile
         virtual void drawText(const std::string &text, int x, int y) const = 0;
 
-        // Get events that happened since last frame
-        // Queue of events
+
+        /**
+         * Saves all inputs to process to a queue
+         * Call in Core at the beginning of everything
+         */
+        virtual void recordInputs() = 0;
+
+        /**
+         * Returns all inputs recorded
+         * @return std::queue<char>
+         */
         virtual std::queue<char> &getInput() = 0;
 
         virtual void popInput() = 0;

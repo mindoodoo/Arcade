@@ -37,7 +37,7 @@ void NcursesGraphicsLib::checkConfig(const gfx_config_t &config)
     }
 }
 
-void NcursesGraphicsLib::loadConfig(void)
+void NcursesGraphicsLib::loadConfig()
 {
     std::vector<std::string> stringVector = csvToVector(this->_config.asciiTilesetPath);
 
@@ -45,7 +45,7 @@ void NcursesGraphicsLib::loadConfig(void)
         this->_tileset.push_back(stringVector[i][0]);
 }
 
-void NcursesGraphicsLib::flush(void) const
+void NcursesGraphicsLib::flush() const
 {
     clear();
 }
@@ -62,9 +62,6 @@ void NcursesGraphicsLib::drawText(const std::string &text, int x, int y) const
 
 std::queue<char> &NcursesGraphicsLib::getInput()
 {
-    // Add new input to queue
-    this->_inputQueue.push(getch());
-
     return this->_inputQueue;
 }
 
@@ -82,4 +79,10 @@ void NcursesGraphicsLib::display() const
 void NcursesGraphicsLib::popInput()
 {
     this->_inputQueue.pop();
+}
+
+void NcursesGraphicsLib::recordInputs()
+{
+    // Add new input to queue
+    this->_inputQueue.push(getch());
 }

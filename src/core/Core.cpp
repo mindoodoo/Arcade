@@ -32,13 +32,18 @@ Core::Core(const std::string &gfxPath)
 void Core::mainLoop()
 {
     while (this->_state) {
+        this->_gfx->recordInputs();
 
         if (this->_state == ARCADE::GAME) {
+            this->handleInputsInGame();
+
             if (this->_gamePtr->frame() != 0) {
                 this->_gfx->flush();
                 this->_state = ARCADE::MENU;
             }
         } else {
+            this->_gfx->flush();
+
             size_t i = 0;
             for (const auto &meta: this->_games) {
                 std::string line = std::to_string(i) + ". " + meta.name;
@@ -47,10 +52,6 @@ void Core::mainLoop()
             }
 
             this->handleInputs();
-
-            this->_gfx->drawText(std::to_string(_selectedGame), 20, 20);
-
-            this->_gfx->flush();
         }
     }
 }
@@ -61,6 +62,8 @@ void Core::launchGame()
         delete this->_gfx;
         throw Error::GameNotFound(this->_selectedGame);
     }
+
+    this->_gfx->flush();
 
     this->_gameLoader.loadLib(this->_games[this->_selectedGame].path);
 
@@ -88,16 +91,15 @@ void Core::loadAvailableLibs()
 
             void *handle = dlopen(path.c_str(), RTLD_NOW);
 
-            if (handle == nullptr)
+            if (handle == nullptr) {
+                std::cerr << dlerror();
                 continue;
+            }
 
             void *result = dlsym(handle, "id");
 
             if (result == nullptr) {
-                std::cerr << "reee";
                 std::cerr << dlerror();
-
-                exit(84);
                 continue;
             }
 
@@ -134,8 +136,7 @@ void Core::handleInputs()
             else
                 this->_selectedGame++;
             break;
-        case 'l': // launches the selected game
-            this->_gfx->flush();
+        case ' ': // launches the selected game
             this->_gfx->popInput();
             this->launchGame();
             break;
@@ -143,4 +144,39 @@ void Core::handleInputs()
             this->_state = ARCADE::HALT;
     }
     this->_gfx->popInput();
+}
+
+void Core::handleInputsInGame()
+{
+    std::queue<char> inputs = this->_gfx->getInput();
+
+    if (inputs.empty())
+        return;
+    switch (inputs.back()) {
+        // game selection section
+        case 'i': // goes up by one game
+            if (this->_selectedGame > 0)
+                this->_selectedGame--;
+            else
+                this->_selectedGame = this->_games.size() - 1;
+            this->_gfx->popInput();
+            if (this->_state == ARCADE::GAME)
+                this->launchGame();
+            break;
+        case 'k': // goes down by one game
+            if (this->_selectedGame == (this->_games.size() - 1))
+                this->_selectedGame = 0;
+            else
+                this->_selectedGame++;
+            this->_gfx->popInput();
+            if (this->_state == ARCADE::GAME)
+                this->launchGame();
+            break;
+        case 'j': // TODO goes "left" by one graphics lib
+            this->_gfx->popInput();
+            break;
+        case 'l': // TODO goes "right" by one graphics lib
+            this->_gfx->popInput();
+            break;
+    }
 }
