@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <curses.h>
+#include <ncurses.h>
 #include <vector>
 #include "../../shared/IGraphicsLib.hpp"
 #include "../../shared/shared.hpp"

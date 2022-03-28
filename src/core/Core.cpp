@@ -37,13 +37,11 @@ void Core::mainLoop()
         this->_gfx->flush();
 
         if (this->_state == ARCADE::GAME) {
-
             if (this->_gamePtr->frame() != 0) {
                 this->_gfx->flush();
                 this->_state = ARCADE::MENU;
             }
         } else {
-
             size_t i = 0;
             for (const auto &meta: this->_games) {
                 std::string line = std::to_string(i) + ". " + meta.name;
@@ -84,6 +82,9 @@ void Core::loadAvailableLibs()
         std::cerr << "Directory not found" << std::endl;
         return;
     }
+
+    this->_games = std::deque<meta_t>(0);
+    this->_graphics = std::deque<meta_t>(0);
 
     while ((entry = readdir(dir)) != nullptr) {
         try {
@@ -152,6 +153,9 @@ void Core::handleArcadeInputs()
             this->_gfx->popInput();
             if (this->_state == ARCADE::GAME)
                 this->launchGame();
+            break;
+        case 'r': // reload list of libs
+            this->loadAvailableLibs();
             break;
         case 'j': // TODO goes "left" by one graphics lib
             this->_gfx->popInput();

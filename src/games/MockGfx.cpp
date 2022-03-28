@@ -42,10 +42,6 @@ MockGfx::MockGfx()
 
 std::queue<char> &MockGfx::getInput()
 {
-    char c = getch();
-    if (c != ERR) {
-        this->_inputQueue.push(c);
-    }
     return this->_inputQueue;
 }
 
@@ -62,4 +58,10 @@ void MockGfx::popInput()
 MockGfx::~MockGfx()
 {
     curs_set(2);
+}
+
+void MockGfx::recordInputs()
+{
+
+    this->_inputQueue.push(getch());
 }

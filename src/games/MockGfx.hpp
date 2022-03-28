@@ -32,6 +32,8 @@ class MockGfx : public virtual IGraphicsLib
 
         void popInput() override;
 
+        void recordInputs() override;
+
         void checkConfig(const gfx_config_t &config) override {
             std::string(config.graphicalTilesetPath) ;
         };

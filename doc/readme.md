@@ -13,6 +13,7 @@ Arcade Machine Inputs:
   - j / a: graphics selection left
   - l: graphics selection right
   - q: quit program
+  - r: reload list of libs
   - space: launch selected game
 
 Tools:
