@@ -225,7 +225,7 @@ void Core::displayScores()
     int offset = 2;
     this->_gfx->drawText("SCORES:", 20, offset);
 
-    for (size_t i = 0; i <= 10; i++) {
+    for (size_t i = 0; i < 10; i++) {
         std::string score = i < scores.size() ? std::to_string(scores[i]) : "";
         std::string line = std::to_string(i + 1) + ".\t" + score;
         this->_gfx->drawText(line, 20, i + offset + 1);
