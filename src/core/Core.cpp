@@ -191,19 +191,28 @@ Core::~Core()
 
 std::deque<int> Core::getScores(const std::string &assets, game_meta_t *game)
 {
+    std::deque<int> scores(0);
+    try {
+        std::vector<std::string> scoreboard = csvToVector(assets + "/scoreboard");
 
-    std::vector<std::string> scoreboard = csvToVector(assets + "/scoreboard");
-    std::deque<int> scores;
+        for (const auto &score_s: scoreboard) {
+            int score = std::stoi(score_s);
 
-    for (const auto &score_s: scoreboard) {
-        int score = std::stoi(score_s);
+            scores.insert(std::upper_bound(scores.begin(), scores.end(), score), score);
+        }
 
-        scores.insert(std::upper_bound(scores.begin(), scores.end(), score), score);
+        std::reverse(scores.begin(), scores.end());
+        if (game) {
+            game->latest_score = scoreboard.empty() ? NO_SCORE : std::stoi(scoreboard.back());
+            game->scores = scores;
+        }
+    } catch (std::exception &err) {
+        if (game) {
+            game->latest_score = NO_SCORE;
+            game->scores = scores;
+        }
+        std::cerr << err.what() << std::endl;
     }
-
-    std::reverse(scores.begin(), scores.end());
-    game->latest_score = scoreboard.empty() ? NO_SCORE : std::stoi(scoreboard.back());
-    game->scores = scores;
     return scores;
 }
 
