@@ -12,12 +12,16 @@
 #include "IGameLib.hpp"
 #include "IGraphicsLib.hpp"
 
+#define SELECTED_GAME this->_games[this->_selectedGame]
+#define NO_SCORE -1
+
 typedef struct
 {
     std::string name;
     std::string path;
     std::string assets;
-    std::deque<int> scores;
+    std::deque<int> scores = std::deque<int>(0);
+    int latest_score = NO_SCORE;
 } game_meta_t;
 
 typedef struct
@@ -78,7 +82,7 @@ class Core
          * @param assets
          * @return sorted scores
          */
-        static std::deque<int> getScores(const std::string &assets);
+        static std::deque<int> getScores(const std::string &assets, game_meta_t *game);
 
         /**
          * Displays the scores of the currently selected games

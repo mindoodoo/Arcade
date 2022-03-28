@@ -38,7 +38,8 @@ void Core::mainLoop()
         this->handleArcadeInputs();
         this->_gfx->flush();
 
-        if (this->_state == ARCADE::GAME) {
+        if (this->_state == ARCADE::
+        GAME) {
             if (this->_gamePtr->frame() != 0) {
                 this->_gfx->flush();
                 this->loadAvailableLibs();
@@ -74,7 +75,8 @@ void Core::launchGame()
 
     this->_gamePtr->setGfx(&this->_gfx);
 
-    this->_state = ARCADE::GAME;
+    this->_state = ARCADE::
+    GAME;
 }
 
 void Core::loadAvailableLibs()
@@ -109,9 +111,11 @@ void Core::loadAvailableLibs()
 
                     assets.append("/assets");
 
-                    std::deque<int> scores = Core::getScores(assets);
+                    game_meta_t game = {.name = path, .path = path, .assets = assets};
 
-                    this->_games.push_back(game_meta_t{.name = path, .path = path, .assets = assets, .scores = scores});
+                    Core::getScores(assets, &game);
+
+                    this->_games.push_back(game);
                 } else if (type == GFX_iD) {
                     this->_graphics.push_back(graphic_meta_t{.name = path, .path = path});
                 }
@@ -185,7 +189,7 @@ Core::~Core()
     delete this->_gamePtr;
 }
 
-std::deque<int> Core::getScores(const std::string &assets)
+std::deque<int> Core::getScores(const std::string &assets, game_meta_t *game)
 {
 
     std::vector<std::string> scoreboard = csvToVector(assets + "/scoreboard");
@@ -198,19 +202,23 @@ std::deque<int> Core::getScores(const std::string &assets)
     }
 
     std::reverse(scores.begin(), scores.end());
-
+    game->latest_score = scoreboard.empty() ? NO_SCORE : std::stoi(scoreboard.back());
+    game->scores = scores;
     return scores;
 }
 
 void Core::displayScores()
 {
-    std::deque<int> scores = this->_games[this->_selectedGame].scores;
+    std::deque<int> scores = SELECTED_GAME.scores;
 
-    int i = 0;
-    this->_gfx->drawText("SCORES:", 20, i++);
-    if (scores.empty())
-        return;
-    for (int score: scores) {
-        this->_gfx->drawText(std::to_string(score), 20, i++);
+    std::string latest_score = SELECTED_GAME.latest_score == NO_SCORE ? "" : std::to_string(SELECTED_GAME.latest_score);
+    this->_gfx->drawText("LATEST SCORE: " + latest_score, 20, 0);
+    int offset = 2;
+    this->_gfx->drawText("SCORES:", 20, offset);
+
+    for (size_t i = 0; i <= 10; i++) {
+        std::string score = i < scores.size() ? std::to_string(scores[i]) : "";
+        std::string line = std::to_string(i + 1) + ".\t" + score;
+        this->_gfx->drawText(line, 20, i + offset + 1);
     }
 }
