@@ -5,39 +5,23 @@
 ** .
 */
 
-#include "IGraphicsLib.hpp"
 #include <fstream>
-#include <sstream>
 #include <iostream>
 #include <vector>
 #include <iterator>
+#include <cstring>
 
-std::vector<std::string> csv_read_row(std::istream &in, char delimiter)
+std::vector<std::string> csv_read_row(const std::string &line)
 {
-    std::stringstream ss;
-    bool inQuotes = false;
-    char c;
     std::vector<std::string> row;
 
-    while(in.good()) {
-        c = in.get();
-        if (!inQuotes && c == '"')
-            inQuotes=true;
-        else if (inQuotes && c == '"') {
-            if (in.peek() == '"')
-                ss << (char)in.get();
-            else
-                inQuotes=false;
-        } else if (!inQuotes && c == delimiter) {
-            row.push_back(ss.str());
-            ss.str("");
-        } else if (!inQuotes && (c == '\r' || c == '\n')) {
-            if (in.peek()=='\n')
-                in.get();
-            row.push_back(ss.str());
-            return row;
-        } else
-            ss << c;
+    char *c_line = const_cast<char *>(line.c_str());
+    char *token = std::strtok(c_line, ",");
+
+    row.emplace_back(token);
+
+    while ((token = std::strtok(nullptr, ","))) {
+        row.emplace_back(token);
     }
     return row;
 }
@@ -47,11 +31,12 @@ std::vector<std::vector<std::string>> csvToTable(const std::string &filepath)
     std::vector<std::string> row;
     std::vector<std::vector<std::string>> table;
     std::ifstream myFile(filepath);
+    std::string buff;
 
-    if(!myFile.is_open())
+    if (!myFile.is_open())
         throw std::runtime_error("Could not open file");
-    while (myFile.good()) {
-        row = csv_read_row(myFile, ',');
+    while (getline(myFile, buff)) {
+        row = csv_read_row(buff);
         table.push_back(row);
     }
     myFile.close();
@@ -63,11 +48,12 @@ std::vector<std::string> csvToVector(const std::string &filepath)
     std::vector<std::string> row;
     std::vector<std::string> output;
     std::ifstream myFile(filepath);
+    std::string buff;
 
-    if(!myFile.is_open())
+    if (!myFile.is_open())
         throw std::runtime_error("Could not open file");
-    while (myFile.good()) {
-        row = csv_read_row(myFile, ',');
+    while (getline(myFile, buff)) {
+        row = csv_read_row(buff);
         output.insert(output.end(), row.begin(), row.end());
     }
     myFile.close();
