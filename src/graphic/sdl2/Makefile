@@ -8,7 +8,7 @@
 CXXFLAGS = -Wall -Wextra -Werror -g3 -I../../shared -shared -fPIC \
 	-g3 -lSDL2 -lSDL2main
 
-NAME = sdllib.so
+NAME = ardcade_sdl2.so
 
 DEST = ../../../lib
 

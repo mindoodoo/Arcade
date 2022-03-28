@@ -6,15 +6,15 @@
 */
 
 #include "Fruit.hpp"
-#include "Nibbler.hpp"
+#include "Player.hpp"
 #include "../include/NibblerMacros.hpp"
 
-Fruit::Fruit(int x, int y, IGraphicsLib **gfx)
+Nibbler::Fruit::Fruit(int x, int y, IGraphicsLib **gfx)
     : Item(x, y, ITEM_FRUIT, gfx)
 {
 }
 
-void Fruit::effect(Nibbler *nibbler)
+void Nibbler::Fruit::effect(Player *nibbler)
 {
     nibbler->appendSegment();
 }

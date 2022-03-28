@@ -5,15 +5,33 @@
 ** Description
 */
 
-#include <ncurses.h>
-#include "src/Core.hpp"
+#include "src/GameCore.hpp"
+
+#include "../MockGfx.hpp"
+#include "include/NibblerMacros.hpp"
 
 int main()
 {
-    auto *core = new Core();
+    MockGfx *gfx = new MockGfx();
 
-    while (true) {
-        core->frame();
+    std::map<int, char> tileset;
+
+    tileset[NIBBLER_HEAD] = 'h';
+    tileset[NIBBLER_BODY] = 'b';
+    tileset[NIBBLER_TAIL] = 't';
+    tileset[ITEM_FRUIT] = 'a';
+    tileset[TERRAIN_WALL] = '$';
+    tileset[TERRAIN_FLOOR] = ' ';
+
+    gfx->loadTileset(tileset);
+    Nibbler::GameCore *core = new Nibbler::GameCore();
+
+    IGraphicsLib *igfx = gfx;
+    core->setGfx(&igfx);
+
+    do {
         refresh();
-    }
+    } while (core->frame() != QUIT_SIGNAL);
+
+    delete gfx;
 }

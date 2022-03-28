@@ -9,7 +9,7 @@ DEFAULT_FLAGS = -Wall -Wextra -g3
 
 FLAGS = $(DEFAULT_FLAGS) -fPIC -shared -Iinclude
 
-NAME = arcade_nibbler.so
+NAME = arcade_pacman.so
 
 DEST = ../../../lib
 
@@ -17,12 +17,7 @@ CC = g++
 
 SRC = 	src/GameCore.cpp\
 		src/Level.cpp\
-		src/Player.cpp\
-		src/Terrain.cpp\
-		src/Fruit.cpp\
-		src/Item.cpp\
 		src/make.cpp\
-		../GameErrors.cpp\
 		../BaseGameCore.cpp
 
 STDL_SRC = 	$(SRC)\
@@ -31,6 +26,7 @@ STDL_SRC = 	$(SRC)\
 
 STDL_FLAGS = $(DEFAULT_FLAGS) -lncurses -Iinclude;
 
+OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
@@ -39,7 +35,7 @@ $(NAME):
 	@make clean
 
 standalone:
-	$(CC) -o arcade_nibbler $(STDL_SRC) $(STDL_FLAGS)
+	$(CC) -o arcade_pacman $(STDL_SRC) $(STDL_FLAGS)
 
 clean:
 	rm -rf $(OBJ)

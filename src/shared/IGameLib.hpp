@@ -9,11 +9,15 @@
 
 #include "IGraphicsLib.hpp"
 
+#define QUIT_SIGNAL 9001
+#define SUCCESS_SIGNAL 0
+#define ERROR_SIGNAL 84
+
 class IGameLib {
     public:
-        ~IGameLib() = default;
+        virtual ~IGameLib() = default;
 
-        virtual void frame() = 0;
+        virtual int frame() = 0;
 
         virtual void setGfx(IGraphicsLib **_gfx) = 0;
 

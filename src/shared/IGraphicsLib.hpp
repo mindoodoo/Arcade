@@ -5,8 +5,12 @@
 ** Description
 */
 
+#pragma once
 #include <string>
 #include <queue>
+#include <map>
+
+#define GFX (*this->_gfx)
 
 // Optionally add tileset width/height in tiles
 typedef struct {
@@ -42,9 +46,20 @@ class IGraphicsLib
         // Draws text, at x tile and y tile
         virtual void drawText(const std::string &text, int x, int y) const = 0;
 
-        // Get events that happened since last frame
-        // Queue of events
+
+        /**
+         * Saves all inputs to process to a queue
+         * Call in Core at the beginning of everything
+         */
+        virtual void recordInputs() = 0;
+
+        /**
+         * Returns all inputs recorded
+         * @return std::queue<char>
+         */
         virtual std::queue<char> &getInput() = 0;
+
+        virtual void popInput() = 0;
 
         // Checks if game config is currently loaded config
         // If not : calls config loading methods

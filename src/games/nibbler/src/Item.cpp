@@ -9,7 +9,7 @@
 #include "Item.hpp"
 #include "../include/NibblerMacros.hpp"
 
-Item::Item(int x, int y, char c, IGraphicsLib **gfx)
+Nibbler::Item::Item(int x, int y, char c, IGraphicsLib **gfx)
 {
     this->_x = x;
     this->_y = y;
@@ -17,22 +17,22 @@ Item::Item(int x, int y, char c, IGraphicsLib **gfx)
     this->_gfx = gfx;
 }
 
-std::pair<int, int> Item::getLocation()
+std::pair<int, int> Nibbler::Item::getLocation()
 {
     return {this->_x, this->_y};
 }
 
-void Item::draw()
+void Nibbler::Item::draw()
 {
-    GFX->drawTile(this->_symbol, this->_x, this->_y);
+    (*this->_gfx)->drawTile(this->_symbol, this->_x, this->_y);
 }
 
-bool Item::itemCollision(int x, int y) const
+bool Nibbler::Item::itemCollision(int x, int y) const
 {
     return x == this->_x && y == this->_y;
 }
 
-void Item::relocate(int x, int y)
+void Nibbler::Item::relocate(int x, int y)
 {
     this->_x = x;
     this->_y = y;

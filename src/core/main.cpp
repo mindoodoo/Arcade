@@ -6,7 +6,7 @@
 */
 
 #include <iostream>
-// #include "../loader/LdLoader.hpp"
+#include "Core.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -14,5 +14,12 @@ int main(int argc, char *argv[])
         std::cout << "Please provide a graphics library." << std::endl;
         return 84;
     }
+
+    Core *coreInstance = new Core(argv[1]);
+    coreInstance->mainLoop();
+
+
+    delete coreInstance;
+
     return 0;
 }
