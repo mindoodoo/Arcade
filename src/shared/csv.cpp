@@ -34,7 +34,7 @@ std::vector<std::vector<std::string>> csvToTable(const std::string &filepath)
     std::string buff;
 
     if (!myFile.is_open())
-        throw std::runtime_error(filepath + ": Could not open file");
+        throw std::runtime_error(filepath + ": Could not open file.");
     while (getline(myFile, buff)) {
         row = csv_read_row(buff);
         table.push_back(row);
@@ -51,7 +51,7 @@ std::vector<std::string> csvToVector(const std::string &filepath)
     std::string buff;
 
     if (!myFile.is_open())
-        throw std::runtime_error("Could not open file");
+        throw std::runtime_error(filepath + ": Could not open file.");
     while (getline(myFile, buff)) {
         row = csv_read_row(buff);
         output.insert(output.end(), row.begin(), row.end());
