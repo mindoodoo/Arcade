@@ -12,6 +12,11 @@
 #include "../../shared/IGraphicsLib.hpp"
 #include "../../shared/shared.hpp"
 
+typedef struct {
+    char c;
+    int color;
+} ascii_tile_t;
+
 class NcursesGraphicsLib : virtual public IGraphicsLib
 {
     public:
@@ -43,6 +48,6 @@ class NcursesGraphicsLib : virtual public IGraphicsLib
         void recordInputs() override;
     private:
         gfx_config_t _config;
-        std::vector<char> _tileset;
+        std::vector<ascii_tile_t> _tileset;
         std::queue<char> _inputQueue;
 };
