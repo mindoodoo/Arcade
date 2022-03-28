@@ -75,8 +75,7 @@ void Core::launchGame()
 
     this->_gamePtr->setGfx(&this->_gfx);
 
-    this->_state = ARCADE::
-    GAME;
+    this->_state = ARCADE::GAME;
 }
 
 void Core::loadAvailableLibs()

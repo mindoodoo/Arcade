@@ -79,6 +79,7 @@ class Core
 
         /**
          * loads all scores and puts them into a sorted deque
+         * adds the sorted scores and most recent score to game_meta_t if given
          * @param assets
          * @return sorted scores
          */
