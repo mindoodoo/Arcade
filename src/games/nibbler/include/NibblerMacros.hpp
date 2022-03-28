@@ -18,3 +18,4 @@
 #define TERRAIN_FLOOR 6
 
 #include <string>
+#define PATH_TO_GAME "./src/games/nibbler"

@@ -8,7 +8,8 @@
 CORE_SRC =  src/core/main.cpp \
 	src/core/Core.cpp \
 	src/core/loader/LdLoader.cpp\
-	src/shared/ArcadeError.cpp
+	src/shared/ArcadeError.cpp\
+	src/shared/csv.cpp
 
 CORE_NAME = arcade
 

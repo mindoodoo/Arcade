@@ -16,7 +16,15 @@ typedef struct
 {
     std::string name;
     std::string path;
-} meta_t;
+    std::string assets;
+    std::deque<int> scores;
+} game_meta_t;
+
+typedef struct
+{
+    std::string name;
+    std::string path;
+} graphic_meta_t;
 
 enum ARCADE
 {
@@ -61,8 +69,21 @@ class Core
         /**
          * loads all game libraries in ./libs
          * to display them in the menu
+         * Called on startup, on 'r' press and maybe also on game close
          */
         void loadAvailableLibs();
+
+        /**
+         * loads all scores and puts them into a sorted deque
+         * @param assets
+         * @return sorted scores
+         */
+        static std::deque<int> getScores(const std::string &assets);
+
+        /**
+         * Displays the scores of the currently selected games
+         */
+        void displayScores();
 
 
         IGraphicsLib *_gfx;
@@ -72,8 +93,8 @@ class Core
         LDLoader<IGameLib> _gameLoader;
 
         // holds all available games and graphical libraries
-        std::deque<meta_t> _games;
-        std::deque<meta_t> _graphics;
+        std::deque<game_meta_t> _games;
+        std::deque<graphic_meta_t> _graphics;
 
         // holds the arcade state, refer to the var type for more info
         ARCADE _state;

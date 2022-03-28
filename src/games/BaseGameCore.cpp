@@ -28,6 +28,7 @@ int BaseGameCore::frame()
         if (levelState == LEVEL::DEFEAT) {
             this->setHighScore(this->_game->getScore());
             this->_state = GS_GAME_OVER;
+            delete this->_game;
             this->_game = nullptr;
             GFX->flush();
         } else if (levelState == LEVEL::VICTORY) {

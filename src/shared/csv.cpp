@@ -18,7 +18,7 @@ std::vector<std::string> csv_read_row(std::istream &in, char delimiter)
     bool inQuotes = false;
     char c;
     std::vector<std::string> row;
-    
+
     while(in.good()) {
         c = in.get();
         if (!inQuotes && c == '"')

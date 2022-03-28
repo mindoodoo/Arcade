@@ -6,8 +6,9 @@
 */
 
 #include "../../../shared/IGameLib.hpp"
-#include "GameCore.hpp"
 #include "../../../shared/shared.hpp"
+#include "GameCore.hpp"
+#include "../include/NibblerMacros.hpp"
 
 extern "C"
 {
@@ -17,4 +18,5 @@ extern "C"
     }
 
     int id = GAME_ID;
+    char path[] = PATH_TO_GAME;
 }

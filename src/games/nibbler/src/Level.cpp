@@ -7,6 +7,8 @@
 
 #include <ncurses.h>
 #include <utility>
+#include <fstream>
+#include <iostream>
 #include "Level.hpp"
 #include "GameCore.hpp"
 #include "../include/NibblerMacros.hpp"
@@ -117,8 +119,8 @@ bool Nibbler::Level::isTileEmpty(int x, int y)
 
 std::pair<int, int> Nibbler::Level::randomLocation()
 {
-    int x;
-    int y;
+    size_t x;
+    size_t y;
 
     x = random() % (this->_gameWidth - 2) + 1;
     y = random() % (this->_gameHeight - 2) + 1;
@@ -126,9 +128,8 @@ std::pair<int, int> Nibbler::Level::randomLocation()
     if (!this->isTileEmpty(x, y)) {
         std::pair<int, int> pair = circleScan(30, x, y);
 
-        if (pair.first == -1) {
+        if (pair.first == -1)
             this->_state = LEVEL::VICTORY;
-        }
         return pair;
     }
 
@@ -169,4 +170,14 @@ std::pair<int, int> Nibbler::Level::circleScan(int r, int x, int y)
 int Nibbler::Level::getScore() const
 {
     return this->_score;
+}
+
+Nibbler::Level::~Level()
+{
+    std::fstream file(PATH_TO_GAME + std::string("/assets/scoreboard"), std::ios::app);
+
+    if (file.tellg() > 0)
+        file << ",";
+    file << std::to_string(this->_score);
+    file.close();
 }

@@ -12,8 +12,4 @@
 #define TERRAIN_WALL 3
 #define TERRAIN_FLOOR 4
 
-void mockDrawTile(int tile, int x, int y);
-
-void mockInitGfxLib();
-
-void mockShowText(const std::string &text, int x, int y);
+#define PATH_TO_GAME "./src/games/pacman"

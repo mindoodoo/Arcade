@@ -18,7 +18,7 @@ namespace Nibbler
         public:
             explicit Level(IGraphicsLib **gfx, gfx_config_t levelConf);
 
-            ~Level() = default;
+            ~Level();
 
             int frame() override;
 

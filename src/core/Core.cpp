@@ -6,6 +6,8 @@
 */
 
 #include <dirent.h>
+#include <fstream>
+#include <algorithm>
 #include "Core.hpp"
 #include "map"
 #include "shared.hpp"
@@ -39,6 +41,7 @@ void Core::mainLoop()
         if (this->_state == ARCADE::GAME) {
             if (this->_gamePtr->frame() != 0) {
                 this->_gfx->flush();
+                this->loadAvailableLibs();
                 this->_state = ARCADE::MENU;
             }
         } else {
@@ -48,6 +51,8 @@ void Core::mainLoop()
                 this->_gfx->drawText(i == this->_selectedGame ? line + " - selected" : line, 0, 0 + i);
                 i++;
             }
+
+            this->displayScores();
 
             this->handleMenuInputs();
         }
@@ -83,8 +88,8 @@ void Core::loadAvailableLibs()
         return;
     }
 
-    this->_games = std::deque<meta_t>(0);
-    this->_graphics = std::deque<meta_t>(0);
+    this->_games = std::deque<game_meta_t>(0);
+    this->_graphics = std::deque<graphic_meta_t>(0);
 
     while ((entry = readdir(dir)) != nullptr) {
         try {
@@ -98,9 +103,17 @@ void Core::loadAvailableLibs()
                 int type = *(int *) result;
 
                 if (type == GAME_ID) {
-                    this->_games.push_back(meta_t{.name = path, .path = path});
+                    result = LDLoader<void>::getSymbol(handle, "path");
+
+                    std::string assets = std::string((char *) result);
+
+                    assets.append("/assets");
+
+                    std::deque<int> scores = Core::getScores(assets);
+
+                    this->_games.push_back(game_meta_t{.name = path, .path = path, .assets = assets, .scores = scores});
                 } else if (type == GFX_iD) {
-                    this->_graphics.push_back(meta_t{.name = path, .path = path});
+                    this->_graphics.push_back(graphic_meta_t{.name = path, .path = path});
                 }
 
                 LDLoader<void>::close(handle);
@@ -170,4 +183,34 @@ Core::~Core()
 {
     delete this->_gfx;
     delete this->_gamePtr;
+}
+
+std::deque<int> Core::getScores(const std::string &assets)
+{
+
+    std::vector<std::string> scoreboard = csvToVector(assets + "/scoreboard");
+    std::deque<int> scores;
+
+    for (const auto &score_s: scoreboard) {
+        int score = std::stoi(score_s);
+
+        scores.insert(std::upper_bound(scores.begin(), scores.end(), score), score);
+    }
+
+    std::reverse(scores.begin(), scores.end());
+
+    return scores;
+}
+
+void Core::displayScores()
+{
+    std::deque<int> scores = this->_games[this->_selectedGame].scores;
+
+    int i = 0;
+    this->_gfx->drawText("SCORES:", 20, i++);
+    if (scores.empty())
+        return;
+    for (int score: scores) {
+        this->_gfx->drawText(std::to_string(score), 20, i++);
+    }
 }

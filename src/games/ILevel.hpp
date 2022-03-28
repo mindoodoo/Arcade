@@ -9,7 +9,7 @@
 
 class ILevel {
     public:
-        ~ILevel() = default;
+        virtual ~ILevel() = default;
 
         virtual int frame() = 0;
 
