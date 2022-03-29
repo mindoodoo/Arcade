@@ -14,14 +14,14 @@ DEST = ../../../lib
 
 CC = g++
 
-SRC = SfmlGraphicsLib.cpp
-
-OBJ = $(SRC:.cpp=.o)
+SRC = SfmlGraphicsLib.cpp \
+	../../shared/operators.cpp \
+	make.cpp
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -o $(DEST)/$(NAME) $(OBJ)
+	$(CC) -o $(DEST)/$(NAME) $(SRC) $(CXXFLAGS)
 
 clean:
 	rm -rf $(OBJ)

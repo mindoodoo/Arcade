@@ -15,11 +15,15 @@ LDLoader<T>::~LDLoader()
 template<class T>
 void LDLoader<T>::loadLib(const std::string &libPath)
 {
-    int res = LDLoader<void>::close(this->_handle);
+    int res;
+
+    if (this->_handle)
+        res = LDLoader<void>::close(this->_handle);
 
     if (res != 0)
         std::cerr << "ERROR (" << std::to_string(res) << "): while closing a dynamic library" << std::endl;
 
+    std::cout << "libpaths is : " << libPath << std::endl;
     this->_handle = LDLoader<void>::open(libPath);
 
     this->_lib_factory = (T *(*)()) LDLoader<void>::getSymbol(this->_handle, "make");

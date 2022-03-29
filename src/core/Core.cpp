@@ -22,6 +22,7 @@ Core::Core(const std::string &gfxPath)
         this->_gfxLoader.loadLib(gfxPath);
         this->loadAvailableLibs();
 
+
         // Get instances of game and gfx libraries
         this->_gfx = this->_gfxLoader.getInstance();
         this->_gamePtr = nullptr;

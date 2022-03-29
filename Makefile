@@ -27,8 +27,8 @@ games:
 
 graphicals:
 	make -C ./src/graphic/ncurses --no-print-directory
+	make -C ./src/graphic/sfml
 	# make -C ./src/graphic/sdl2
-	# make -C ./src/graphic/sfml
 
 clean:
 	find -regex ".*/.*\.o" -delete;

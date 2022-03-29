@@ -14,8 +14,8 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
-#include "../../shared/IGraphicsLib.hpp"
-#include "../../shared/shared.hpp"
+#include "IGraphicsLib.hpp"
+#include "shared.hpp"
 
 class SfmlGraphicsLib : public virtual IGraphicsLib
 {
@@ -25,8 +25,6 @@ class SfmlGraphicsLib : public virtual IGraphicsLib
         ~SfmlGraphicsLib();
 
         //config / view setup
-
-        
 
         // Updates screen with buffer (called at the end of all draw tiles)
         virtual void display() override;
@@ -58,7 +56,6 @@ class SfmlGraphicsLib : public virtual IGraphicsLib
         sf::Text _text;
         sf::Font _font;
         std::vector<sf::Sprite*> _tiles;
-        // std::vector<sf::Texture*> _tileTextures;
         sf::Texture _tilesetTexture;
         sf::RenderWindow _window;
         gfx_config_t _config;

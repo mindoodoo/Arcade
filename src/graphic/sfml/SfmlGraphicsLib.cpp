@@ -25,7 +25,7 @@ SfmlGraphicsLib::~SfmlGraphicsLib()
     this->_window.close();
 
     // Free Sprite pointers
-    for (int i = 0; i < this->_tiles.size(); ++i)
+    for (unsigned int i = 0; i < this->_tiles.size(); ++i)
         delete this->_tiles[i];
 }
 
