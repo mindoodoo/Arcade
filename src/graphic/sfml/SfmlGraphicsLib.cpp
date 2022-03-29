@@ -46,7 +46,8 @@ void SfmlGraphicsLib::drawText(const std::string &text, int x, int y)
     this->_text.setString(text);
     this->_text.setCharacterSize(24); // in pixels
     this->_text.setFillColor(sf::Color::Red);
-    this->_text.setPosition(x,y);
+    this->_text.setPosition(x * this->_config.tileWidth,
+    y * this->_config.tileHeight);
     this->_window.draw(this->_text);
 }
 
