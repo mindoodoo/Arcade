@@ -25,6 +25,18 @@ Core::Core(const std::string &gfxPath)
 
         // Get instances of game and gfx libraries
         this->_gfx = this->_gfxLoader.getInstance();
+
+        // Init gfx config for menu
+        this->_config = {
+            "",
+            "",
+            "./src/core/BADABB__.TTF",
+            64,
+            64,
+            10,
+            10
+        };
+
         this->_gamePtr = nullptr;
     } catch (std::exception &err) {
         std::cerr << err.what() << std::endl;
@@ -35,6 +47,7 @@ Core::Core(const std::string &gfxPath)
 void Core::mainLoop()
 {
     while (this->_state) {
+        this->_gfx->checkConfig(this->_config);
         this->_gfx->recordInputs();
         this->handleArcadeInputs();
         this->_gfx->flush();

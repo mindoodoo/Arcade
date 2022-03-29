@@ -50,6 +50,8 @@ void SfmlGraphicsLib::loadTileset()
     int x;
     int y;
 
+    if (this->_config.graphicalTilesetPath == "")
+        return;
     if (!this->_tilesetTexture.loadFromFile(this->_config.graphicalTilesetPath))
         std::cout << "ERROR LOADING TILESET IMAGE" << std::endl;
     else {

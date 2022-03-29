@@ -106,4 +106,7 @@ class Core
 
         // holds the index of the selected game
         size_t _selectedGame = 0;
+
+        // Config specifically to set size of menu in tiles and tile size
+        gfx_config_t _config;
 };
