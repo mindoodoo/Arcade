@@ -53,19 +53,6 @@ void SfmlGraphicsLib::drawText(const std::string &text, int x, int y)
 
 std::queue<char> &SfmlGraphicsLib::getInput()
 {
-    sf::Event event{};
-    char pressedKey;
-
-    while (this->_window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed)
-            this->_window.close(); // Maybe more cleanup ? back to core menu ?
-        else if (event.type == sf::Event::KeyPressed) {
-            pressedKey = event.key.code + 'a';
-            if (pressedKey >= 'a' && pressedKey <= 'z')
-                this->_inputQueue.push(pressedKey);
-            // If other special keys needed add if
-        }
-    }
     return this->_inputQueue;
 }
 
@@ -99,7 +86,17 @@ void SfmlGraphicsLib::popInput()
 
 void SfmlGraphicsLib::recordInputs()
 {
-    // Add new input to queue
-    //this->_inputQueue.push(getch());
-}
+    sf::Event event{};
+    char pressedKey;
 
+    while (this->_window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed)
+            this->_window.close(); // Maybe more cleanup ? back to core menu ?
+        else if (event.type == sf::Event::KeyPressed) {
+            pressedKey = event.key.code + 'a';
+            if (pressedKey >= 'a' && pressedKey <= 'z')
+                this->_inputQueue.push(pressedKey);
+            // If other special keys needed add if
+        }
+    }
+}
