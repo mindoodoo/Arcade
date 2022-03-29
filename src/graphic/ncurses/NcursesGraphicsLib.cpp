@@ -109,14 +109,14 @@ void NcursesGraphicsLib::flush()
     clear();
 }
 
-void NcursesGraphicsLib::drawTile(int tile_index, int x, int y) const
+void NcursesGraphicsLib::drawTile(int tile_index, int x, int y)
 {
     attron(COLOR_PAIR(this->_tileset[tile_index].color));
     mvaddch(y, x * 2, this->_tileset[tile_index].c);
     attroff(COLOR_PAIR(this->_tileset[tile_index].color));
 }
 
-void NcursesGraphicsLib::drawText(const std::string &text, int x, int y) const
+void NcursesGraphicsLib::drawText(const std::string &text, int x, int y)
 {
     mvprintw(y, x * 2, text.c_str());
 }
