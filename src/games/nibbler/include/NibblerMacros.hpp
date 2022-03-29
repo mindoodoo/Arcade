@@ -9,6 +9,7 @@
 
 #define NIBBLER_HEAD 0
 #define NIBBLER_BODY 1
+#define NIBBLER_BODY2 7
 #define NIBBLER_TAIL 2
 
 #define ITEM_FRUIT 3
