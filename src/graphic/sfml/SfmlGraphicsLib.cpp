@@ -54,45 +54,19 @@ void SfmlGraphicsLib::drawText(const std::string &text, int x, int y)
     this->window.draw(_text);
 }
 
-std::queue<char> & SfmlGraphicsLib::getInput()
+std::queue<char> &SfmlGraphicsLib::getInput()
 {
     sf::Event event{};
-    //sf::Keyboard::Key pressedKey;
+    char pressedKey;
 
     while (window.pollEvent(event)) {
-        if (event.type == sf::Event::Resized) {
-            sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
-            window.setView(sf::View(visibleArea));
-        }
-        else if (event.type == sf::Event::Closed)
-            window.close();
+        if (event.type == sf::Event::Closed)
+            window.close(); // Maybe more cleanup ? back to core menu ?
         else if (event.type == sf::Event::KeyPressed) {
-            // pressedKey = event.key.code;
-            // this->_inputQueue.push(static_cast<char>(pressedKey));
-            switch (event.key.code) 
-            {
-            case sf::Keyboard::Z:
-                this->_inputQueue.push('z');
-                break;
-            case sf::Keyboard::A:
-                this->_inputQueue.push('a');
-                break;
-            case sf::Keyboard::D:
-                this->_inputQueue.push('d');
-                break;
-            case sf::Keyboard::S:
-                this->_inputQueue.push('s');
-                break;
-            case sf::Keyboard::W:
-                this->_inputQueue.push('w');
-                break;
-            case sf::Keyboard::Q:
-                this->_inputQueue.push('q');
-                break;
-            
-            default:
-                break;
-            }
+            pressedKey = event.key.code + 'a';
+            if (pressedKey >= 'a' && pressedKey <= 'z')
+                this->_inputQueue.push(pressedKey);
+            // If other special keys needed add if
         }
     }
     return this->_inputQueue;
