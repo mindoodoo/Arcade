@@ -42,7 +42,6 @@ void SfmlGraphicsLib::flush()
 
 void SfmlGraphicsLib::drawText(const std::string &text, int x, int y) 
 {
-    this->_font.loadFromFile(this->_config.fontFolderPath);
     this->_text.setString(text);
     this->_text.setCharacterSize(24); // in pixels
     this->_text.setFillColor(sf::Color::Red);
