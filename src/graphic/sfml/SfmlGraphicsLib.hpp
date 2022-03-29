@@ -52,18 +52,12 @@ class SfmlGraphicsLib : public virtual IGraphicsLib
         virtual void checkConfig(const gfx_config_t &config) override;
         void loadConfig(void);
 
-        void mocksetconfig(std::vector<std::string> configs); //this is a mock function to simulation the config setup
-    
-        sf::RenderWindow window;
+    private:
         sf::Text _text;
         sf::Font _font;
-        std::vector<sf::Sprite> sprites;
-        std::vector<sf::Texture> textures;
-    protected:
-
-
-
-    private:
+        std::vector<sf::Sprite> _sprites;
+        std::vector<sf::Texture> _textures;
+        sf::RenderWindow _window;
         gfx_config_t _config;
         std::queue<char> _inputQueue;
 };
