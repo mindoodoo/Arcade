@@ -33,10 +33,10 @@ class IGraphicsLib
         virtual ~IGraphicsLib() = default;
 
         // Updates screen with buffer (called at the end of all draw tiles)
-        virtual void display() const = 0;
+        virtual void display() = 0;
 
         // Clear screen/window
-        virtual void flush() const = 0;
+        virtual void flush(void) = 0;
 
         // Draw tile of index tile_index, at x tile and y tile
         // (tile is the unit)

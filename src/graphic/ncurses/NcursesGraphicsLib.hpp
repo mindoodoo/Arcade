@@ -31,14 +31,14 @@ class NcursesGraphicsLib : virtual public IGraphicsLib
         void loadConfig();
 
         // Runtime methods
-        void flush() const override;
+        void flush() override;
 
         void drawTile(int tile_index, int x, int y) const override;
 
         void drawText(const std::string &text, int x, int y) const override;
 
         // Do nothing function
-        void display() const override;
+        void display() override;
 
         // Input
         std::queue<char> &getInput() override;

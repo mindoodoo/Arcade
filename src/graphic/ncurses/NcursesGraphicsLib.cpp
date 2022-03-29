@@ -104,7 +104,7 @@ void NcursesGraphicsLib::loadConfig()
     }
 }
 
-void NcursesGraphicsLib::flush() const
+void NcursesGraphicsLib::flush()
 {
     clear();
 }
@@ -132,7 +132,7 @@ NcursesGraphicsLib::~NcursesGraphicsLib()
     endwin();
 }
 
-void NcursesGraphicsLib::display() const
+void NcursesGraphicsLib::display()
 {
     refresh();
 }
