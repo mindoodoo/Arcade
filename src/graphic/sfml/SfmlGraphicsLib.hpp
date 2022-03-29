@@ -13,6 +13,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <iostream>
 #include "../../shared/IGraphicsLib.hpp"
 #include "../../shared/shared.hpp"
 
@@ -51,12 +52,14 @@ class SfmlGraphicsLib : public virtual IGraphicsLib
         // If not : calls config loading methods
         virtual void checkConfig(const gfx_config_t &config) override;
         void loadConfig(void);
+        void loadTileset();
 
     private:
         sf::Text _text;
         sf::Font _font;
-        std::vector<sf::Sprite> _sprites;
-        std::vector<sf::Texture> _textures;
+        std::vector<sf::Sprite*> _tiles;
+        // std::vector<sf::Texture*> _tileTextures;
+        sf::Texture _tilesetTexture;
         sf::RenderWindow _window;
         gfx_config_t _config;
         std::queue<char> _inputQueue;

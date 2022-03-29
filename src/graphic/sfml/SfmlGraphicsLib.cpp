@@ -23,11 +23,53 @@ SfmlGraphicsLib::SfmlGraphicsLib()
 SfmlGraphicsLib::~SfmlGraphicsLib()
 {
     this->_window.close();
+
+    // Free Sprite pointers
+    for (int i = 0; i < this->_tiles.size(); ++i)
+        delete this->_tiles[i];
 }
 
 void SfmlGraphicsLib::drawTile(int tile_index, int x, int y)
 {
+    sf::Sprite *tile = this->_tiles[tile_index];
+    // sf::Vector2u
 
+    // Set position and draw sprite
+    tile->setPosition(x * this->_config.tileWidth,
+    y * this->_config.tileHeight);
+    this->_window.draw(*tile);
+}
+
+void SfmlGraphicsLib::loadTileset()
+{
+    sf::Vector2u tilesetSize;
+    // sf::Texture *newTexture;
+    sf::Sprite *newSprite;
+    sf::IntRect tileRect = {0, 0, this->_config.tileWidth,
+    this->_config.tileHeight};
+    int x;
+    int y;
+
+    if (!this->_tilesetTexture.loadFromFile(this->_config.graphicalTilesetPath))
+        std::cout << "ERROR LOADING TILESET IMAGE" << std::endl;
+    else {
+        // Get tileset width and height in tiles
+        tilesetSize = this->_tilesetTexture.getSize();
+        x = tilesetSize.x / this->_config.tileWidth;
+        y = tilesetSize.y / this->_config.tileHeight;
+
+        for (int i = 0; i < y; i++)
+            for (int j = 0; j < x; j++) {
+                // Update targeted part of the image
+                tileRect.left = j * this->_config.tileWidth;
+                tileRect.top = i * this->_config.tileHeight;
+
+                // Load tile texture, apply to sprite and push to vector
+                // newTexture = new sf::Texture();
+                newSprite = new sf::Sprite(this->_tilesetTexture, tileRect);
+                this->_tiles.push_back(newSprite);
+            }
+    }
 }
 
 void SfmlGraphicsLib::display()
@@ -67,8 +109,6 @@ void SfmlGraphicsLib::checkConfig(const gfx_config_t &config)
 
 void SfmlGraphicsLib::loadConfig(void)
 {
-    std::vector<std::string> stringVector = csvToVector(this->_config.graphicalTilesetPath);
-    
     this->_font.loadFromFile(this->_config.fontFolderPath); // Considered single font file but in future multiple fonts potentially
     this->_text.setFont(this->_font);
 
@@ -76,6 +116,8 @@ void SfmlGraphicsLib::loadConfig(void)
     this->_config.windowHeight * this->_config.tileHeight), "Arcade SFML");
 
     this->_window.setFramerateLimit(60);
+
+    this->loadTileset();
 }
 
 void SfmlGraphicsLib::popInput()
