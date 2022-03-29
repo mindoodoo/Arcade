@@ -41,10 +41,10 @@ class IGraphicsLib
         // Draw tile of index tile_index, at x tile and y tile
         // (tile is the unit)
         // Note : Could add possibility for rotation of tile in the future
-        virtual void drawTile(int tile_index, int x, int y) const = 0;
+        virtual void drawTile(int tile_index, int x, int y) = 0;
 
         // Draws text, at x tile and y tile
-        virtual void drawText(const std::string &text, int x, int y) const = 0;
+        virtual void drawText(const std::string &text, int x, int y) = 0;
 
 
         /**

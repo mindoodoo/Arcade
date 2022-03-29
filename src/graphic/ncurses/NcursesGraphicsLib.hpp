@@ -33,9 +33,9 @@ class NcursesGraphicsLib : virtual public IGraphicsLib
         // Runtime methods
         void flush() override;
 
-        void drawTile(int tile_index, int x, int y) const override;
+        void drawTile(int tile_index, int x, int y) override;
 
-        void drawText(const std::string &text, int x, int y) const override;
+        void drawText(const std::string &text, int x, int y) override;
 
         // Do nothing function
         void display() override;
