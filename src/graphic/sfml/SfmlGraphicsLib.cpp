@@ -139,6 +139,8 @@ void SfmlGraphicsLib::recordInputs()
             pressedKey = event.key.code + 'a';
             if (pressedKey >= 'a' && pressedKey <= 'z')
                 this->_inputQueue.push(pressedKey);
+            if (event.key.code == sf::Keyboard::Space)
+                this->_inputQueue.push(' ');
             // If other special keys needed add if
         }
     }

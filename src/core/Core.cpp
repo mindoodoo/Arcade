@@ -31,10 +31,10 @@ Core::Core(const std::string &gfxPath)
             "",
             "",
             "./src/core/BADABB__.TTF",
-            64,
-            64,
-            10,
-            10
+            32,
+            32,
+            20,
+            20
         };
 
         this->_gamePtr = nullptr;
@@ -71,6 +71,7 @@ void Core::mainLoop()
 
             this->handleMenuInputs();
         }
+        this->_gfx->display();
     }
 }
 
