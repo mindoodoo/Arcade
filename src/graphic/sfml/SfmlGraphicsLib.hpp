@@ -14,6 +14,8 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
+#include <chrono>
+#include <thread>
 #include "IGraphicsLib.hpp"
 #include "shared.hpp"
 

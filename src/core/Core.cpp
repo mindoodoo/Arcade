@@ -47,7 +47,6 @@ Core::Core(const std::string &gfxPath)
 void Core::mainLoop()
 {
     while (this->_state) {
-        this->_gfx->checkConfig(this->_config);
         this->_gfx->recordInputs();
         this->handleArcadeInputs();
         this->_gfx->flush();
@@ -60,6 +59,7 @@ void Core::mainLoop()
                 this->_state = ARCADE::MENU;
             }
         } else {
+            this->_gfx->checkConfig(this->_config);
             size_t i = 0;
             for (const auto &meta: this->_games) {
                 std::string line = std::to_string(i) + ". " + meta.name;

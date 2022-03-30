@@ -144,4 +144,5 @@ void SfmlGraphicsLib::recordInputs()
             // If other special keys needed add if
         }
     }
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
 }
