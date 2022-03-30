@@ -18,5 +18,5 @@ extern "C"
     }
 
     int id = GAME_ID;
-    char path[] = PATH_TO_GAME;
+    char gameName[] = "nibbler";
 }

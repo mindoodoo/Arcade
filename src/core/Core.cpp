@@ -30,7 +30,7 @@ Core::Core(const std::string &gfxPath)
         this->_config = {
             "",
             "",
-            "./src/core/BADABB__.TTF",
+            "./assets/core/BADABB__.TTF",
             32,
             32,
             20,
@@ -119,13 +119,12 @@ void Core::loadAvailableLibs()
                 int type = *(int *) result;
 
                 if (type == GAME_ID) {
-                    result = LDLoader<void>::getSymbol(handle, "path");
+                    result = LDLoader<void>::getSymbol(handle, "gameName");
 
-                    std::string assets = std::string((char *) result);
+                    std::string gameName = std::string((char *) result);
+                    std::string assets = "./assets" + gameName + "/";
 
-                    assets.append("/assets");
-
-                    game_meta_t game = {.name = path, .path = path, .assets = assets};
+                    game_meta_t game = {.name = gameName, .path = path, .assets = assets};
 
                     Core::getScores(assets, &game);
 
@@ -207,7 +206,7 @@ std::deque<int> Core::getScores(const std::string &assets, game_meta_t *game)
 {
     std::deque<int> scores(0);
     try {
-        std::vector<std::string> scoreboard = csvToVector(assets + "/scoreboard");
+        std::vector<std::string> scoreboard = csvToVector(assets + "scoreboard");
 
         for (const auto &score_s: scoreboard) {
             int score = std::stoi(score_s);

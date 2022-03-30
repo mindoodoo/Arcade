@@ -174,7 +174,7 @@ int Nibbler::Level::getScore() const
 
 Nibbler::Level::~Level()
 {
-    std::fstream file(PATH_TO_GAME + std::string("/assets/scoreboard"), std::ios::app);
+    std::fstream file("./assets/nibbler/scoreboard", std::ios::app);
 
     if (file.tellg() > 0)
         file << ",";
