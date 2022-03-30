@@ -17,7 +17,7 @@ Nibbler::GameCore::GameCore()
     this->_levelConf = {
         "./assets/nibbler/asciiTileset.csv",
         "./assets/nibbler/NibblerTestTileset.png",
-        "", // TODO: These other elements will be implemented later
+        "./assets/nibbler/BADABB__.TTF", // TODO: These other elements will be implemented later
         64,
         64,
         30,

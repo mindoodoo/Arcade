@@ -122,7 +122,7 @@ void Core::loadAvailableLibs()
                     result = LDLoader<void>::getSymbol(handle, "gameName");
 
                     std::string gameName = std::string((char *) result);
-                    std::string assets = "./assets" + gameName + "/";
+                    std::string assets = "./assets/" + gameName + "/";
 
                     game_meta_t game = {.name = gameName, .path = path, .assets = assets};
 
