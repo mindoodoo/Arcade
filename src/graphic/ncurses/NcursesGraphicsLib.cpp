@@ -89,6 +89,9 @@ int getColor(std::string colorName)
 
 void NcursesGraphicsLib::loadConfig()
 {
+    if (this->_config.asciiTilesetPath == "")
+        return;
+
     std::vector<std::string> stringVector = csvToVector(this->_config.asciiTilesetPath);
     std::vector<std::string> splitStringVector;
     ascii_tile_t tile;
