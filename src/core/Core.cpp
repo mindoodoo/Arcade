@@ -30,11 +30,11 @@ Core::Core(const std::string &gfxPath)
         this->_config = {
             "",
             "",
-            "./assets/core/BADABB__.TTF",
+            "./assets/core/arial.ttf",
             32,
             32,
-            20,
-            20
+            40,
+            40
         };
 
         this->_gamePtr = nullptr;

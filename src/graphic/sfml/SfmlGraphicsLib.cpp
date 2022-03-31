@@ -113,6 +113,7 @@ void SfmlGraphicsLib::loadConfig(void)
 {
     this->_font.loadFromFile(this->_config.fontFolderPath); // Considered single font file but in future multiple fonts potentially
     this->_text.setFont(this->_font);
+    this->_text.setCharacterSize(300);
 
     this->_window.create(sf::VideoMode(this->_config.windowWidth * this->_config.tileWidth,
     this->_config.windowHeight * this->_config.tileHeight), "Arcade SFML");
