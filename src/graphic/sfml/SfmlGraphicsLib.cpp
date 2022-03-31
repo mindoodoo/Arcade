@@ -111,15 +111,17 @@ void SfmlGraphicsLib::checkConfig(const gfx_config_t &config)
 
 void SfmlGraphicsLib::loadConfig(void)
 {
+    // Font stuff
     this->_font.loadFromFile(this->_config.fontFolderPath); // Considered single font file but in future multiple fonts potentially
     this->_text.setFont(this->_font);
     this->_text.setCharacterSize(300);
 
+    // Window creation
     this->_window.create(sf::VideoMode(this->_config.windowWidth * this->_config.tileWidth,
     this->_config.windowHeight * this->_config.tileHeight), "Arcade SFML");
-
     this->_window.setFramerateLimit(60);
 
+    // Load tileset
     this->loadTileset();
 }
 
@@ -145,5 +147,5 @@ void SfmlGraphicsLib::recordInputs()
             // If other special keys needed add if
         }
     }
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(100)); // This should change
 }
