@@ -87,7 +87,6 @@ void SfmlGraphicsLib::flush()
 void SfmlGraphicsLib::drawText(const std::string &text, int x, int y) 
 {
     this->_text.setString(text);
-    this->_text.setCharacterSize(24); // in pixels
     this->_text.setFillColor(sf::Color::Red);
     this->_text.setPosition(x * this->_config.tileWidth,
     y * this->_config.tileHeight);
@@ -114,9 +113,10 @@ void SfmlGraphicsLib::loadConfig(void)
     // Font stuff
     this->_font.loadFromFile(this->_config.fontFolderPath); // Considered single font file but in future multiple fonts potentially
     this->_text.setFont(this->_font);
-    this->_text.setCharacterSize(300);
+    this->_text.setCharacterSize(this->_config.tileWidth);
 
     // Window creation
+    std::cout << "Window dimensions are : " << this->_config.windowWidth * this->_config.tileWidth << ":" << this->_config.windowHeight * this->_config.tileHeight << std::endl;
     this->_window.create(sf::VideoMode(this->_config.windowWidth * this->_config.tileWidth,
     this->_config.windowHeight * this->_config.tileHeight), "Arcade SFML");
     this->_window.setFramerateLimit(60);
