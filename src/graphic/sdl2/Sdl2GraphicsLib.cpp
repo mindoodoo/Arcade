@@ -23,6 +23,7 @@ Sdl2GraphicsLib::Sdl2GraphicsLib()
 
 Sdl2GraphicsLib::~Sdl2GraphicsLib()
 {
+    TTF_CloseFont(this->_font);
     SDL_DestroyTexture(this->_texture);
     SDL_DestroyRenderer(this->_renderer);
     SDL_DestroyWindow(this->_window);
@@ -45,7 +46,7 @@ void Sdl2GraphicsLib::loadConfig(void)
     this->_window = SDL_CreateWindow("GAME", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, this->_config.windowWidth, this->_config.windowHeight, SDL_WINDOW_SHOWN);
     this->_renderer = SDL_CreateRenderer(this->_window, -1, SDL_RENDERER_ACCELERATED);
     this->_surface = IMG_Load("index.jpeg");
-    this->_font = TTF_OpenFont("BADABB__.TTF", this->_config.tileWidth);
+    this->_font = TTF_OpenFont(this->_config.fontFolderPath.c_str(), this->_config.tileWidth);
     this->_texture = SDL_CreateTextureFromSurface(this->_renderer, this->_surface);
    
 }
@@ -63,44 +64,26 @@ void Sdl2GraphicsLib::popInput()
 void Sdl2GraphicsLib::recordInputs()
 {
     int close = 0;
+    char pressedKey;
+
     while (!close) {
 		SDL_Event event;
 
 		// Events management
 		while (SDL_PollEvent(&event)) {
 			switch (event.type) {
-
-			case SDL_QUIT:
-				// handling of close button
-				close = 1;
-				break;
-
-			case SDL_KEYDOWN:
-				// keyboard API for key pressed
-				switch (event.key.keysym.scancode) {
-				case SDL_SCANCODE_W:
-				case SDL_SCANCODE_UP:
-                    this->_inputQueue.push('w');
-					break;
-				case SDL_SCANCODE_A:
-				case SDL_SCANCODE_LEFT:
-                    this->_inputQueue.push('a');
-					break;
-				case SDL_SCANCODE_S:
-				case SDL_SCANCODE_DOWN:
-                    this->_inputQueue.push('s');
-					break;
-				case SDL_SCANCODE_D:
-				case SDL_SCANCODE_RIGHT:
-                    this->_inputQueue.push('d');
-					break;
-				default:
-					break;
-				}
+			    case SDL_QUIT:
+				    close = 1;
+				    break;
+			    case SDL_KEYDOWN:
+                    pressedKey = event.key.keysym.scancode;
+				    this->_inputQueue.push(pressedKey);
+                    break;
+                default:
+                    break;
 			}
 		}
     }
-
 }
 
 void Sdl2GraphicsLib::display()
