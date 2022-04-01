@@ -23,7 +23,7 @@ namespace Nibbler
              * @param width  width in tiles
              * @param gfx
              */
-            Terrain(size_t height, size_t width, IGraphicsLib **gfx);
+            Terrain(size_t height, size_t width, IGraphicsLib **gfx, const std::string &map_path);
 
             ~Terrain() = default;
 

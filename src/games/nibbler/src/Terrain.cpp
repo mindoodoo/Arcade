@@ -12,7 +12,7 @@
 
 #define RANGE(a) a.begin(), a.end()
 
-Nibbler::Terrain::Terrain(size_t height, size_t width, IGraphicsLib **gfx)
+Nibbler::Terrain::Terrain(size_t height, size_t width, IGraphicsLib **gfx, const std::string &map_path)
 {
     this->_map = std::vector<std::vector<char>>(height);
 
