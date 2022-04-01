@@ -78,7 +78,7 @@ void Nibbler::Player::draw()
             GFX->drawTile(NIBBLER_TAIL, this->_body[i].x, this->_body[i].y);
         else {
             if (i % 4 == 0)
-                GFX->drawTile(NIBBLER_BODY, this->_body[i].x, this->_body[i].y);
+                GFX->drawTile(NIBBLER_BODY1, this->_body[i].x, this->_body[i].y);
             else
                 GFX->drawTile(NIBBLER_BODY2, this->_body[i].x, this->_body[i].y);
         }

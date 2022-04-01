@@ -16,10 +16,10 @@ Nibbler::GameCore::GameCore()
     // Hardcoded for the time being, we can add multiple level parsing in the future
     this->_levelConf = {
         "./assets/nibbler/asciiTileset.csv",
-        "./assets/nibbler/NibblerTestTileset.png",
+        "./assets/nibbler/NibblerTileset.png",
         "./assets/nibbler/arial.ttf", // TODO: These other elements will be implemented later
-        64,
-        64,
+        16,
+        16,
         30,
         30
     };
