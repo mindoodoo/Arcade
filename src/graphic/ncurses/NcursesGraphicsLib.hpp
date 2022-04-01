@@ -12,6 +12,8 @@
 #include "../../shared/IGraphicsLib.hpp"
 #include "../../shared/shared.hpp"
 
+#define NAME "ncurses"
+
 typedef struct {
     char c;
     int color;
@@ -46,8 +48,11 @@ class NcursesGraphicsLib : virtual public IGraphicsLib
         void popInput() override;
 
         void recordInputs() override;
+
+        std::string getName() override;
     private:
         gfx_config_t _config;
         std::vector<ascii_tile_t> _tileset;
         std::queue<char> _inputQueue;
+        std::string _name;
 };

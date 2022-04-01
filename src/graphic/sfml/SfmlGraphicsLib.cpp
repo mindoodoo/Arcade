@@ -18,6 +18,8 @@ SfmlGraphicsLib::SfmlGraphicsLib()
         0,
         0
     };
+
+    this->_name = NAME;
 }
 
 SfmlGraphicsLib::~SfmlGraphicsLib()
@@ -79,12 +81,12 @@ void SfmlGraphicsLib::display()
     this->_window.display();
 }
 
-void SfmlGraphicsLib::flush() 
+void SfmlGraphicsLib::flush()
 {
     this->_window.clear(sf::Color::Black);
 }
 
-void SfmlGraphicsLib::drawText(const std::string &text, int x, int y) 
+void SfmlGraphicsLib::drawText(const std::string &text, int x, int y)
 {
     this->_text.setString(text);
     this->_text.setFillColor(sf::Color::Red);
@@ -148,4 +150,9 @@ void SfmlGraphicsLib::recordInputs()
         }
     }
     std::this_thread::sleep_for(std::chrono::milliseconds(100)); // This should change
+}
+
+std::string SfmlGraphicsLib::getName()
+{
+    return this->_name;
 }

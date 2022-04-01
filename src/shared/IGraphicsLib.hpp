@@ -64,4 +64,6 @@ class IGraphicsLib
         // Checks if game config is currently loaded config
         // If not : calls config loading methods
         virtual void checkConfig(const gfx_config_t &config) = 0;
+
+        virtual std::string getName() = 0;
 };

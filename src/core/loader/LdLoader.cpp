@@ -23,10 +23,11 @@ void LDLoader<T>::loadLib(const std::string &libPath)
     if (res != 0)
         std::cerr << "ERROR (" << std::to_string(res) << "): while closing a dynamic library" << std::endl;
 
-    std::cout << "libpaths is : " << libPath << std::endl;
     this->_handle = LDLoader<void>::open(libPath);
 
     this->_lib_factory = (T *(*)()) LDLoader<void>::getSymbol(this->_handle, "make");
+
+    std::cout << "Library \"" << libPath << "\" loaded." << std::endl;
 }
 
 template<class T>

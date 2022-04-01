@@ -38,6 +38,8 @@ NcursesGraphicsLib::NcursesGraphicsLib()
     init_pair(COLOR_MAGENTA, COLOR_MAGENTA, COLOR_BLACK);
     init_pair(COLOR_CYAN, COLOR_CYAN, COLOR_BLACK);
     init_pair(COLOR_WHITE, COLOR_WHITE, COLOR_BLACK);
+
+    this->_name = NAME;
 }
 
 void NcursesGraphicsLib::checkConfig(const gfx_config_t &config)
@@ -149,4 +151,9 @@ void NcursesGraphicsLib::recordInputs()
 {
     // Add new input to queue
     this->_inputQueue.push(getch());
+}
+
+std::string NcursesGraphicsLib::getName()
+{
+    return this->_name;
 }

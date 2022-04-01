@@ -90,6 +90,16 @@ class Core
          */
         void displayScores();
 
+        /**
+         * the last element of the graphics array becomes the active one
+         */
+        void graphicsRotateLeft();
+
+        /**
+         * the second element of the graphics array becomes the active one
+         */
+        void graphicsRotateRight();
+
 
         IGraphicsLib *_gfx;
         IGameLib *_gamePtr;
