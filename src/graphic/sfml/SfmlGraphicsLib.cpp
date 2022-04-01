@@ -29,15 +29,19 @@ SfmlGraphicsLib::~SfmlGraphicsLib()
         delete this->_tiles[i];
 }
 
-void SfmlGraphicsLib::drawTile(int tile_index, int x, int y)
+void SfmlGraphicsLib::drawTile(int tile_index, int x, int y, int orientation)
 {
     sf::Sprite *tile = this->_tiles[tile_index];
     int pixelPosX = x * this->_config.tileWidth + (this->_config.tileWidth / 2);
     int pixelPosY = y * this->_config.tileHeight + (this->_config.tileHeight / 2);
 
-    // Set position and draw sprite
+    // Set position, orientation and draw sprite
     tile->setPosition(pixelPosX, pixelPosY);
+    tile->setRotation(90 * orientation);
     this->_window.draw(*tile);
+
+    // Reset orientation for future use
+    tile->setRotation(0);
 }
 
 void SfmlGraphicsLib::loadTileset()

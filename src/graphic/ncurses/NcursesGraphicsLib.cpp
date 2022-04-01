@@ -112,8 +112,9 @@ void NcursesGraphicsLib::flush()
     clear();
 }
 
-void NcursesGraphicsLib::drawTile(int tile_index, int x, int y)
+void NcursesGraphicsLib::drawTile(int tile_index, int x, int y, int orientation)
 {
+    std::cout << "Ncurses library ignoring rotation" << orientation << std::endl;
     attron(COLOR_PAIR(this->_tileset[tile_index].color));
     mvaddch(y, x * 2, this->_tileset[tile_index].c);
     attroff(COLOR_PAIR(this->_tileset[tile_index].color));
