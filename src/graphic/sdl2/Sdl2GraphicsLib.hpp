@@ -5,15 +5,16 @@
 ** Description
 */
 
-#ifndef B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_SDL2GRAPHICSLIB_HPP
-#define B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_SDL2GRAPHICSLIB_HPP
+#pragma once
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_ttf.h>
-#include "IGraphicsLib.hpp"
-#include "shared.hpp"
+#include <iostream>
+#include <fstream>
+#include "../../shared/IGraphicsLib.hpp"
+#include "../../shared/shared.hpp"
 
 
 class Sdl2GraphicsLib : public virtual IGraphicsLib
@@ -54,9 +55,10 @@ class Sdl2GraphicsLib : public virtual IGraphicsLib
         std::queue<char> _inputQueue;
         SDL_Window *_window;
         SDL_Renderer *_renderer;
-        SDL_Texture *_texture;
-        SDL_Surface *_surface;
+        SDL_Texture *_textTexture;
+        SDL_Texture *_tilesetTexture;
+        std::vector<SDL_Texture *> _tiles;
+        SDL_Surface *_textSurface;
+        SDL_Surface *_tilesetSurface;
         TTF_Font *_font;
 };
-
-#endif //B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_SDL2GRAPHICSLIB_HPP
