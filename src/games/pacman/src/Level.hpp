@@ -11,14 +11,17 @@
 #include <string>
 #include "../include/PacmanMacros.hpp"
 #include "../../ILevel.hpp"
+#include "Terrain.hpp"
+#include "Player.hpp"
 
-namespace Pacman {
+namespace Pacman
+{
     class Level : virtual public ILevel
     {
         public:
-            Level();
+            Level(IGraphicsLib **gfx, gfx_config_t levelConf);
 
-            ~Level() = default;
+            ~Level() override = default;
 
             int frame() override;
 
@@ -35,12 +38,13 @@ namespace Pacman {
             int getScore() const override;
 
         private:
-            //        Nibbler *_nibbler;
-            //        Terrain *_scene;
+            Player *_pacman;
+            Terrain *_scene;
             //        std::vector<Item *> _items;
-            size_t _gameHeight;
-            size_t _gameWidth;
-            //        IGraphicsLib **_gfx;
+//            size_t _gameHeight;
+//            size_t _gameWidth;
+            IGraphicsLib **_gfx;
+            gfx_config_t _levelConf;
             int _score;
     };
 }

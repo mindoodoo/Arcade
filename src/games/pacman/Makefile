@@ -17,6 +17,8 @@ CC = g++
 
 SRC = 	src/GameCore.cpp\
 		src/Level.cpp\
+		src/Terrain.cpp\
+		src/Player.cpp\
 		src/make.cpp\
 		../BaseGameCore.cpp
 
