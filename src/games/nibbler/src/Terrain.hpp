@@ -8,9 +8,17 @@
 #pragma once
 
 #include <vector>
+#include <string>
+#include <iostream>
+#include <stddef.h>
 #include "Fruit.hpp"
 #include "../../../shared/IGraphicsLib.hpp"
-#include <stddef.h>
+#include "../../../shared/shared.hpp"
+
+typedef struct {
+    int tile;
+    int orientation;
+} gfx_tile_t;
 
 namespace Nibbler
 {
@@ -19,11 +27,10 @@ namespace Nibbler
         public:
 
             /**
-             * @param height height in tiles
-             * @param width  width in tiles
+             * @param tilemapPath
              * @param gfx
              */
-            Terrain(size_t height, size_t width, IGraphicsLib **gfx);
+            Terrain(std::string tilemapPath, IGraphicsLib **gfx);
 
             ~Terrain() = default;
 
@@ -32,9 +39,9 @@ namespace Nibbler
             void draw();
 
         private:
-            std::vector<std::vector<char>> _map;
+            std::vector<std::vector<gfx_tile_t>> _map;
 
-            std::vector<char> _walkable;
+            std::vector<int> _walkable;
 
             IGraphicsLib **_gfx;
     };

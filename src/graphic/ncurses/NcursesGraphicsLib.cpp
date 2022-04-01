@@ -49,23 +49,6 @@ void NcursesGraphicsLib::checkConfig(const gfx_config_t &config)
     }
 }
 
-std::vector<std::string> splitStr(std::string str, std::string sep)
-{
-    std::vector<std::string> output;
-    size_t start = 0;
-    size_t end;
-    std::string token;
-
-    while ((end = str.find(sep, start)) != std::string::npos) {
-        token = str.substr(start, end - start);
-        start = end + sep.length();
-        output.push_back (token);
-    }
-    output.push_back(str.substr (start));
-
-    return output;
-}
-
 int getColor(std::string colorName)
 {
     if (colorName == "BLACK")

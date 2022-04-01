@@ -59,3 +59,20 @@ std::vector<std::string> csvToVector(const std::string &filepath)
     myFile.close();
     return output;
 }
+
+std::vector<std::string> splitStr(std::string str, std::string sep)
+{
+    std::vector<std::string> output;
+    size_t start = 0;
+    size_t end;
+    std::string token;
+
+    while ((end = str.find(sep, start)) != std::string::npos) {
+        token = str.substr(start, end - start);
+        start = end + sep.length();
+        output.push_back (token);
+    }
+    output.push_back(str.substr (start));
+
+    return output;
+}
