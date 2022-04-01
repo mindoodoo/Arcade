@@ -8,7 +8,13 @@
 #ifndef B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_SDL2GRAPHICSLIB_HPP
 #define B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_SDL2GRAPHICSLIB_HPP
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_timer.h>
+#include <SDL2/SDL_ttf.h>
 #include "IGraphicsLib.hpp"
+#include "shared.hpp"
+
 
 class Sdl2GraphicsLib : public virtual IGraphicsLib
 {
@@ -43,10 +49,14 @@ class Sdl2GraphicsLib : public virtual IGraphicsLib
         void loadConfig(void);
         void loadTileset();
 
-    private:
-    
+    private:    
         gfx_config_t _config;
         std::queue<char> _inputQueue;
+        SDL_Window *_window;
+        SDL_Renderer *_renderer;
+        SDL_Texture *_texture;
+        SDL_Surface *_surface;
+        TTF_Font *_font;
 };
 
 #endif //B_OOP_400_BER_4_1_ARCADE_NICOLAS_LATTEMANN_SDL2GRAPHICSLIB_HPP
