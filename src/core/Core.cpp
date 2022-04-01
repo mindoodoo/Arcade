@@ -20,11 +20,11 @@ Core::Core(const std::string &gfxPath)
         this->_state = ARCADE::MENU;
 
         this->_gfxLoader.loadLib(gfxPath);
-        this->loadAvailableLibs();
-
 
         // Get instances of game and gfx libraries
         this->_gfx = this->_gfxLoader.getInstance();
+
+        this->loadAvailableLibs();
 
         // Init gfx config for menu
         this->_config = {
@@ -132,7 +132,10 @@ void Core::loadAvailableLibs()
                     result = LDLoader<void>::getSymbol(handle, "name");
                     std::string gfxName = std::string((char *) result);
 
-                    this->_graphics.push_back(graphic_meta_t{.name = gfxName, .path = path});
+                    if (gfxName == this->_gfx->getName())
+                        this->_graphics.push_front(graphic_meta_t{.name = gfxName, .path = path});
+                    else
+                        this->_graphics.push_back(graphic_meta_t{.name = gfxName, .path = path});
                 }
 
                 LDLoader<void>::close(handle);
@@ -166,6 +169,7 @@ void Core::handleArcadeInputs()
 
     if (inputs.empty())
         return;
+
     switch (inputs.back()) {
         // game selection section
         case 'i': // goes up by one game
@@ -189,19 +193,11 @@ void Core::handleArcadeInputs()
         case 'r': // reload list of libs
             this->loadAvailableLibs();
             break;
-        case 'j': // TODO goes "left" by one graphics lib
-            delete this->_gfx;
-            this->_gfxLoader.loadLib(this->_graphics.back().path);
-            this->_gfx = this->_gfxLoader.getInstance();
-            this->_graphics.push_front(this->_graphics.back());
-            this->_graphics.pop_back();
+        case 'j':
+            this->graphicsRotateLeft();
             break;
-        case 'l': // TODO goes "right" by one graphics lib
-            delete this->_gfx;
-            this->_gfxLoader.loadLib(this->_graphics.front().path);
-            this->_gfx = this->_gfxLoader.getInstance();
-            this->_graphics.push_back(this->_graphics.front());
-            this->_graphics.pop_front();
+        case 'l':
+            this->graphicsRotateRight();
             break;
     }
 }
@@ -253,4 +249,32 @@ void Core::displayScores()
         std::string line = std::to_string(i + 1) + ".\t" + score;
         this->_gfx->drawText(line, 20, i + offset + 1);
     }
+}
+
+void Core::graphicsRotateLeft()
+{
+    std::cout << "help"<< std::endl;
+    std::cout << this->_graphics[1].path << std::endl;
+    if (this->_graphics.size() <= 1)
+        return;
+    delete this->_gfx;
+    this->_gfxLoader.loadLib(this->_graphics[1].path);
+    this->_gfx = this->_gfxLoader.getInstance();
+    this->_gfx->checkConfig(this->_config);
+    this->_graphics.push_back(this->_graphics.front());
+    this->_graphics.pop_front();
+}
+
+void Core::graphicsRotateRight()
+{
+    std::cout << "help"<< std::endl;
+    std::cout << this->_graphics.back().path << std::endl;
+    if (this->_graphics.size() <= 1)
+        return;
+    delete this->_gfx;
+    this->_gfxLoader.loadLib(this->_graphics.back().path);
+    this->_gfx = this->_gfxLoader.getInstance();
+    this->_gfx->checkConfig(this->_config);
+    this->_graphics.push_front(this->_graphics.back());
+    this->_graphics.pop_back();
 }
