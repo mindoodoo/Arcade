@@ -20,8 +20,8 @@ Nibbler::GameCore::GameCore()
         "./assets/nibbler/arial.ttf", // TODO: These other elements will be implemented later
         16,
         16,
-        50,
-        50
+        80,
+        80
     };
 }
 
