@@ -51,8 +51,7 @@ void Core::mainLoop()
         this->handleArcadeInputs();
         this->_gfx->flush();
 
-        if (this->_state == ARCADE::
-        GAME) {
+        if (this->_state == ARCADE::GAME) {
             if (this->_gamePtr->frame() != 0) {
                 this->_gfx->flush();
                 this->loadAvailableLibs();
@@ -188,9 +187,21 @@ void Core::handleArcadeInputs()
             this->loadAvailableLibs();
             break;
         case 'j': // TODO goes "left" by one graphics lib
+            delete this->_gfx;
+            this->_gfxLoader.loadLib(this->_games.back().path);
+            this->_gfx = this->_gfxLoader.getInstance();
+            this->_games.push_front(this->_games.back());
+            this->_graphics.pop_back();
+            this->_gamePtr->setGfx(&this->_gfx);
             this->_gfx->popInput();
             break;
         case 'l': // TODO goes "right" by one graphics lib
+            delete this->_gfx;
+            this->_gfxLoader.loadLib(this->_games.front().path);
+            this->_gfx = this->_gfxLoader.getInstance();
+            this->_games.push_back(this->_games.front());
+            this->_graphics.pop_front();
+            this->_gamePtr->setGfx(&this->_gfx);
             this->_gfx->popInput();
             break;
     }
