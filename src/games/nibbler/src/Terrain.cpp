@@ -54,7 +54,7 @@ bool Nibbler::Terrain::validLocation(size_t x, size_t y)
 
 void Nibbler::Terrain::draw()
 {
-    for (size_t x = 0; x < this->_map.size(); x++)
-        for (size_t y = 0; y < this->_map[x].size(); y++)
-            GFX->drawTile(this->_map[x][y].tile, x, y, this->_map[x][y].orientation);
+    for (size_t y = 0; y < this->_map.size(); y++)
+        for (size_t x = 0; x < this->_map[y].size(); x++)
+            GFX->drawTile(this->_map[y][x].tile, x, y, this->_map[y][x].orientation);
 }
