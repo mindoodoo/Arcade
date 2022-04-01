@@ -8,20 +8,22 @@
 CXXFLAGS = -Wall -Wextra -Werror -g3 -I../../shared -shared -fPIC \
 	-g3 -lSDL2 -lSDL2main
 
-NAME = ardcade_sdl2.so
+NAME = arcade_sdl2.so
 
 DEST = ../../../lib
 
 CC = g++
 
-SRC = Sdl2GraphicsLib.cpp
+SRC = Sdl2GraphicsLib.cpp \
+	../../shared/operators.cpp \
+	make.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -o $(DEST)/$(NAME) $(OBJ)
+	$(CC) -o $(DEST)/$(NAME) $(SRC) $(CXXFLAGS)
 
 clean:
 	rm -rf $(OBJ)
