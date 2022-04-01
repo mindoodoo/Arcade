@@ -129,7 +129,10 @@ void Core::loadAvailableLibs()
 
                     this->_games.push_back(game);
                 } else if (type == GFX_iD) {
-                    this->_graphics.push_back(graphic_meta_t{.name = path, .path = path});
+                    result = LDLoader<void>::getSymbol(handle, "name");
+                    std::string gfxName = std::string((char *) result);
+
+                    this->_graphics.push_back(graphic_meta_t{.name = gfxName, .path = path});
                 }
 
                 LDLoader<void>::close(handle);
@@ -188,21 +191,17 @@ void Core::handleArcadeInputs()
             break;
         case 'j': // TODO goes "left" by one graphics lib
             delete this->_gfx;
-            this->_gfxLoader.loadLib(this->_games.back().path);
+            this->_gfxLoader.loadLib(this->_graphics.back().path);
             this->_gfx = this->_gfxLoader.getInstance();
-            this->_games.push_front(this->_games.back());
+            this->_graphics.push_front(this->_graphics.back());
             this->_graphics.pop_back();
-            this->_gamePtr->setGfx(&this->_gfx);
-            this->_gfx->popInput();
             break;
         case 'l': // TODO goes "right" by one graphics lib
             delete this->_gfx;
-            this->_gfxLoader.loadLib(this->_games.front().path);
+            this->_gfxLoader.loadLib(this->_graphics.front().path);
             this->_gfx = this->_gfxLoader.getInstance();
-            this->_games.push_back(this->_games.front());
+            this->_graphics.push_back(this->_graphics.front());
             this->_graphics.pop_front();
-            this->_gamePtr->setGfx(&this->_gfx);
-            this->_gfx->popInput();
             break;
     }
 }

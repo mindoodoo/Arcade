@@ -17,4 +17,5 @@ extern "C"
     }
 
     int id = GFX_iD;
+    char name[] = NAME;
 }
