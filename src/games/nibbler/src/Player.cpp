@@ -69,19 +69,66 @@ Nibbler::segment_t Nibbler::Player::tail()
     return this->_body.back();
 }
 
+int Nibbler::Player::getTileOrientation(int bodyIndex) const
+{
+    // Head (first tile) orientation
+    if (bodyIndex == 0) {
+        if (this->_xMovement != 0)
+            return (this->_xMovement == -1 ? ORIENT_RIGHT : ORIENT_LEFT);
+        if (this->_yMovement != 0)
+            return (this->_yMovement == -1 ? ORIENT_BOTTOM : ORIENT_TOP);
+    }
+    
+    // Previous tile has different Y
+    switch(this->_body[bodyIndex - 1].y - this->_body[bodyIndex].y) {
+        case -1:
+            return ORIENT_TOP;
+        case 1:
+            return ORIENT_BOTTOM;
+    }
+
+    // Previous tile has different X
+    switch(this->_body[bodyIndex - 1].x - this->_body[bodyIndex].x) {
+        case -1:
+            return ORIENT_LEFT;
+        case 1:
+            return ORIENT_RIGHT;
+    }
+    return ORIENT_TOP;
+}
+
 void Nibbler::Player::draw()
 {
-    for (size_t i = 0; i < this->_body.size(); i++) {
+    // for (size_t i = 0; i < this->_body.size(); i++) {
+    //     if (i == 0)
+    //         GFX->drawTile(NIBBLER_HEAD, this->_body[i].x, this->_body[i].y);
+    //     else if (i == this->_body.size() - 1)
+    //         GFX->drawTile(NIBBLER_TAIL, this->_body[i].x, this->_body[i].y);
+    //     else {
+    //         if (i % 4 == 0)
+    //             GFX->drawTile(NIBBLER_BODY1, this->_body[i].x, this->_body[i].y);
+    //         else
+    //             GFX->drawTile(NIBBLER_BODY2, this->_body[i].x, this->_body[i].y);
+    //     }
+    // }
+
+    int tile = NIBBLER_HEAD;
+    int orientation;
+
+    for (int i = 0; i < this->_body.size(); i++) {
+        // Get correct tile
         if (i == 0)
-            GFX->drawTile(NIBBLER_HEAD, this->_body[i].x, this->_body[i].y);
+            tile = NIBBLER_HEAD;
         else if (i == this->_body.size() - 1)
-            GFX->drawTile(NIBBLER_TAIL, this->_body[i].x, this->_body[i].y);
-        else {
-            if (i % 4 == 0)
-                GFX->drawTile(NIBBLER_BODY1, this->_body[i].x, this->_body[i].y);
-            else
-                GFX->drawTile(NIBBLER_BODY2, this->_body[i].x, this->_body[i].y);
-        }
+            tile = NIBBLER_TAIL;
+        else
+            tile = NIBBLER_BODY1; // This omits alternating tiles
+
+        // Get orientation
+        orientation = this->getTileOrientation(i);
+
+        // Draw tile
+        GFX->drawTile(tile, this->_body[i].x, this->_body[i].y, orientation);
     }
 }
 

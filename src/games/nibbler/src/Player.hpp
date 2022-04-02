@@ -9,13 +9,13 @@
 
 #include <deque>
 #include <stack>
-#include "Terrain.hpp"
 #include <cstddef>
+#include <stdlib.h>
+#include "Terrain.hpp"
 
 namespace Nibbler
 {
-    typedef struct
-    {
+    typedef struct {
         int x;
         int y;
     } segment_t;
@@ -37,6 +37,7 @@ namespace Nibbler
 
             segment_t tail();
 
+            int getTileOrientation(int bodyIndex) const;
             void draw();
 
             bool nibblerCollision(int x, int y);
