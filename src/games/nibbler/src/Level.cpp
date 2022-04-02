@@ -18,11 +18,14 @@ Nibbler::Level::Level(IGraphicsLib **gfx, gfx_config_t levelConf)
     this->_score = 0;
     this->_levelConf = std::move(levelConf);
 
-    this->_gameHeight = 30;
-    this->_gameWidth = 30;
-
     this->_scene = new Terrain("./assets/nibbler/map1.csv", gfx);
-    
+    std::pair<int, int> dimensions = this->_scene->getMapDimensions();
+    this->_levelConf.windowWidth = dimensions.first;
+    this->_levelConf.windowHeight = dimensions.second;
+
+    this->_gameHeight = dimensions.first;
+    this->_gameWidth = dimensions.second;
+
     this->_nibbler = new Player(this->_gameHeight / 2, this->_gameWidth / 2, this->_scene, gfx);
 
     this->_gfx = gfx;

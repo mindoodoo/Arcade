@@ -11,6 +11,7 @@
 #include <string>
 #include <iostream>
 #include <stddef.h>
+#include <utility>
 #include "Fruit.hpp"
 #include "../../../shared/IGraphicsLib.hpp"
 #include "../../../shared/shared.hpp"
@@ -33,6 +34,9 @@ namespace Nibbler
             Terrain(std::string tilemapPath, IGraphicsLib **gfx);
 
             ~Terrain() = default;
+
+            // get dimensions of parsed map
+            std::pair<int, int> getMapDimensions() const;
 
             bool validLocation(size_t x, size_t y);
 

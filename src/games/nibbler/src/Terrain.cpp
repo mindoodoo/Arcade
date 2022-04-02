@@ -58,3 +58,8 @@ void Nibbler::Terrain::draw()
         for (size_t x = 0; x < this->_map[y].size(); x++)
             GFX->drawTile(this->_map[y][x].tile, x, y, this->_map[y][x].orientation);
 }
+
+std::pair<int, int> Nibbler::Terrain::getMapDimensions() const
+{
+    return std::make_pair(this->_map[0].size(), this->_map.size());
+}
