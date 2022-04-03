@@ -19,6 +19,8 @@
 #include "../../shared/IGraphicsLib.hpp"
 #include "../../shared/shared.hpp"
 
+#define NAME "sfml"
+
 class SfmlGraphicsLib : public virtual IGraphicsLib
 {
     public:
@@ -47,12 +49,14 @@ class SfmlGraphicsLib : public virtual IGraphicsLib
          */
         virtual void recordInputs() override;
         virtual void popInput() override;
-        
+
         // Checks if game config is currently loaded config
         // If not : calls config loading methods
         virtual void checkConfig(const gfx_config_t &config) override;
         void loadConfig(void);
         void loadTileset();
+
+        std::string getName() override;
 
     private:
         sf::Text _text;
@@ -62,4 +66,5 @@ class SfmlGraphicsLib : public virtual IGraphicsLib
         sf::RenderWindow _window;
         gfx_config_t _config;
         std::queue<char> _inputQueue;
+        std::string _name;
 };
