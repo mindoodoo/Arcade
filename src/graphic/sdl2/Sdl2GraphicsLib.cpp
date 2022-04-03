@@ -54,7 +54,7 @@ void Sdl2GraphicsLib::loadConfig(void)
     this->_renderer = SDL_CreateRenderer(this->_window, -1, SDL_RENDERER_ACCELERATED);
     
     //font loading
-    this->_font = TTF_OpenFont(this->_config.fontFolderPath.c_str(), 24);
+    this->_font = TTF_OpenFont(this->_config.fontFolderPath.c_str(), this->_config.tileWidth);
     if (this->_font == NULL)
         std::cout << "failed loading font" << std::endl;
     
