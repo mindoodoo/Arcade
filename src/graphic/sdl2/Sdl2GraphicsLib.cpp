@@ -18,6 +18,7 @@ Sdl2GraphicsLib::Sdl2GraphicsLib()
         0,
         0
     };
+    this->_name = NAME;
     TTF_Init();
 
 }
@@ -158,6 +159,12 @@ void Sdl2GraphicsLib::drawText(const std::string &txt, int x, int y)
     SDL_RenderCopy(this->_renderer, this->_textTexture, NULL, &textLocation);    
     SDL_FreeSurface(this->_textSurface);
 }
+
+std::string Sdl2GraphicsLib::getName()
+{
+    return this->_name;
+}
+
 
 
 

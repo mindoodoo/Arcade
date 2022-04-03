@@ -16,6 +16,8 @@
 #include "../../shared/IGraphicsLib.hpp"
 #include "../../shared/shared.hpp"
 
+#define NAME "sfml"
+
 
 class Sdl2GraphicsLib : public virtual IGraphicsLib
 {
@@ -50,6 +52,8 @@ class Sdl2GraphicsLib : public virtual IGraphicsLib
         void loadConfig(void);
         void loadTileset();
 
+        std::string getName() override;
+
     private:    
         gfx_config_t _config;
         std::queue<char> _inputQueue;
@@ -61,4 +65,5 @@ class Sdl2GraphicsLib : public virtual IGraphicsLib
         SDL_Surface *_textSurface;
         SDL_Surface *_tilesetSurface;
         TTF_Font *_font;
+        std::string _name;
 };
