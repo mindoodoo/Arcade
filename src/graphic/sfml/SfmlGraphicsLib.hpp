@@ -16,8 +16,8 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
-#include "IGraphicsLib.hpp"
-#include "shared.hpp"
+#include "../../shared/IGraphicsLib.hpp"
+#include "../../shared/shared.hpp"
 
 class SfmlGraphicsLib : public virtual IGraphicsLib
 {

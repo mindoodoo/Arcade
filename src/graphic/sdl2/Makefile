@@ -6,7 +6,7 @@
 ##
 
 CXXFLAGS = -Wall -Wextra -Werror -g3 -I../../shared -shared -fPIC \
-	-g3 -lSDL2 -lSDL2main
+	-g3 -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2main
 
 NAME = arcade_sdl2.so
 

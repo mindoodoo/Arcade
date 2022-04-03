@@ -150,7 +150,7 @@ void Sdl2GraphicsLib::drawTile(int tile_index, int x, int y)
 void Sdl2GraphicsLib::drawText(const std::string &txt, int x, int y)
 {
     SDL_Rect textLocation = {x, y, 0, 0};
-    SDL_Color color = {255, 255, 255};
+    SDL_Color color = {255, 255, 255, 42};
     this->_textSurface = TTF_RenderText_Solid(this->_font, txt.c_str(), color);
     this->_textTexture = SDL_CreateTextureFromSurface(this->_renderer, this->_textSurface);
     textLocation.w = this->_textSurface->w;
