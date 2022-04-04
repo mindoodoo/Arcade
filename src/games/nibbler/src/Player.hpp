@@ -38,6 +38,7 @@ namespace Nibbler
             segment_t tail();
 
             int getTileOrientation(int bodyIndex) const;
+            int getCornerOrientation(int bodyIndex) const;
             void draw();
 
             bool nibblerCollision(int x, int y);
