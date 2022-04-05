@@ -24,7 +24,7 @@ Sdl2GraphicsLib::Sdl2GraphicsLib()
     this->_tilesetTexture = NULL;
     this->_font = NULL;
     TTF_Init();
-
+    SDL_Init(SDL_INIT_EVERYTHING);
 }
 
 Sdl2GraphicsLib::~Sdl2GraphicsLib()
@@ -48,17 +48,20 @@ void Sdl2GraphicsLib::checkConfig(const gfx_config_t &config)
 
 void Sdl2GraphicsLib::loadConfig(void)
 {
-    if (SDL_Init(SDL_INIT_VIDEO ) != 0 || SDL_Init(SDL_INIT_EVENTS) != 0)
-		printf("error initializing SDL: %s\n", SDL_GetError());
     //window creation and stuff
     std::cout << "Window dimensions are : " << this->_config.windowWidth * this->_config.tileWidth <<
     ":" << this->_config.windowHeight * this->_config.tileHeight << std::endl;
 
     //SDL_CreateWindowAndRenderer( this->_config.windowWidth * this->_config.tileWidth, this->_config.windowHeight * this->_config.tileHeight, SDL_WINDOW_RESIZABLE, &this->_window, &this->_renderer);
     
+    if (this->_window)
+        SDL_DestroyWindow(this->_window);
     this->_window = SDL_CreateWindow("GAME", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
     this->_config.windowWidth * this->_config.tileWidth,
     this->_config.windowHeight * this->_config.tileHeight, SDL_WINDOW_SHOWN);
+
+    if (this->_renderer)
+        SDL_DestroyRenderer(this->_renderer);
     this->_renderer = SDL_CreateRenderer(this->_window, -1, SDL_RENDERER_ACCELERATED);
     
     //font loading

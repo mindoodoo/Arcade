@@ -70,6 +70,7 @@ int main(int argc, char *argv[])
 		GraphLibSDL2.drawTile(2 ,X+1, Y+1);
 		GraphLibSDL2.drawTile(3 ,X+2, Y+2);
 		GraphLibSDL2.drawText("LETS GO QT", 50, 50);
+		GraphLibSDL2.drawText("LETS GO QT", 500, 500);
 		GraphLibSDL2.display();
     }
 	return 0;
