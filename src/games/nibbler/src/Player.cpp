@@ -122,9 +122,9 @@ int getTurnDirection(Nibbler::segment_t previous, Nibbler::segment_t current, Ni
 
 int Nibbler::Player::getCornerOrientation(int bodyIndex) const
 {
-    segment_t previous = this->_body[bodyIndex - 1];
-    segment_t current = this->_body[bodyIndex];
-    segment_t next = this->_body[bodyIndex + 1];
+    segment_t previous = this->_body[bodyIndex - 1]; // Closest to head
+    segment_t current = this->_body[bodyIndex]; // Actual corner piece
+    segment_t next = this->_body[bodyIndex + 1]; // Closest to tail
     int turnDirection = getTurnDirection(previous, current, next);
 
     if (turnDirection == 0) {
@@ -159,6 +159,7 @@ void Nibbler::Player::draw()
         else if (i == this->_body.size() - 1)
             tile = NIBBLER_TAIL;
         else {
+            // Condition to identify corner pieces (works)
             if (this->_body[i - 1].x - this->_body[i + 1].x != 0 &&
             this->_body[i - 1].y - this->_body[i + 1].y != 0)
                 tile = NIBBLER_CORNER;
