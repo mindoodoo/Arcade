@@ -143,6 +143,8 @@ void Sdl2GraphicsLib::recordInputs()
 			this->_inputQueue.push(pressedKey);
         }   
 	}
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(100)); // This should change
 }
 
 void Sdl2GraphicsLib::display()
