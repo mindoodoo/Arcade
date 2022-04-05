@@ -39,10 +39,7 @@ int main(int argc, char *argv[])
 		}
 		if (queualias == "q")
 			game = 0;
-		//
-		//
-		//
-		//
+			
 		//mock movement to check if it works
 		if (queualias == "d" && X < mockConfig.windowWidth - 1) {
 			X = X + 1;
