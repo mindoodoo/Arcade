@@ -78,20 +78,27 @@ void Sdl2GraphicsLib::loadTileset()
     SDL_Texture *newTexture;
     SDL_Rect tileRect = {0, 0, this->_config.tileWidth,
     this->_config.tileHeight};
+
     int x;
     int y;
-    int a = 0;
 
     if (this->_config.graphicalTilesetPath == "")
         return;
+
     this->_tilesetSurface = IMG_Load(this->_config.graphicalTilesetPath.c_str());
+
     if (!this->_tilesetSurface)
         std::cout << "ERROR LOADING TILESET IMAGE" << std::endl;
+        // Potentially throw error here
     else {
         this->_tilesetTexture = SDL_CreateTextureFromSurface(this->_renderer, this->_tilesetSurface);
+
+        // Get tileset width and height in tiles
         x = this->_tilesetSurface->w / this->_config.tileWidth;
         y = this->_tilesetSurface->h / this->_config.tileHeight;
+        
         SDL_FreeSurface(this->_tilesetSurface);
+        
         for (int i = 0; i < y; i++){ 
             for (int j = 0; j < x; j++) {
                 // Update targeted part of the image
@@ -101,18 +108,14 @@ void Sdl2GraphicsLib::loadTileset()
                 // Load tile texture, apply to texture and push to vector
                 newTexture = SDL_CreateTexture(this->_renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
                 tileRect.w, tileRect.h);
+
                 SDL_SetRenderTarget(this->_renderer, newTexture);
                 SDL_RenderCopy(this->_renderer, this->_tilesetTexture, &tileRect, NULL);
                 SDL_SetRenderTarget(this->_renderer, NULL);
                 this->_tiles.push_back(newTexture);
-
-                //print to terminal index of loaded tile
-                std::cout << a << " tile loaded" <<std::endl;
-                a++;
             }
-        }        
+        }
     }   
-    std::cout << "LOLOL" << std::endl;
 }
 
 std::queue<char> &Sdl2GraphicsLib::getInput()
