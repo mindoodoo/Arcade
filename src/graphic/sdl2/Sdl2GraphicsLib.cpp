@@ -19,6 +19,10 @@ Sdl2GraphicsLib::Sdl2GraphicsLib()
         0
     };
     this->_name = NAME;
+    this->_renderer = NULL;
+    this->_textTexture = NULL;
+    this->_tilesetTexture = NULL;
+    this->_font = NULL;
     TTF_Init();
 
 }
@@ -29,6 +33,7 @@ Sdl2GraphicsLib::~Sdl2GraphicsLib()
     SDL_DestroyTexture(this->_textTexture);
     SDL_DestroyRenderer(this->_renderer);
     SDL_DestroyWindow(this->_window);
+    TTF_Quit();
     SDL_Quit();
 }
 
@@ -43,11 +48,14 @@ void Sdl2GraphicsLib::checkConfig(const gfx_config_t &config)
 
 void Sdl2GraphicsLib::loadConfig(void)
 {
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+    if (SDL_Init(SDL_INIT_VIDEO ) != 0 || SDL_Init(SDL_INIT_EVENTS) != 0)
 		printf("error initializing SDL: %s\n", SDL_GetError());
     //window creation and stuff
     std::cout << "Window dimensions are : " << this->_config.windowWidth * this->_config.tileWidth <<
     ":" << this->_config.windowHeight * this->_config.tileHeight << std::endl;
+
+    //SDL_CreateWindowAndRenderer( this->_config.windowWidth * this->_config.tileWidth, this->_config.windowHeight * this->_config.tileHeight, SDL_WINDOW_RESIZABLE, &this->_window, &this->_renderer);
+    
     this->_window = SDL_CreateWindow("GAME", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
     this->_config.windowWidth * this->_config.tileWidth,
     this->_config.windowHeight * this->_config.tileHeight, SDL_WINDOW_SHOWN);
@@ -100,7 +108,8 @@ void Sdl2GraphicsLib::loadTileset()
                 a++;
             }
         }        
-    }    
+    }   
+    std::cout << "LOLOL" << std::endl;
 }
 
 std::queue<char> &Sdl2GraphicsLib::getInput()
@@ -120,8 +129,9 @@ void Sdl2GraphicsLib::recordInputs()
 	SDL_Event event;
 	// Events management
 	while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT)
+        if (event.type == SDL_QUIT) {
             this->_inputQueue.push('q');
+        }
         else if (event.type == SDL_KEYDOWN) {
             pressedKey = event.key.keysym.sym;
 			this->_inputQueue.push(pressedKey);

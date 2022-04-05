@@ -11,12 +11,15 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_ttf.h>
+#include <vector>
 #include <iostream>
+#include <chrono>
+#include <thread>
 #include <fstream>
 #include "../../shared/IGraphicsLib.hpp"
 #include "../../shared/shared.hpp"
 
-#define NAME "sfml"
+#define NAME "sdl2"
 
 
 class Sdl2GraphicsLib : public virtual IGraphicsLib

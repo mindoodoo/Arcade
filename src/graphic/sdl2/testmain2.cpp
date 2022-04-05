@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 	int X = 0;
 	int Y= 0;
 
-    GraphLibSDL2.checkConfig(mockConfig);
+	GraphLibSDL2.checkConfig(mockConfig);
 	while (game) {
 		GraphLibSDL2.flush();
         GraphLibSDL2.recordInputs();
