@@ -45,10 +45,24 @@ std::vector<std::vector<char>> csvToVector2(const std::string &filepath)
     return table;
 }
 
+map_t twoDVectorToMap(std::vector<std::vector<char>> rawMap)
+{
+    map_t map(rawMap.size());
+
+    for (int y = 0; y < rawMap.size(); y++) {
+        map[y] = std::vector<tile_t>(rawMap[y].size());
+        for (int x = 0; x < rawMap[y].size(); x++) {
+            map[y][x] = {rawMap[y][x], rawMap[y][x] == TERRAIN_WALL ? 9999 : 0};
+        }
+    }
+
+    return map;
+}
+
 Pacman::Terrain::Terrain(IGraphicsLib **gfx)
 {
 
-    this->_map = csvToVector2("./assets/pacman/map");
+    this->_map = twoDVectorToMap(csvToVector2("./assets/pacman/map"));
 
     this->_height = this->_map.size();
     this->_width = this->_map[0].size();
@@ -61,7 +75,7 @@ bool Pacman::Terrain::validLocation(size_t x, size_t y)
 {
     if (y >= this->_map.size() || x >= this->_map[0].size())
         return true;
-    const char tile = this->_map[y][x];
+    const char tile = this->_map[y][x].first;
 
     return std::find(RANGE(this->_walkable), tile) != this->_walkable.end();
 }
@@ -70,7 +84,7 @@ void Pacman::Terrain::draw()
 {
     for (size_t y = 0; y < this->_map.size(); y++) {
         for (size_t x = 0; x < this->_map[y].size(); x++) {
-            GFX->drawTile(this->_map[y][x], x, y);
+            GFX->drawTile(this->_map[y][x].first, x, y);
         }
     }
 }
@@ -83,4 +97,9 @@ size_t Pacman::Terrain::getHeight() const
 size_t Pacman::Terrain::getWidth() const
 {
     return this->_width;
+}
+
+map_t Pacman::Terrain::getMap() const
+{
+    return this->_map;
 }

@@ -29,6 +29,10 @@ namespace Pacman
             void move(size_t xOffset, size_t yOffset);
 
             void draw();
+
+            size_t getX() const;
+
+            size_t getY() const;
         private:
             size_t _x;
             size_t _y;

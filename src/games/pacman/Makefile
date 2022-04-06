@@ -19,6 +19,8 @@ SRC = 	src/GameCore.cpp\
 		src/Level.cpp\
 		src/Terrain.cpp\
 		src/Player.cpp\
+		src/Astar.cpp\
+		src/BaseGhost.cpp\
 		src/make.cpp\
 		../BaseGameCore.cpp
 

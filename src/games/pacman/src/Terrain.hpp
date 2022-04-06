@@ -11,6 +11,14 @@
 #include "../../../shared/IGraphicsLib.hpp"
 #include <stddef.h>
 
+/**
+ * first = id of the tile
+ * second = cost
+ */
+typedef std::pair<char, int> tile_t;
+
+typedef std::vector<std::vector<tile_t>> map_t;
+
 namespace Pacman
 {
     class Terrain
@@ -32,8 +40,9 @@ namespace Pacman
 
             size_t getWidth() const;
 
+            map_t getMap() const;
         private:
-            std::vector<std::vector<char>> _map;
+            map_t _map;
 
             std::vector<char> _walkable;
 

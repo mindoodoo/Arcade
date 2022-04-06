@@ -48,7 +48,14 @@ void Pacman::Player::move(size_t xOffset, size_t yOffset)
         this->_y = 0;
     else
         this->_y += yOffset;
+}
 
+size_t Pacman::Player::getX() const
+{
+    return this->_x;
+}
 
-
+size_t Pacman::Player::getY() const
+{
+    return this->_y;
 }

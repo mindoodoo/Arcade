@@ -16,6 +16,7 @@ Pacman::Level::Level(IGraphicsLib **gfx, gfx_config_t levelConf)
     this->_levelConf = std::move(levelConf);
 
     this->_scene = new Terrain(gfx);
+    this->_ghost = new BaseGhost(this->_scene, this->_gfx);
     this->_pacman = new Player(this->_scene->getHeight() / 2, this->_scene->getWidth() / 2, this->_scene, gfx);
 }
 
@@ -50,8 +51,11 @@ int Pacman::Level::frame()
                 break;
         }
     }
+
+    this->_ghost->move(this->_pacman->getX() - 2, this->_pacman->getY());
     this->_scene->draw();
     this->_pacman->draw();
+    this->_ghost->draw();
 
     return LEVEL::RUNNING;
 }
