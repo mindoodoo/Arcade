@@ -27,6 +27,11 @@ typedef struct {
 bool operator==(gfx_config_t const &left, gfx_config_t const &right);
 bool operator!=(gfx_config_t const &left, gfx_config_t const &right);
 
+#define ORIENT_TOP 0
+#define ORIENT_RIGHT 1
+#define ORIENT_BOTTOM 2
+#define ORIENT_LEFT 3
+
 class IGraphicsLib
 {
     public:
@@ -41,7 +46,7 @@ class IGraphicsLib
         // Draw tile of index tile_index, at x tile and y tile
         // (tile is the unit)
         // Note : Could add possibility for rotation of tile in the future
-        virtual void drawTile(int tile_index, int x, int y) = 0;
+        virtual void drawTile(int tile_index, int x, int y, int orientation = ORIENT_TOP) = 0;
 
         // Draws text, at x tile and y tile
         virtual void drawText(const std::string &text, int x, int y) = 0;

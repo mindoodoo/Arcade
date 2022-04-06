@@ -10,7 +10,7 @@
 #include "../include/NibblerMacros.hpp"
 
 Nibbler::Fruit::Fruit(int x, int y, IGraphicsLib **gfx)
-    : Item(x, y, ITEM_FRUIT, gfx)
+    : Item(x, y, ITEM_FRUIT1, gfx)
 {
 }
 

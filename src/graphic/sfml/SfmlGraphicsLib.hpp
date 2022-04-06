@@ -36,7 +36,7 @@ class SfmlGraphicsLib : public virtual IGraphicsLib
 
         //Runtime methods
         void flush(void)  override;
-        void drawTile(int tile_index, int x, int y) override;
+        void drawTile(int tile_index, int x, int y, int orientation = ORIENT_TOP) override;
         void drawText(const std::string &txt, int x, int y) override;
 
         // Get events that happened since last frame

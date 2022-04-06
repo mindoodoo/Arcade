@@ -15,15 +15,16 @@ DEST = ../../../lib
 
 CC = g++
 
-SRC = 	src/GameCore.cpp\
-		src/Level.cpp\
-		src/Player.cpp\
-		src/Terrain.cpp\
-		src/Fruit.cpp\
-		src/Item.cpp\
-		src/make.cpp\
-		../GameErrors.cpp\
-		../BaseGameCore.cpp
+SRC = 	src/GameCore.cpp \
+		src/Level.cpp \
+		src/Player.cpp \
+		src/Terrain.cpp \
+		src/Fruit.cpp \
+		src/Item.cpp \
+		src/make.cpp \
+		../GameErrors.cpp \
+		../BaseGameCore.cpp \
+		../../shared/csv.cpp
 
 STDL_SRC = 	$(SRC)\
 			main.cpp\

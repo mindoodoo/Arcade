@@ -51,23 +51,6 @@ void NcursesGraphicsLib::checkConfig(const gfx_config_t &config)
     }
 }
 
-std::vector<std::string> splitStr(std::string str, std::string sep)
-{
-    std::vector<std::string> output;
-    size_t start = 0;
-    size_t end;
-    std::string token;
-
-    while ((end = str.find(sep, start)) != std::string::npos) {
-        token = str.substr(start, end - start);
-        start = end + sep.length();
-        output.push_back (token);
-    }
-    output.push_back(str.substr (start));
-
-    return output;
-}
-
 int getColor(std::string colorName)
 {
     if (colorName == "BLACK")
@@ -114,8 +97,9 @@ void NcursesGraphicsLib::flush()
     clear();
 }
 
-void NcursesGraphicsLib::drawTile(int tile_index, int x, int y)
+void NcursesGraphicsLib::drawTile(int tile_index, int x, int y, int orientation)
 {
+    std::cout << "Ncurses library ignoring rotation" << orientation << std::endl;
     attron(COLOR_PAIR(this->_tileset[tile_index].color));
     mvaddch(y, x * 2, this->_tileset[tile_index].c);
     attroff(COLOR_PAIR(this->_tileset[tile_index].color));
