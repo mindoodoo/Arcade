@@ -24,7 +24,8 @@ Sdl2GraphicsLib::Sdl2GraphicsLib()
     this->_tilesetTexture = NULL;
     this->_font = NULL;
     TTF_Init();
-    SDL_Init(SDL_INIT_EVERYTHING);
+    SDL_Init(SDL_INIT_VIDEO);
+    SDL_Init(SDL_INIT_EVENTS);
 }
 
 Sdl2GraphicsLib::~Sdl2GraphicsLib()
@@ -63,6 +64,7 @@ void Sdl2GraphicsLib::loadConfig(void)
     if (this->_renderer)
         SDL_DestroyRenderer(this->_renderer);
     this->_renderer = SDL_CreateRenderer(this->_window, -1, SDL_RENDERER_ACCELERATED);
+    SDL_SetRenderDrawColor(this->_renderer, 0x00, 0x00, 0x00, 0xFF );
     
     //font loading
     this->_font = TTF_OpenFont(this->_config.fontFolderPath.c_str(), this->_config.tileWidth);
