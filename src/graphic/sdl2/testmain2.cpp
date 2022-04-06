@@ -63,9 +63,9 @@ int main(int argc, char *argv[])
             GraphLibSDL2.popInput();
 			queualias = "";
 		}
-		GraphLibSDL2.drawTile(1,X,Y);
-		GraphLibSDL2.drawTile(2 ,X+1, Y+1);
-		GraphLibSDL2.drawTile(3 ,X+2, Y+2);
+		GraphLibSDL2.drawTile(1,X,Y, ORIENT_TOP);
+		GraphLibSDL2.drawTile(2 ,X+1, Y+1,ORIENT_TOP);
+		GraphLibSDL2.drawTile(3 ,X+2, Y+2,ORIENT_LEFT);
 		GraphLibSDL2.drawText("LETS GO QT", 50, 50);
 		GraphLibSDL2.drawText("LETS GO QT", 500, 500);
 		GraphLibSDL2.display();

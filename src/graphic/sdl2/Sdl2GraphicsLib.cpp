@@ -154,17 +154,18 @@ void Sdl2GraphicsLib::display()
     SDL_RenderPresent(this->_renderer);
 }
 
-void Sdl2GraphicsLib::flush() 
+void Sdl2GraphicsLib::flush()
 {
+    SDL_SetRenderDrawColor(this->_renderer, 0, 0, 0, 255);
     SDL_RenderClear(this->_renderer);
 }
 
-void Sdl2GraphicsLib::drawTile(int tile_index, int x, int y)
+void Sdl2GraphicsLib::drawTile(int tile_index, int x, int y, int orientation)
 {
-
+    
 	SDL_Rect dest = {x *  this->_config.tileWidth , y *  this->_config.tileHeight,
     this->_config.tileWidth, this->_config.tileHeight};
-    SDL_RenderCopy(this->_renderer, this->_tiles[tile_index], NULL, &dest);
+    SDL_RenderCopyEx(this->_renderer, this->_tiles[tile_index], NULL, &dest, orientation * 90.0f , NULL, SDL_FLIP_NONE);
 
 }
 
