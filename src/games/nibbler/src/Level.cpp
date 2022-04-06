@@ -18,17 +18,21 @@ Nibbler::Level::Level(IGraphicsLib **gfx, gfx_config_t levelConf)
     this->_score = 0;
     this->_levelConf = std::move(levelConf);
 
-    this->_gameHeight = 30;
-    this->_gameWidth = 30;
+    this->_scene = new Terrain("./assets/nibbler/map1.csv", gfx);
+    std::pair<int, int> dimensions = this->_scene->getMapDimensions();
+    this->_levelConf.windowWidth = dimensions.first;
+    this->_levelConf.windowHeight = dimensions.second;
 
-    this->_scene = new Terrain(this->_gameHeight, this->_gameWidth, gfx);
+    this->_gameHeight = dimensions.first;
+    this->_gameWidth = dimensions.second;
+
     this->_nibbler = new Player(this->_gameHeight / 2, this->_gameWidth / 2, this->_scene, gfx);
 
     this->_gfx = gfx;
 
     this->_state = LEVEL::RUNNING;
 
-    this->generateItems(ITEM_FRUIT, this->_gameHeight * this->_gameWidth * 0.1);
+    this->generateItems(ITEM_FRUIT1, this->_gameHeight * this->_gameWidth * 0.1);
 }
 
 void Nibbler::Level::draw()
@@ -97,7 +101,7 @@ void Nibbler::Level::generateItems(int item_id, size_t amount)
         Item *item = nullptr;
 
         switch (item_id) {
-            case ITEM_FRUIT:
+            case ITEM_FRUIT1:
                 item = new Fruit(coords.first, coords.second, this->_gfx);
         }
 

@@ -31,15 +31,19 @@ SfmlGraphicsLib::~SfmlGraphicsLib()
         delete this->_tiles[i];
 }
 
-void SfmlGraphicsLib::drawTile(int tile_index, int x, int y)
+void SfmlGraphicsLib::drawTile(int tile_index, int x, int y, int orientation)
 {
     sf::Sprite *tile = this->_tiles[tile_index];
-    // sf::Vector2u
+    int pixelPosX = x * this->_config.tileWidth + (this->_config.tileWidth / 2);
+    int pixelPosY = y * this->_config.tileHeight + (this->_config.tileHeight / 2);
 
-    // Set position and draw sprite
-    tile->setPosition(x * this->_config.tileWidth,
-    y * this->_config.tileHeight);
+    // Set position, orientation and draw sprite
+    tile->setPosition(pixelPosX, pixelPosY);
+    tile->setRotation(90 * orientation);
     this->_window.draw(*tile);
+
+    // Reset orientation for future use
+    tile->setRotation(0);
 }
 
 void SfmlGraphicsLib::loadTileset()
@@ -49,6 +53,8 @@ void SfmlGraphicsLib::loadTileset()
     sf::Sprite *newSprite;
     sf::IntRect tileRect = {0, 0, this->_config.tileWidth,
     this->_config.tileHeight};
+    int x_origin = this->_config.tileWidth / 2;
+    int y_origin = this->_config.tileHeight / 2;
     int x;
     int y;
 
@@ -68,9 +74,11 @@ void SfmlGraphicsLib::loadTileset()
                 tileRect.left = j * this->_config.tileWidth;
                 tileRect.top = i * this->_config.tileHeight;
 
-                // Load tile texture, apply to sprite and push to vector
-                // newTexture = new sf::Texture();
+                // Load new tile texture and apply to sprite
                 newSprite = new sf::Sprite(this->_tilesetTexture, tileRect);
+                // Set transformation origin to middle of tile
+                newSprite->setOrigin(x_origin, y_origin);
+
                 this->_tiles.push_back(newSprite);
             }
     }

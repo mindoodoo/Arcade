@@ -15,3 +15,4 @@
 
 std::vector<std::vector<std::string>> csvToTable(const std::string &filepath);
 std::vector<std::string> csvToVector(const std::string &filepath);
+std::vector<std::string> splitStr(std::string str, std::string sep);
