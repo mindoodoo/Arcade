@@ -22,10 +22,10 @@ Nibbler::Terrain::Terrain(std::string tilemapPath, IGraphicsLib **gfx)
     std::vector<gfx_tile_t> tempRow;
     std::vector<std::string> splitCell;
 
-    for (int i = 0; i < parsedCsv.size(); i++) {
+    for (long unsigned int i = 0; i < parsedCsv.size(); i++) {
         tempRow.clear();
 
-        for (int j = 0; j < parsedCsv[i].size(); j++) {
+        for (long unsigned int j = 0; j < parsedCsv[i].size(); j++) {
             // Split tile from orientation
             splitCell = splitStr(parsedCsv[i][j], ";");
             

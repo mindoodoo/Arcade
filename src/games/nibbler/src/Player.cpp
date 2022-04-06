@@ -152,7 +152,7 @@ void Nibbler::Player::draw()
     int tile = NIBBLER_HEAD;
     int orientation;
 
-    for (int i = 0; i < this->_body.size(); i++) {
+    for (long unsigned int i = 0; i < this->_body.size(); i++) {
         // Get correct tile
         if (i == 0)
             tile = NIBBLER_HEAD;
