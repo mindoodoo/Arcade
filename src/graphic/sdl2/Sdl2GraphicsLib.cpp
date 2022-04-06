@@ -64,7 +64,7 @@ void Sdl2GraphicsLib::loadConfig(void)
     if (this->_renderer)
         SDL_DestroyRenderer(this->_renderer);
     this->_renderer = SDL_CreateRenderer(this->_window, -1, SDL_RENDERER_ACCELERATED);
-    SDL_SetRenderDrawColor(this->_renderer, 0x00, 0x00, 0x00, 0xFF );
+    SDL_SetRenderDrawBlendMode(this->_renderer, SDL_BLENDMODE_BLEND);
     
     //font loading
     this->_font = TTF_OpenFont(this->_config.fontFolderPath.c_str(), this->_config.tileWidth);
@@ -88,6 +88,7 @@ void Sdl2GraphicsLib::loadTileset()
         return;
 
     this->_tilesetSurface = IMG_Load(this->_config.graphicalTilesetPath.c_str());
+    SDL_SetColorKey(this->_tilesetSurface, SDL_TRUE, SDL_MapRGB(this->_tilesetSurface->format, 0, 0xFF, 0xFF));
 
     if (!this->_tilesetSurface)
         std::cout << "ERROR LOADING TILESET IMAGE" << std::endl;
@@ -110,6 +111,7 @@ void Sdl2GraphicsLib::loadTileset()
                 // Load tile texture, apply to texture and push to vector
                 newTexture = SDL_CreateTexture(this->_renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
                 tileRect.w, tileRect.h);
+                SDL_SetTextureBlendMode(newTexture, SDL_BLENDMODE_BLEND);
 
                 SDL_SetRenderTarget(this->_renderer, newTexture);
                 SDL_RenderCopy(this->_renderer, this->_tilesetTexture, &tileRect, NULL);
@@ -156,7 +158,6 @@ void Sdl2GraphicsLib::display()
 
 void Sdl2GraphicsLib::flush()
 {
-    SDL_SetRenderDrawColor(this->_renderer, 0, 0, 0, 255);
     SDL_RenderClear(this->_renderer);
 }
 
