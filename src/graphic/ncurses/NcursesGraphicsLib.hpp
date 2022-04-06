@@ -38,7 +38,7 @@ class NcursesGraphicsLib : virtual public IGraphicsLib
 
         void drawTile(int tile_index, int x, int y, int orientation = ORIENT_TOP) override;
 
-        void drawText(const std::string &text, int x, int y) override;
+        void drawText(const std::string &text, int x, int y, rgb_t color = {255,255,255}) override;
 
         // Do nothing function
         void display() override;

@@ -23,6 +23,12 @@ typedef struct {
     int windowHeight; // In tiles
 } gfx_config_t;
 
+typedef struct {
+    int r;
+    int g;
+    int b;
+} rgb_t;
+
 // Overloads
 bool operator==(gfx_config_t const &left, gfx_config_t const &right);
 bool operator!=(gfx_config_t const &left, gfx_config_t const &right);
@@ -49,8 +55,7 @@ class IGraphicsLib
         virtual void drawTile(int tile_index, int x, int y, int orientation = ORIENT_TOP) = 0;
 
         // Draws text, at x tile and y tile
-        virtual void drawText(const std::string &text, int x, int y) = 0;
-
+        virtual void drawText(const std::string &text, int x, int y, rgb_t color = {255,255,255}) = 0;
 
         /**
          * Saves all inputs to process to a queue

@@ -104,14 +104,12 @@ int getTurnDirection(Nibbler::segment_t previous, Nibbler::segment_t current, Ni
     // If going horizontally before turn
     if (previous.x == current.x) {
         if (next.y > current.y) {
-            std::cout << "OUIIIIIIIIIIIIIIIIIIIIIIIIII\n";
             return 1;
         }
         else
             return 0;
     } else { // If going vertically before turn
         if (next.x > current.x) {
-            std::cout << "OUIIIIIIIIIIIIIIIIIIIIIIIIII\n";
             return 1;
         }
         else
@@ -129,13 +127,11 @@ int Nibbler::Player::getCornerOrientation(int bodyIndex) const
 
     if (turnDirection == 0) {
         if (previous.x < next.x) {
-            std::cout << "TOP\n";
             if (previous.y > next.y)
                 return (previous.x == current.x ? ORIENT_LEFT : ORIENT_BOTTOM);
             else
                 return (previous.x == current.x ? ORIENT_RIGHT : ORIENT_TOP);
         } else { // Bottom corners
-            std::cout << "BOTTOM\n";
             if (previous.y < next.y)
                 return (previous.x == current.x ? ORIENT_RIGHT : ORIENT_TOP);
             else

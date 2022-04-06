@@ -94,10 +94,12 @@ void SfmlGraphicsLib::flush()
     this->_window.clear(sf::Color::Black);
 }
 
-void SfmlGraphicsLib::drawText(const std::string &text, int x, int y)
+void SfmlGraphicsLib::drawText(const std::string &text, int x, int y, rgb_t color)
 {
+    sf::Color textColor = sf::Color(color.r, color.g, color.b);
+
     this->_text.setString(text);
-    this->_text.setFillColor(sf::Color::Red);
+    this->_text.setFillColor(textColor);
     this->_text.setPosition(x * this->_config.tileWidth,
     y * this->_config.tileHeight);
     this->_window.draw(this->_text);

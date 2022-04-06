@@ -99,15 +99,27 @@ void NcursesGraphicsLib::flush()
 
 void NcursesGraphicsLib::drawTile(int tile_index, int x, int y, int orientation)
 {
-    std::cout << "Ncurses library ignoring rotation" << orientation << std::endl;
+    (void)orientation; // Silences unused parameter warning
     attron(COLOR_PAIR(this->_tileset[tile_index].color));
     mvaddch(y, x * 2, this->_tileset[tile_index].c);
     attroff(COLOR_PAIR(this->_tileset[tile_index].color));
 }
 
-void NcursesGraphicsLib::drawText(const std::string &text, int x, int y)
+void NcursesGraphicsLib::drawText(const std::string &text, int x, int y, rgb_t color)
 {
+    int usedColor = COLOR_BLUE;
+
+    // Select color based on highest value
+    if (color.r >= color.g && color.r >= color.b)
+        usedColor = COLOR_RED;
+    if (color.g >= color.r && color.g >= color.b)
+        usedColor = COLOR_GREEN;
+    if (color.g == color.r && color.r == color.b)
+        usedColor = COLOR_WHITE;
+    
+    attron(COLOR_PAIR(usedColor));
     mvprintw(y, x * 2, text.c_str());
+    attroff(COLOR_PAIR(usedColor));
 }
 
 std::queue<char> &NcursesGraphicsLib::getInput()
