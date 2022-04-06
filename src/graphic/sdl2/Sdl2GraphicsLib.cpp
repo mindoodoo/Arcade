@@ -20,6 +20,7 @@ Sdl2GraphicsLib::Sdl2GraphicsLib()
     };
     this->_name = NAME;
     this->_renderer = NULL;
+    this->_window = NULL;
     this->_textTexture = NULL;
     this->_tilesetTexture = NULL;
     this->_font = NULL;
@@ -173,7 +174,7 @@ void Sdl2GraphicsLib::drawTile(int tile_index, int x, int y, int orientation)
 void Sdl2GraphicsLib::drawText(const std::string &txt, int x, int y)
 {
     SDL_Rect textLocation = {x * this->_config.tileWidth , y * this->_config.tileHeight, 0, 0};
-    SDL_Color color = {255, 255, 255, 42};
+    SDL_Color color = {255, 255, 255, 0};
 
     this->_textSurface = TTF_RenderText_Solid(this->_font, txt.c_str(), color);
     this->_textTexture = SDL_CreateTextureFromSurface(this->_renderer, this->_textSurface);
