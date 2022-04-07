@@ -10,16 +10,11 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include <stddef.h>
+#include <cstddef>
 #include <utility>
 #include "Fruit.hpp"
 #include "../../../shared/IGraphicsLib.hpp"
 #include "../../../shared/shared.hpp"
-
-typedef struct {
-    int tile;
-    int orientation;
-} gfx_tile_t;
 
 namespace Nibbler
 {
@@ -31,7 +26,7 @@ namespace Nibbler
              * @param tilemapPath
              * @param gfx
              */
-            Terrain(std::string tilemapPath, IGraphicsLib **gfx);
+            Terrain(const std::string& tilemapPath, IGraphicsLib **gfx);
 
             ~Terrain() = default;
 

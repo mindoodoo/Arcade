@@ -54,12 +54,12 @@ void Core::mainLoop()
 
             if (this->_state == ARCADE::GAME) {
                 if (this->_gamePtr->frame() != 0) {
+                    this->_gfx->checkConfig(this->_config);
                     this->_gfx->flush();
                     this->loadAvailableLibs();
                     this->_state = ARCADE::MENU;
                 }
             } else {
-                this->_gfx->checkConfig(this->_config);
                 size_t i = 0;
                 for (const auto &meta: this->_games) {
                     std::string line = std::to_string(i) + ". " + meta.name;
@@ -87,13 +87,13 @@ void Core::launchGame()
         throw Error::GameNotFound(this->_selectedGame);
     }
 
-    this->_gfx->flush();
-
     this->_gameLoader.loadLib(this->_games[this->_selectedGame].path);
 
     this->_gamePtr = this->_gameLoader.getInstance();
 
     this->_gamePtr->setGfx(&this->_gfx);
+
+    this->_gfx->checkConfig(this->_gamePtr->getConfig());
 
     this->_state = ARCADE::GAME;
 }
@@ -266,7 +266,10 @@ void Core::graphicsRotateLeft()
     delete this->_gfx;
     this->_gfxLoader.loadLib(this->_graphics[1].path);
     this->_gfx = this->_gfxLoader.getInstance();
-    this->_gfx->checkConfig(this->_config);
+    if (this->_state == ARCADE::GAME)
+        this->_gfx->checkConfig(this->_gamePtr->getConfig());
+    else
+        this->_gfx->checkConfig(this->_config);
     this->_graphics.push_back(this->_graphics.front());
     this->_graphics.pop_front();
 }
@@ -280,7 +283,10 @@ void Core::graphicsRotateRight()
     delete this->_gfx;
     this->_gfxLoader.loadLib(this->_graphics.back().path);
     this->_gfx = this->_gfxLoader.getInstance();
-    this->_gfx->checkConfig(this->_config);
+    if (this->_state == ARCADE::GAME)
+        this->_gfx->checkConfig(this->_gamePtr->getConfig());
+    else
+        this->_gfx->checkConfig(this->_config);
     this->_graphics.push_front(this->_graphics.back());
     this->_graphics.pop_back();
 }

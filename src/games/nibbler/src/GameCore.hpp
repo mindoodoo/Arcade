@@ -25,6 +25,7 @@ namespace Nibbler
 
             void startGame() override;
 
+            gfx_config_t getConfig() override;
         private:
             gfx_config_t _levelConf;
     };

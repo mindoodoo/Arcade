@@ -44,3 +44,8 @@ void Nibbler::GameCore::startGame()
 {
     this->_game = new Level(this->_gfx, this->_levelConf);
 }
+
+gfx_config_t Nibbler::GameCore::getConfig()
+{
+    return this->_levelConf;
+}

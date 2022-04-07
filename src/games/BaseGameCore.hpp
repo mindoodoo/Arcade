@@ -40,6 +40,8 @@ class BaseGameCore : public virtual IGameLib
 
         virtual void showGameOver() = 0;
 
+        virtual gfx_config_t getConfig() = 0;
+
     protected:
         int _highScore;
 
