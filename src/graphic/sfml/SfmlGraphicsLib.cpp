@@ -52,7 +52,7 @@ void SfmlGraphicsLib::loadTileset()
     // sf::Texture *newTexture;
     sf::Sprite *newSprite;
     sf::IntRect tileRect = {0, 0, this->_config.tileWidth,
-    this->_config.tileHeight};
+                            this->_config.tileHeight};
     int x_origin = this->_config.tileWidth / 2;
     int y_origin = this->_config.tileHeight / 2;
     int x;
@@ -100,8 +100,7 @@ void SfmlGraphicsLib::drawText(const std::string &text, int x, int y, rgb_t colo
 
     this->_text.setString(text);
     this->_text.setFillColor(textColor);
-    this->_text.setPosition(x * this->_config.tileWidth,
-    y * this->_config.tileHeight);
+    this->_text.setPosition(x * this->_config.tileWidth, y * this->_config.tileHeight);
     this->_window.draw(this->_text);
 }
 
@@ -109,7 +108,6 @@ std::queue<char> &SfmlGraphicsLib::getInput()
 {
     return this->_inputQueue;
 }
-
 
 void SfmlGraphicsLib::checkConfig(const gfx_config_t &config)
 {
@@ -123,14 +121,16 @@ void SfmlGraphicsLib::checkConfig(const gfx_config_t &config)
 void SfmlGraphicsLib::loadConfig(void)
 {
     // Font stuff
-    this->_font.loadFromFile(this->_config.fontFolderPath); // Considered single font file but in future multiple fonts potentially
+    this->_font.loadFromFile(
+        this->_config.fontFolderPath); // Considered single font file but in future multiple fonts potentially
     this->_text.setFont(this->_font);
     this->_text.setCharacterSize(this->_config.tileWidth);
 
     // Window creation
-    std::cout << "Window dimensions are : " << this->_config.windowWidth * this->_config.tileWidth << ":" << this->_config.windowHeight * this->_config.tileHeight << std::endl;
+    std::cout << "Window dimensions are : " << this->_config.windowWidth * this->_config.tileWidth << ":"
+              << this->_config.windowHeight * this->_config.tileHeight << std::endl;
     this->_window.create(sf::VideoMode(this->_config.windowWidth * this->_config.tileWidth,
-    this->_config.windowHeight * this->_config.tileHeight), "Arcade SFML");
+                                       this->_config.windowHeight * this->_config.tileHeight), "Arcade SFML");
     this->_window.setFramerateLimit(60);
 
     // Load tileset
