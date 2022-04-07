@@ -30,9 +30,6 @@ void reverseQueue(std::queue<coordinates_t> &Queue)
 std::deque<coordinates_t> returnPath(Node currentNode)
 {
     std::deque<coordinates_t> path;
-    //    std::cout << "pare " << currentNode.parent->g << " " << currentNode.parent->position.first << " " << currentNode
-    //    .parent->position
-    //    .second <<std::endl;
 
     while (true) {
         std::cout << "help " << currentNode.g << " " << currentNode.position.first << " " << currentNode.position.second
