@@ -16,8 +16,8 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
-#include "IGraphicsLib.hpp"
-#include "shared.hpp"
+#include "../../shared/IGraphicsLib.hpp"
+#include "../../shared/shared.hpp"
 
 #define NAME "sfml"
 
@@ -37,7 +37,7 @@ class SfmlGraphicsLib : public virtual IGraphicsLib
         //Runtime methods
         void flush(void)  override;
         void drawTile(int tile_index, int x, int y, int orientation = ORIENT_TOP) override;
-        void drawText(const std::string &txt, int x, int y, rgb_t color = {255,255,255}) override;
+        void drawText(const std::string &txt, int x, int y, rgb_t color) override;
 
         // Get events that happened since last frame
         // Queue of events
