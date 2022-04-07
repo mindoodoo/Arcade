@@ -8,6 +8,10 @@
 #pragma once
 
 #include "Terrain.hpp"
+#include <algorithm>
+#include <valarray>
+#include <iostream>
+#include <stack>
 
 typedef std::pair<int /* x */, int /* x */> coordinates_t;
 

@@ -5,12 +5,7 @@
 ** Description
 */
 
-#include <algorithm>
-#include <valarray>
-#include <iostream>
-#include <stack>
 #include "Astar.hpp"
-#include "../include/PacmanMacros.hpp"
 
 #define RANGE(a) a.begin(), a.end()
 
