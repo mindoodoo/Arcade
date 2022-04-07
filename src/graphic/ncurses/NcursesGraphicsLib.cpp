@@ -81,6 +81,9 @@ void NcursesGraphicsLib::loadConfig()
     std::vector<std::string> splitStringVector;
     ascii_tile_t tile;
 
+    // Clear previous tileset
+    this->_tileset.clear();
+
     for (unsigned int i = 0; i < stringVector.size(); ++i) {
         splitStringVector = splitStr(stringVector[i], ";");
         tile.c = splitStringVector[0][0];
