@@ -54,16 +54,14 @@ void Sdl2GraphicsLib::loadConfig(void)
     std::cout << "Window dimensions are : " << this->_config.windowWidth * this->_config.tileWidth <<
     ":" << this->_config.windowHeight * this->_config.tileHeight << std::endl;
 
-    //SDL_CreateWindowAndRenderer( this->_config.windowWidth * this->_config.tileWidth, this->_config.windowHeight * this->_config.tileHeight, SDL_WINDOW_RESIZABLE, &this->_window, &this->_renderer);
-    
-    if (this->_window)
-        SDL_DestroyWindow(this->_window);
+    // if (this->_window != NULL)
+    //     SDL_DestroyWindow(this->_window);
     this->_window = SDL_CreateWindow("GAME", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
     this->_config.windowWidth * this->_config.tileWidth,
     this->_config.windowHeight * this->_config.tileHeight, SDL_WINDOW_SHOWN);
 
-    if (this->_renderer)
-        SDL_DestroyRenderer(this->_renderer);
+    // if (this->_renderer != NULL)
+    //     SDL_DestroyRenderer(this->_renderer);
     this->_renderer = SDL_CreateRenderer(this->_window, -1, SDL_RENDERER_ACCELERATED);
     SDL_SetRenderDrawBlendMode(this->_renderer, SDL_BLENDMODE_BLEND);
     

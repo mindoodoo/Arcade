@@ -97,9 +97,38 @@ int Nibbler::Player::getTileOrientation(int bodyIndex) const
     return ORIENT_TOP;
 }
 
+
 int getTurnDirection(Nibbler::segment_t previous, Nibbler::segment_t current, Nibbler::segment_t next)
 {
     // Left is 0 and right is 1
+    std::cout << "previous (near head) X = " << previous.x << "and current X = " << current.x << " and next X (near tail) = "<< next.x <<std::endl;
+    std::cout << "previous (near head) Y = " << previous.y << "and current Y = " << current.y << " and next Y (near tail) = "<< next.y <<std::endl;
+
+
+    //take 2
+
+    //if going vertically before turn
+    if (previous.y == current.y) {
+        std::cout << "turned to horizontal movement" << std::endl;
+        if (previous.x > current.x) {
+            std::cout << "turned RIGHT" << std::endl;
+        }
+        if (previous.x < current.x) {
+            std::cout << "turned LEFT" << std::endl;
+        }
+
+    }
+
+    if (previous.x == current.x) {
+        std::cout << "turned vertical movement" << std::endl;
+        if (previous.y > current.y) {
+            std::cout << "turned DOWN" << std::endl;
+        }
+        if (previous.y < current.y) {
+            std::cout << "turned UP" << std::endl;
+        }
+
+    }
 
     // If going horizontally before turn
     if (previous.x == current.x) {
