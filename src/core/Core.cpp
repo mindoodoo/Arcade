@@ -60,6 +60,7 @@ void Core::mainLoop()
                     this->_state = ARCADE::MENU;
                 }
             } else {
+                this->_gfx->checkConfig(this->_config);
                 size_t i = 0;
                 for (const auto &meta: this->_games) {
                     std::string line = std::to_string(i) + ". " + meta.name;
