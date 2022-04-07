@@ -29,10 +29,10 @@ Core::Core(const std::string &gfxPath)
         // Init gfx config for menu
         this->_config = {
             "",
-            "",
+            "./assets/core/CoreTileset.png",
             "./assets/core/arial.ttf",
-            32,
-            32,
+            16,
+            16,
             40,
             40
         };
