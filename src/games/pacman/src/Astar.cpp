@@ -25,12 +25,16 @@ void reverseQueue(std::queue<coordinates_t> &Queue)
 std::deque<coordinates_t> returnPath(Node currentNode)
 {
     std::deque<coordinates_t> path;
-
+    std::cout << "help " << currentNode.g << " " << currentNode.position.first << " " << currentNode.position
+        .second << std::endl;
+    std::cout << "help " << currentNode.parent->g << " " << currentNode.parent->position.first << " " << currentNode
+        .parent->position.second << std::endl;
     while (true) {
-        std::cout << "help " << currentNode.g << " " << currentNode.position.first << " " << currentNode.position.second
-                  << std::endl;
-        path.push_back(currentNode.position);
-        if (currentNode.parent == nullptr || currentNode == *currentNode.parent)
+
+        if (currentNode == *currentNode.parent)
+            break;
+        path.push_front(currentNode.position);
+        if (currentNode.parent == nullptr)
             break;
         currentNode = *currentNode.parent;
     }
@@ -43,6 +47,9 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
     Node startNode = Node(nullptr, start);
     Node endNode = Node(nullptr, end);
 
+    std::cout << "from " << start.first << " " << start.second << std::endl;
+
+    std::cout << "to " << end.first << " " << end.second << std::endl;
     std::deque<Node> openList;
     std::deque<Node> closedList;
 
@@ -76,13 +83,12 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
         // Found the goal
         if (currNode == endNode) {
             std::cerr << "AT GOAL" << std::endl;
-
             return returnPath(currNode);
         }
 
         // Generate children
         std::deque<Node> children;
-        std::cout << currNode.position.first << " " << currNode.position.second << std::endl;
+
         for (std::pair<int, int> posOffset: adjacentSquares) {
             // Adjacent squares
 
@@ -91,17 +97,15 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
                                           currNode.position.second + posOffset.second};
 
             // Make sure within range
-            if (nodePosition.first > (map.size() - 1)
-                || (nodePosition.first < 0)
-                || nodePosition.second > (map[map.size() - 1].size() - 1)
-                || nodePosition.second < 0) {
-                std::cerr << "not within range" << std::endl;
+            if ((nodePosition.first > (map.size() - 1))
+                || (nodePosition.second > (map[map.size() - 1].size() - 1))) {
+                //                std::cerr << "not within range" << std::endl;
                 continue;
             }
 
             // Make sure walkable terrain
             if (map[nodePosition.first][nodePosition.second].tile == TERRAIN_WALL) {
-                std::cerr << "is wall" << std::endl;
+                //                std::cerr << "is wall" << std::endl;
                 continue;
             }
 
@@ -113,10 +117,17 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
 
         for (Node child: children) {
 
-            if (std::find(RANGE(closedList), child) != closedList.end()) {
-                std::cerr << child.position.first << " " << child.position.second << " in closed list" << std::endl;
-                continue;
-            }
+//            int check1 = 0;
+//            for (auto item: closedList) {
+//                if (item == child)
+//                    check1++;
+//            }
+//            if (check1 > 0)
+//                continue;
+                        if (std::find(RANGE(closedList), child) != closedList.end()) {
+            //                std::cerr << child.position.first << " " << child.position.second << " in closed list" << std::endl;
+                            continue;
+                        }
 
             child.g = currNode.g + 1;
             child.h = std::pow((child.position.first - endNode.position.first), 2) +
@@ -129,7 +140,7 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
                     check++;
             }
             if (check > 0) {
-                std::cerr << "check above 0" << std::endl;
+                //                std::cerr << "check above 0" << std::endl;
                 continue;
             }
 
@@ -149,7 +160,7 @@ Node::Node(Node *parent, coordinates_t position)
     this->h = 0;
 }
 
-bool Node::operator==(Node other) const
+bool operator==(Node first, Node other)
 {
-    return this->position.first == other.position.first && this->position.second == other.position.second;
+    return (first.position.first == other.position.first) && (first.position.second == other.position.second);
 }

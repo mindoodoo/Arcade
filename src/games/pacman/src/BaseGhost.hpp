@@ -31,7 +31,7 @@ namespace Pacman
 
             void setState(GhostState state);
 
-            void move(int x, int y);
+            void move(size_t x, size_t y);
 
             void draw();
         protected:
@@ -48,5 +48,7 @@ namespace Pacman
             Terrain *_scene;
 
             IGraphicsLib **_gfx;
+
+            std::deque<coordinates_t> _path;
     };
 }

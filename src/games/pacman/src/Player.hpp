@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <chrono>
 #include "../../../shared/IGraphicsLib.hpp"
 #include "Terrain.hpp"
 
@@ -26,7 +27,9 @@ namespace Pacman
 
             ~Player() = default;
 
-            void move(size_t xOffset, size_t yOffset);
+            void move();
+
+            void turn(char xOffset, char yOffset);
 
             void draw();
 
@@ -41,5 +44,10 @@ namespace Pacman
             IGraphicsLib **_gfx;
 
             State _state;
+
+            char _xOffset;
+            char _yOffset;
+
+            std::chrono::time_point<std::chrono::system_clock> _playerMovementTime;
     };
 }
