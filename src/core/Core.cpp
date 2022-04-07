@@ -37,6 +37,11 @@ Core::Core(const std::string &gfxPath)
             40
         };
 
+        // Parse core menu map
+        this->_menuMap = parseMap("./assets/core/coreMap.csv");
+        this->_config.windowWidth = this->_menuMap[0].size();
+        this->_config.windowHeight = this->_menuMap.size();
+
         this->_gamePtr = nullptr;
     } catch (std::exception &err) {
         std::cerr << err.what() << std::endl;
@@ -61,6 +66,12 @@ void Core::mainLoop()
                 }
             } else {
                 this->_gfx->checkConfig(this->_config);
+
+                // Draw core map
+                for (size_t y = 0; y < this->_menuMap.size(); y++)
+                    for (size_t x = 0; x < this->_menuMap[y].size(); x++)
+                        this->_gfx->drawTile(this->_menuMap[y][x].tile, x, y);
+
                 size_t i = 0;
                 for (const auto &meta: this->_games) {
                     std::string line = std::to_string(i) + ". " + meta.name;

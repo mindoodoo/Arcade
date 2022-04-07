@@ -11,6 +11,7 @@
 #include "./loader/LdLoader.hpp"
 #include "IGameLib.hpp"
 #include "IGraphicsLib.hpp"
+#include "../shared/shared.hpp"
 
 #define SELECTED_GAME this->_games[this->_selectedGame]
 #define NO_SCORE -1
@@ -119,4 +120,6 @@ class Core
 
         // Config specifically to set size of menu in tiles and tile size
         gfx_config_t _config;
+
+        std::vector<std::vector<gfx_tile_t>> _menuMap;
 };

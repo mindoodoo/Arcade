@@ -9,11 +9,12 @@ CORE_SRC =  src/core/main.cpp \
 	src/core/Core.cpp \
 	src/core/loader/LdLoader.cpp\
 	src/shared/ArcadeError.cpp\
-	src/shared/csv.cpp
+	src/shared/csv.cpp \
+	src/shared/mapParser.cpp
 
 CORE_NAME = arcade
 
-CFLAGS = -Wall -Wextra -fno-gnu-unique -ldl -I./src/shared/
+CFLAGS = -Wall -Wextra -fno-gnu-unique -ldl -I./src/shared/ -g3
 
 all: core games graphicals
 

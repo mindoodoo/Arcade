@@ -27,9 +27,9 @@ std::vector<std::vector<gfx_tile_t>> parseMap(const std::string &path)
 
             // Push new gfx tile to row
             tempRow.push_back({
-                                  stoi(splitCell[0]),
-                                  (splitCell.size() > 1 ? stoi(splitCell[1]) : ORIENT_TOP)
-                              });
+                stoi(splitCell[0]),
+                (splitCell.size() > 1 ? stoi(splitCell[1]) : ORIENT_TOP)
+            });
         }
 
         map.push_back(tempRow);
