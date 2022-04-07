@@ -24,9 +24,9 @@ typedef struct {
 } gfx_config_t;
 
 typedef struct {
-    int r;
-    int g;
-    int b;
+    unsigned char r;
+    unsigned char g;
+    unsigned char b;
 } rgb_t;
 
 // Overloads
