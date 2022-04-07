@@ -26,3 +26,5 @@ std::vector<std::string> csvToVector(const std::string &filepath);
 std::vector<std::string> splitStr(std::string str, std::string sep);
 
 std::vector<std::vector<gfx_tile_t>> parseMap(const std::string &path);
+
+std::vector<std::vector<gfx_tile_t>> parseMap(const std::string &path);

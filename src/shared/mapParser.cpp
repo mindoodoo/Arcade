@@ -7,8 +7,8 @@
 
 #include <vector>
 #include <string>
-#include "../shared/shared.hpp"
-#include "../shared/IGraphicsLib.hpp"
+#include "shared.hpp"
+#include "IGraphicsLib.hpp"
 
 std::vector<std::vector<gfx_tile_t>> parseMap(const std::string &path)
 {

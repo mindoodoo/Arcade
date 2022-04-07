@@ -22,7 +22,7 @@ SRC = 	src/GameCore.cpp\
 		src/Astar.cpp\
 		src/BaseGhost.cpp\
 		src/make.cpp\
-		../mapParser.cpp \
+		../../shared/mapParser.cpp \
 		../BaseGameCore.cpp \
 		../../shared/csv.cpp
 
