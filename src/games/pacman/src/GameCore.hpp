@@ -25,7 +25,9 @@ namespace Pacman
             void startGame() override;
 
         private:
+            gfx_config_t _levelConf;
 
             int _level;
     };
+
 }

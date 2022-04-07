@@ -8,22 +8,27 @@
 #pragma once
 
 #include <vector>
-#include "Fruit.hpp"
 #include "../../../shared/IGraphicsLib.hpp"
 #include <stddef.h>
 
-namespace Nibbler
+/**
+ * first = id of the tile
+ * second = cost
+ */
+typedef std::pair<char, int> tile_t;
+
+typedef std::vector<std::vector<tile_t>> map_t;
+
+namespace Pacman
 {
     class Terrain
     {
         public:
 
             /**
-             * @param height height in tiles
-             * @param width  width in tiles
              * @param gfx
              */
-            Terrain(size_t height, size_t width, IGraphicsLib **gfx, const std::string &map_path);
+            explicit Terrain(IGraphicsLib **gfx);
 
             ~Terrain() = default;
 
@@ -31,11 +36,19 @@ namespace Nibbler
 
             void draw();
 
+            size_t getHeight() const;
+
+            size_t getWidth() const;
+
+            map_t getMap() const;
         private:
-            std::vector<std::vector<char>> _map;
+            map_t _map;
 
             std::vector<char> _walkable;
 
             IGraphicsLib **_gfx;
+
+            size_t _height;
+            size_t _width;
     };
 }

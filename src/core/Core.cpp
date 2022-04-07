@@ -46,31 +46,37 @@ Core::Core(const std::string &gfxPath)
 
 void Core::mainLoop()
 {
-    while (this->_state) {
-        this->_gfx->recordInputs();
-        this->handleArcadeInputs();
-        this->_gfx->flush();
+    try {
+        while (this->_state) {
+            this->_gfx->recordInputs();
+            this->handleArcadeInputs();
+            this->_gfx->flush();
 
-        if (this->_state == ARCADE::GAME) {
-            if (this->_gamePtr->frame() != 0) {
-                this->_gfx->flush();
-                this->loadAvailableLibs();
-                this->_state = ARCADE::MENU;
+            if (this->_state == ARCADE::GAME) {
+                if (this->_gamePtr->frame() != 0) {
+                    this->_gfx->flush();
+                    this->loadAvailableLibs();
+                    this->_state = ARCADE::MENU;
+                }
+            } else {
+                this->_gfx->checkConfig(this->_config);
+                size_t i = 0;
+                for (const auto &meta: this->_games) {
+                    std::string line = std::to_string(i) + ". " + meta.name;
+                    this->_gfx->drawText(i == this->_selectedGame ? line + " - selected" : line, 0, 0 + i);
+                    i++;
+                }
+
+                this->displayScores();
+
+                this->handleMenuInputs();
             }
-        } else {
-            this->_gfx->checkConfig(this->_config);
-            size_t i = 0;
-            for (const auto &meta: this->_games) {
-                std::string line = std::to_string(i) + ". " + meta.name;
-                this->_gfx->drawText(i == this->_selectedGame ? line + " - selected" : line, 0, 0 + i);
-                i++;
-            }
-
-            this->displayScores();
-
-            this->handleMenuInputs();
+            this->_gfx->display();
         }
-        this->_gfx->display();
+    } catch (std::exception &err) {
+        delete this->_gfx;
+        delete this->_gamePtr;
+        this->_state = ARCADE::HALT;
     }
 }
 
@@ -253,7 +259,7 @@ void Core::displayScores()
 
 void Core::graphicsRotateLeft()
 {
-    std::cout << "help"<< std::endl;
+    std::cout << "help" << std::endl;
     std::cout << this->_graphics[1].path << std::endl;
     if (this->_graphics.size() <= 1)
         return;
@@ -267,7 +273,7 @@ void Core::graphicsRotateLeft()
 
 void Core::graphicsRotateRight()
 {
-    std::cout << "help"<< std::endl;
+    std::cout << "help" << std::endl;
     std::cout << this->_graphics.back().path << std::endl;
     if (this->_graphics.size() <= 1)
         return;
