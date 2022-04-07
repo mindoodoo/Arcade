@@ -15,15 +15,22 @@ void Pacman::BaseGhost::setState(Pacman::GhostState state)
     this->stateChangeTimer;
 }
 
-void Pacman::BaseGhost::move(int x, int y)
+void Pacman::BaseGhost::move(size_t x, size_t y)
 {
-    std::deque<coordinates_t> path = calculateAStar({this->_x, this->_y}, {x, y}, this->_scene->getMap());
-    std::cout << "move" << std::endl;
-
-    std::cout << path.front().first << " " << path.front().second << "move" << std::endl;
-
-    this->_x = path.front().first;
-    this->_y = path.front().second;
+    /**
+     * HERE GOES PATHFINDING
+     */
+//    std::deque<coordinates_t> path = calculateAStar(coordinates_t {this->_x, this->_y}, coordinates_t {x, y}, this->_scene->getMap());
+//    if (!path.empty())
+//        this->_path = path;
+//
+//    if (this->_path.empty())
+//        return;
+//
+//    this->_x = this->_path.front().first < this->_scene->getWidth() ? this->_path.front().first : 1;
+//    this->_y = this->_path.front().second < this->_scene->getHeight() ? this->_path.front().second : 1;
+//    std::cout << this->_y << " " << this->_y << "to" << std::endl;
+//    this->_path.pop_front();
 }
 
 void Pacman::BaseGhost::draw()
@@ -37,7 +44,6 @@ Pacman::BaseGhost::BaseGhost(Pacman::Terrain *scene, IGraphicsLib **gfx)
     this->_gfx = gfx;
     this->setState(GhostState::SLEEPING);
 
-    this->_x = 2;
-    this->_y = 2;
-
+    this->_x = 1;
+    this->_y = 1;
 }

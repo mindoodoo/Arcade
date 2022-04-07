@@ -81,6 +81,9 @@ void NcursesGraphicsLib::loadConfig()
     std::vector<std::string> splitStringVector;
     ascii_tile_t tile;
 
+    // Clear previous tileset
+    this->_tileset.clear();
+
     for (unsigned int i = 0; i < stringVector.size(); ++i) {
         splitStringVector = splitStr(stringVector[i], ";");
         tile.c = splitStringVector[0][0];
@@ -116,7 +119,7 @@ void NcursesGraphicsLib::drawText(const std::string &text, int x, int y, rgb_t c
         usedColor = COLOR_GREEN;
     if (color.g == color.r && color.r == color.b)
         usedColor = COLOR_WHITE;
-    
+
     attron(COLOR_PAIR(usedColor));
     mvprintw(y, x * 2, text.c_str());
     attroff(COLOR_PAIR(usedColor));

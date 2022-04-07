@@ -22,6 +22,7 @@ SRC = 	src/GameCore.cpp \
 		src/Fruit.cpp \
 		src/Item.cpp \
 		src/make.cpp \
+		../mapParser.cpp \
 		../GameErrors.cpp \
 		../BaseGameCore.cpp \
 		../../shared/csv.cpp

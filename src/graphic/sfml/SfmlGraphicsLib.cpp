@@ -58,6 +58,9 @@ void SfmlGraphicsLib::loadTileset()
     int x;
     int y;
 
+    // Clear previous tileset
+    this->_tiles.clear();
+
     if (this->_config.graphicalTilesetPath == "")
         return;
     if (!this->_tilesetTexture.loadFromFile(this->_config.graphicalTilesetPath))

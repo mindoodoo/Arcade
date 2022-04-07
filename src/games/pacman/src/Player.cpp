@@ -16,6 +16,9 @@ Pacman::Player::Player(size_t start_x, size_t start_y, Pacman::Terrain *scene, I
     this->_scene = scene;
     this->_gfx = gfx;
     this->_state = State::NORMAL;
+    this->_xOffset = 0;
+    this->_yOffset = -1;
+    this->_playerMovementTime = std::chrono::system_clock::now();
 }
 
 void Pacman::Player::draw()
@@ -23,31 +26,32 @@ void Pacman::Player::draw()
     GFX->drawTile(PACMAN_HEAD, this->_x, this->_y);
 }
 
-void Pacman::Player::move(size_t xOffset, size_t yOffset)
+void Pacman::Player::move()
 {
-    if (!(xOffset == 0 || yOffset == 0)) {
-        std::cout << "Vertical movements not allowed" << std::endl;
-    }
-
-    if (!this->_scene->validLocation(this->_x + xOffset, this->_y + yOffset))
+    if (!this->_scene->validLocation(this->_x + this->_xOffset, this->_y + this->_yOffset))
         return;
 
-    int overflowCheckX = this->_x + xOffset;
-    int overflowCheckY = this->_y + yOffset;
+    auto now = std::chrono::system_clock::now();
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(now - this->_playerMovementTime).count() >= 200) {
+        this->_playerMovementTime = now;
 
-    if (overflowCheckX < 0)
-        this->_x = this->_scene->getWidth() - 1;
-    else if (overflowCheckX >= this->_scene->getWidth())
-        this->_x = 0;
-    else
-        this->_x += xOffset;
+        int overflowCheckX = this->_x + this->_xOffset;
+        int overflowCheckY = this->_y + this->_yOffset;
 
-    if (overflowCheckY < 0)
-        this->_y = this->_scene->getHeight() - 1;
-    else if (overflowCheckY >= this->_scene->getHeight())
-        this->_y = 0;
-    else
-        this->_y += yOffset;
+        if (overflowCheckX < 0)
+            this->_x = this->_scene->getWidth() - 1;
+        else if (overflowCheckX >= this->_scene->getWidth())
+            this->_x = 0;
+        else
+            this->_x += this->_xOffset;
+
+        if (overflowCheckY < 0)
+            this->_y = this->_scene->getHeight() - 1;
+        else if (overflowCheckY >= this->_scene->getHeight())
+            this->_y = 0;
+        else
+            this->_y += this->_yOffset;
+    }
 }
 
 size_t Pacman::Player::getX() const
@@ -58,4 +62,10 @@ size_t Pacman::Player::getX() const
 size_t Pacman::Player::getY() const
 {
     return this->_y;
+}
+
+void Pacman::Player::turn(char xOffset, char yOffset)
+{
+    this->_yOffset = yOffset;
+    this->_xOffset = xOffset;
 }

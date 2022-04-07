@@ -8,16 +8,19 @@
 #pragma once
 
 #include <vector>
+#include <algorithm>
+#include <cstring>
+#include <cstddef>
+#include "../include/PacmanMacros.hpp"
 #include "../../../shared/IGraphicsLib.hpp"
-#include <stddef.h>
+#include "../../../shared/shared.hpp"
 
 /**
  * first = id of the tile
  * second = cost
  */
-typedef std::pair<char, int> tile_t;
 
-typedef std::vector<std::vector<tile_t>> map_t;
+typedef std::vector<std::vector<gfx_tile_t>> map_t;
 
 namespace Pacman
 {
@@ -49,6 +52,7 @@ namespace Pacman
             IGraphicsLib **_gfx;
 
             size_t _height;
+
             size_t _width;
     };
 }

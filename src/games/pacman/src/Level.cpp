@@ -17,7 +17,8 @@ Pacman::Level::Level(IGraphicsLib **gfx, gfx_config_t levelConf)
 
     this->_scene = new Terrain(gfx);
     this->_ghost = new BaseGhost(this->_scene, this->_gfx);
-    this->_pacman = new Player(this->_scene->getHeight() / 2, this->_scene->getWidth() / 2, this->_scene, gfx);
+    this->_pacman = new Player(10, 14, this->_scene, gfx);
+    this->_ghostMovementTime = std::chrono::system_clock::now();
 }
 
 int Pacman::Level::frame()
@@ -29,30 +30,36 @@ int Pacman::Level::frame()
     this->_score++;
     if (!inputs.empty()) {
         char c = inputs.back();
-
         switch (c) {
             case 'z':
             case 'w':
-                this->_pacman->move(0, -1);
+                this->_pacman->turn(0, -1);
                 GFX->popInput();
                 break;
             case 's':
-                this->_pacman->move(0, 1);
+                this->_pacman->turn(0, 1);
                 GFX->popInput();
                 break;
             case 'q':
             case 'a':
-                this->_pacman->move(-1, 0);
+                this->_pacman->turn(-1, 0);
                 GFX->popInput();
                 break;
             case 'd':
-                this->_pacman->move(1, 0);
+                this->_pacman->turn(1, 0);
                 GFX->popInput();
                 break;
         }
     }
 
-    this->_ghost->move(this->_pacman->getX() - 2, this->_pacman->getY());
+    std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
+
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(now - this->_ghostMovementTime).count() >= 200) {
+        this->_ghost->move(this->_pacman->getX(), this->_pacman->getY());
+        this->_ghostMovementTime = now;
+    }
+
+    this->_pacman->move();
     this->_scene->draw();
     this->_pacman->draw();
     this->_ghost->draw();

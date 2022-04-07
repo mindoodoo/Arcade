@@ -46,3 +46,8 @@ void Pacman::GameCore::startGame()
 {
     this->_game = new Level(this->_gfx, this->_levelConf);
 }
+
+gfx_config_t Pacman::GameCore::getConfig()
+{
+    return this->_levelConf;
+}

@@ -8,8 +8,12 @@
 #pragma once
 
 #include "Terrain.hpp"
+#include <algorithm>
+#include <valarray>
+#include <iostream>
+#include <stack>
 
-typedef std::pair<int /* x */, int /* x */> coordinates_t;
+typedef std::pair<size_t /* x */, size_t /* x */> coordinates_t;
 
 class Node
 {
@@ -25,8 +29,8 @@ class Node
         int h;
 
         int f;
-
-        bool operator==(Node x) const;
 };
 
 std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end, map_t map);
+
+bool operator==(Node y, Node x);

@@ -49,5 +49,7 @@ namespace Pacman
             IGraphicsLib **_gfx;
             gfx_config_t _levelConf;
             int _score;
+
+            std::chrono::time_point<std::chrono::system_clock> _ghostMovementTime;
     };
 }
