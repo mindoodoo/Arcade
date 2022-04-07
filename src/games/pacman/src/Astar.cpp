@@ -105,7 +105,7 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
             }
 
             // Make sure walkable terrain
-            if (map[nodePosition.first][nodePosition.second].first == TERRAIN_WALL) {
+            if (map[nodePosition.first][nodePosition.second].tile == TERRAIN_WALL) {
                 std::cerr << "is wall" << std::endl;
                 continue;
             }
