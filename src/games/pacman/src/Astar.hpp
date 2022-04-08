@@ -12,8 +12,9 @@
 #include <valarray>
 #include <iostream>
 #include <stack>
+#include <cmath>
 
-typedef std::pair<size_t /* x */, size_t /* x */> coordinates_t;
+typedef std::pair<int, int> coordinates_t;
 
 class Node
 {

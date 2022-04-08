@@ -95,27 +95,22 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
         // Generate neighbours
         std::deque<Node> neighbours;
 
-        ///////////////////////////////////
-
+        // Instantiate neighbour nodes
+        // Note : f, g, and h are all instatiated to 0
         for (std::pair<int, int> posOffset: possiblePos) {
-            // Adjacent squares
-
             // Get node position
-            coordinates_t nodePosition = {currNode.position.first + posOffset.first,
-                                          currNode.position.second + posOffset.second};
+            coordinates_t nodePosition = {
+                currNode.position.first + posOffset.first,
+                currNode.position.second + posOffset.second
+            };
 
             // Make sure within range
-            if ((nodePosition.first > (map.size() - 1))
-                || (nodePosition.second > (map[map.size() - 1].size() - 1))) {
-                //                std::cerr << "not within range" << std::endl;
+            if (nodePosition.first >= map.size() || nodePosition.second >= map[0].size())
                 continue;
-            }
 
             // Make sure walkable terrain
-            if (map[nodePosition.first][nodePosition.second].tile == TERRAIN_WALL) {
-                //                std::cerr << "is wall" << std::endl;
-                continue;
-            }
+            if (map[nodePosition.first][nodePosition.second].tile == TERRAIN_WALL)
+                continue; // Maybe add to closed list ?
 
             // Create new node
             Node newNode = Node(&currNode, nodePosition);
@@ -124,38 +119,32 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
         }
 
         for (Node child: neighbours) {
+            // Search closed list if child exist
+            if (std::find(RANGE(closedList), child) != closedList.end()) // Does this work ?
+                continue;
 
-//            int check1 = 0;
-//            for (auto item: closedList) {
-//                if (item == child)
-//                    check1++;
-//            }
-//            if (check1 > 0)
-//                continue;
-                        if (std::find(RANGE(closedList), child) != closedList.end()) {
-            //                std::cerr << child.position.first << " " << child.position.second << " in closed list" << std::endl;
-                            continue;
-                        }
-
+            // Calc G
             child.g = currNode.g + 1;
-            child.h = std::pow((child.position.first - endNode.position.first), 2) +
-                      std::pow((child.position.second - endNode.position.second), 2);
+            // Calc H
+            child.h = std::abs(child.position.first - endNode.position.first) +
+            std::abs(child.position.second - endNode.position.second);
+            // Sum F = G + H
             child.f = child.g + child.h;
 
-            int check = 0;
-            for (auto openNode: openList) {
-                if (child == openNode && child.g > openNode.g)
-                    check++;
-            }
-            if (check > 0) {
-                //                std::cerr << "check above 0" << std::endl;
+            // If node with same coords is in open list
+            // AND openNode.f < child.f, skip child
+            int inOpenList = 0;
+            for (auto openNode: openList)
+                if (child == openNode && openNode.f < child.f)
+                    inOpenList = 1;
+            if (inOpenList)
                 continue;
-            }
 
+            // Add child to open list
             openList.push_back(child);
         }
     }
-    std::cerr << "Couldn't get a path to destination" << std::endl;
+    std::cerr << "Couldn't get a path to destination..." << std::endl;
     return {};
 }
 
