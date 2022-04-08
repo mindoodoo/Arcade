@@ -7,9 +7,9 @@
 
 #pragma once
 
-#define PACMAN_PACGUM 1
-#define PACMAN_HEAD 2
-#define GHOST 1
+#define PACMAN_PACGUM 6
+#define PACMAN_HEAD 0
+#define GHOST 4
 
 #define TERRAIN_WALL 5
-#define TERRAIN_FLOOR 6
+#define TERRAIN_FLOOR 8
