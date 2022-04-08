@@ -24,6 +24,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) -o $(DEST)/$(NAME) $(SRC) $(CXXFLAGS)
+	make clean
 
 clean:
 	rm -rf $(OBJ)

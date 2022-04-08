@@ -1,5 +1,2 @@
 asciiTilesetPath,graphicalTilesetPath,fontFolderPath,mapPath,tileWidth,tileHeight,windowWidth,windowHeight,scale
-<<<<<<< HEAD
 ./assets/core/asciiTileset.csv,./assets/core/CoreTileset.png,./assets/core/arial.ttf,./assets/core/coreMap.csv,16,16,40,40,1
-=======
->>>>>>> 4a3a11eb6cbf140f6bb4eeb905e5f89212d9b0cd
