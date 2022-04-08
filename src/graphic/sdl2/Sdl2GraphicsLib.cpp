@@ -83,6 +83,8 @@ void Sdl2GraphicsLib::loadTileset()
     SDL_Rect tileRect = {0, 0, this->_config.tileWidth,
     this->_config.tileHeight};
 
+    this->_tiles.clear();
+
     int x;
     int y;
 
