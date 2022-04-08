@@ -76,7 +76,7 @@ void Core::mainLoop()
                     name[0] = toupper(name[0]);
                     
                     this->_gfx->drawTile(i == this->_selectedGame ? GAME_UNSELECTED : GAME_SELECTED, 7, 13 + i * 2);
-                    this->_gfx->drawText(name, 9, 13 + i * 2, i == this->_selectedGame ? selectedColor : textColor);
+                    this->_gfx->drawText(name, 9, 13 + i * 2, i == this->_selectedGame ? textColor : selectedColor);
                     i++;
                 }
 
