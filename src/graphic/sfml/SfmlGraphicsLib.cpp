@@ -17,6 +17,7 @@ SfmlGraphicsLib::SfmlGraphicsLib()
         0,
         0,
         0,
+        0,
         0
     };
 

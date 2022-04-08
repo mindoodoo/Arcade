@@ -17,6 +17,7 @@ Sdl2GraphicsLib::Sdl2GraphicsLib()
         0,
         0,
         0,
+        0,
         0
     };
 

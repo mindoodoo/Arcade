@@ -1,2 +1,2 @@
-asciiTilesetPath,graphicalTilesetPath,fontFolderPath,mapPath,tileWidth,tileHeight,windowWidth,windowHeight
-"",./assets/core/CoreTileset.png,./assets/core/arial.ttf,./assets/core/coreMap.csv,16,16,40,40
+asciiTilesetPath,graphicalTilesetPath,fontFolderPath,mapPath,tileWidth,tileHeight,windowWidth,windowHeight,scale
+"",./assets/core/CoreTileset.png,./assets/core/arial.ttf,./assets/core/coreMap.csv,16,16,40,40,1

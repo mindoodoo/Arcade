@@ -30,6 +30,7 @@ gfx_config_t parseGfx(const std::string &path, size_t index)
     config.tileHeight = std::stoi(map[5]);
     config.windowWidth = std::stoi(map[6]);
     config.windowHeight = std::stoi(map[7]);
+    config.scale = std::stoi(map[8]);
 
     return config;
 }

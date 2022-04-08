@@ -22,6 +22,7 @@ typedef struct {
     int tileHeight; // In px
     int windowWidth; // In tiles
     int windowHeight; // In tiles
+    int scale;
 } gfx_config_t;
 
 typedef struct {
