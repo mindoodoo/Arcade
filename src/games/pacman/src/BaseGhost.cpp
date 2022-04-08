@@ -27,7 +27,6 @@ void Pacman::BaseGhost::move(size_t x, size_t y)
 
    this->_x = this->_path.front().first < this->_scene->getWidth() ? this->_path.front().first : 1;
    this->_y = this->_path.front().second < this->_scene->getHeight() ? this->_path.front().second : 1;
-   std::cout << this->_y << " " << this->_y << "to" << std::endl;
    this->_path.pop_front();
 }
 

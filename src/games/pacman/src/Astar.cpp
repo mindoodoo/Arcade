@@ -25,12 +25,8 @@ void reverseQueue(std::queue<coordinates_t> &Queue)
 std::deque<coordinates_t> returnPath(Node currentNode)
 {
     std::deque<coordinates_t> path;
-    std::cout << "help " << currentNode.g << " " << currentNode.position.first << " " << currentNode.position
-        .second << std::endl;
-    std::cout << "help " << currentNode.parent->g << " " << currentNode.parent->position.first << " " << currentNode
-        .parent->position.second << std::endl;
-    while (true) {
 
+    while (true) {
         if (currentNode == *currentNode.parent)
             break;
         path.push_front(currentNode.position);
@@ -81,16 +77,12 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
         closedList.push_back(currNode);
 
         // Timeour check
-        if (totalIterations > max_iterations) {
-            std::cerr << "Pathfinding timeout... Too many iterations" << std::endl;
+        if (totalIterations > max_iterations)
             return returnPath(currNode);
-        }
 
         // Check if at target
-        if (currNode == endNode) {
-            std::cerr << "AT GOAL" << std::endl;
+        if (currNode == endNode)
             return returnPath(currNode);
-        }
 
         // Generate neighbours
         std::deque<Node> neighbours;
@@ -145,7 +137,6 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
             openList.push_back(child);
         }
     }
-    std::cerr << "Couldn't get a path to destination..." << std::endl;
     return {};
 }
 
