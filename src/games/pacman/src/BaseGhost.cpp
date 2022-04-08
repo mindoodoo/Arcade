@@ -25,8 +25,8 @@ void Pacman::BaseGhost::move(size_t x, size_t y)
     if (this->_path.empty())
        return;
 
-   this->_x = this->_path.front().first < this->_scene->getWidth() ? this->_path.front().first : 1;
-   this->_y = this->_path.front().second < this->_scene->getHeight() ? this->_path.front().second : 1;
+   this->_y = this->_path.front().first < this->_scene->getHeight() ? this->_path.front().first : 1;
+   this->_x = this->_path.front().second < this->_scene->getWidth() ? this->_path.front().second : 1;
    this->_path.pop_front();
 }
 
