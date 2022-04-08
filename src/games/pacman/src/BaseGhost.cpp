@@ -17,14 +17,12 @@ void Pacman::BaseGhost::setState(Pacman::GhostState state)
 
 void Pacman::BaseGhost::move(size_t x, size_t y)
 {
-    /**
-     * HERE GOES PATHFINDING
-     */
-   std::deque<coordinates_t> path = calculateAStar(coordinates_t {this->_x, this->_y}, coordinates_t {x, y}, this->_scene->getMap());
-   if (!path.empty())
+   std::deque<coordinates_t> path = calculateAStar(coordinates_t {this->_y, this->_x}, coordinates_t {y, x}, this->_scene->getMap());
+
+    if (!path.empty())
        this->_path = path;
 
-   if (this->_path.empty())
+    if (this->_path.empty())
        return;
 
    this->_x = this->_path.front().first < this->_scene->getWidth() ? this->_path.front().first : 1;

@@ -118,6 +118,7 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
             neighbours.push_back(newNode);
         }
 
+        // Actual loop
         for (Node child: neighbours) {
             // Search closed list if child exist
             if (std::find(RANGE(closedList), child) != closedList.end()) // Does this work ?
