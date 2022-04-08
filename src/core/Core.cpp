@@ -17,6 +17,7 @@ Core::Core(const std::string &gfxPath)
 {
     try {
         this->_selectedGame = 0;
+        this->_selectedGraphics = 0;
         this->_state = ARCADE::MENU;
 
         this->_gfxLoader.loadLib(gfxPath);
@@ -263,34 +264,38 @@ void Core::displayScores()
 
 void Core::graphicsRotateLeft()
 {
-    std::cout << "help" << std::endl;
-    std::cout << this->_graphics[1].path << std::endl;
     if (this->_graphics.size() <= 1)
         return;
-    delete this->_gfx;
-    this->_gfxLoader.loadLib(this->_graphics[1].path);
-    this->_gfx = this->_gfxLoader.getInstance();
-    if (this->_state == ARCADE::GAME)
-        this->_gfx->checkConfig(this->_gamePtr->getConfig());
+
+    if (this->_selectedGraphics > 0)
+        this->_selectedGraphics--;
     else
-        this->_gfx->checkConfig(this->_config);
-    this->_graphics.push_back(this->_graphics.front());
-    this->_graphics.pop_front();
+        this->_selectedGraphics = this->_graphics.size() - 1;
+
+    this->loadGraphics();
 }
 
 void Core::graphicsRotateRight()
 {
-    std::cout << "help" << std::endl;
-    std::cout << this->_graphics.back().path << std::endl;
     if (this->_graphics.size() <= 1)
         return;
+
+    if (this->_selectedGraphics == (this->_graphics.size() - 1))
+        this->_selectedGraphics = 0;
+    else
+        this->_selectedGraphics++;
+    this->loadGraphics();
+}
+
+void Core::loadGraphics()
+{
     delete this->_gfx;
-    this->_gfxLoader.loadLib(this->_graphics.back().path);
+
+    this->_gfxLoader.loadLib(this->_graphics[this->_selectedGraphics].path);
     this->_gfx = this->_gfxLoader.getInstance();
+
     if (this->_state == ARCADE::GAME)
         this->_gfx->checkConfig(this->_gamePtr->getConfig());
     else
         this->_gfx->checkConfig(this->_config);
-    this->_graphics.push_front(this->_graphics.back());
-    this->_graphics.pop_back();
 }

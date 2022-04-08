@@ -101,6 +101,10 @@ class Core
          */
         void graphicsRotateRight();
 
+        /**
+         * loads currently selected graphical library
+         */
+        void loadGraphics();
 
         IGraphicsLib *_gfx;
         IGameLib *_gamePtr;
@@ -117,6 +121,7 @@ class Core
 
         // holds the index of the selected game
         size_t _selectedGame = 0;
+        size_t _selectedGraphics = 0;
 
         // Config specifically to set size of menu in tiles and tile size
         gfx_config_t _config;

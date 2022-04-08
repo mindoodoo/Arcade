@@ -103,7 +103,9 @@ void NcursesGraphicsLib::flush()
 
 void NcursesGraphicsLib::drawTile(int tile_index, int x, int y, int orientation)
 {
-    (void)orientation; // Silences unused parameter warning
+    (void) orientation; // Silences unused parameter warning
+    if ((size_t) tile_index >=  this->_tileset.size())
+        return;
     attron(COLOR_PAIR(this->_tileset[tile_index].color));
     mvaddch(y, x * 2, this->_tileset[tile_index].c);
     attroff(COLOR_PAIR(this->_tileset[tile_index].color));
