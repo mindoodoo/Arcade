@@ -27,11 +27,11 @@ std::deque<coordinates_t> returnPath(Node currentNode)
     std::deque<coordinates_t> path;
 
     while (true) {
+        if (currentNode.parent == nullptr)
+            break;
         if (currentNode == *currentNode.parent)
             break;
         path.push_front(currentNode.position);
-        if (currentNode.parent == nullptr)
-            break;
         currentNode = *currentNode.parent;
     }
 
@@ -105,7 +105,7 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
                 continue; // Maybe add to closed list ?
 
             // Create new node
-            Node newNode = Node(&currNode, nodePosition);
+            Node newNode = Node(&closedList.back(), nodePosition);
 
             neighbours.push_back(newNode);
         }
