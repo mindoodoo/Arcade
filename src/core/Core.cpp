@@ -258,6 +258,7 @@ void Core::displayScores()
     for (size_t i = 0; i < 10; i++) {
         std::string score = i < scores.size() ? std::to_string(scores[i]) : "";
         std::string line = std::to_string(i + 1) + ".\t" + score;
+        this->_gfx->drawTile(QUESTION_CUBE, 19, i + offset + 1);
         this->_gfx->drawText(line, 20, i + offset + 1);
     }
 }

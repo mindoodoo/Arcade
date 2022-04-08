@@ -12,6 +12,7 @@
 #include "IGameLib.hpp"
 #include "IGraphicsLib.hpp"
 #include "../shared/shared.hpp"
+#include "CoreMacros.hpp"
 
 #define SELECTED_GAME this->_games[this->_selectedGame]
 #define NO_SCORE -1
