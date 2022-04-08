@@ -13,12 +13,12 @@
 #include "GameCore.hpp"
 #include "../include/NibblerMacros.hpp"
 
-Nibbler::Level::Level(IGraphicsLib **gfx, gfx_config_t levelConf)
+Nibbler::Level::Level(IGraphicsLib **gfx, int level)
 {
     this->_score = 0;
-    this->_levelConf = std::move(levelConf);
+    this->_levelConf = parseGfx(CONFIG_PATH, level);
 
-    this->_scene = new Terrain("./assets/nibbler/map1.csv", gfx);
+    this->_scene = new Terrain(this->_levelConf.mapPath, gfx);
     std::pair<int, int> dimensions = this->_scene->getMapDimensions();
 
     this->_gameHeight = dimensions.second;

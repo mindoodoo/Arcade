@@ -11,6 +11,7 @@
 #include "../../../shared/IGraphicsLib.hpp"
 #include "../../../shared/IGameLib.hpp"
 #include "../../BaseGameCore.hpp"
+#include "../include/NibblerMacros.hpp"
 
 namespace Nibbler
 {

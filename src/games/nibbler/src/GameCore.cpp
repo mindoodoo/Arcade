@@ -6,23 +6,13 @@
 */
 
 #include "GameCore.hpp"
-#include "../include/NibblerMacros.hpp"
 
 Nibbler::GameCore::GameCore()
     : BaseGameCore()
 {
     this->_highScore = 0;  // TODO: Read from file where we save scores
 
-    // Hardcoded for the time being, we can add multiple level parsing in the future
-    this->_levelConf = {
-        "./assets/nibbler/asciiTileset.csv",
-        "./assets/nibbler/NibblerTileset.png",
-        "./assets/nibbler/arial.ttf", // TODO: These other elements will be implemented later
-        16,
-        16,
-        80,
-        80
-    };
+    this->_levelConf = parseGfx(CONFIG_PATH);
 }
 
 void Nibbler::GameCore::showMenu()
@@ -42,7 +32,7 @@ void Nibbler::GameCore::showGameOver()
 
 void Nibbler::GameCore::startGame()
 {
-    this->_game = new Level(this->_gfx, this->_levelConf);
+    this->_game = new Level(this->_gfx, 1);
 }
 
 gfx_config_t Nibbler::GameCore::getConfig()

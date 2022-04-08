@@ -25,7 +25,8 @@ SRC = 	src/GameCore.cpp \
 		../../shared/mapParser.cpp \
 		../GameErrors.cpp \
 		../BaseGameCore.cpp \
-		../../shared/csv.cpp
+		../../shared/csv.cpp \
+		../../shared/gfxParser.cpp
 
 STDL_SRC = 	$(SRC)\
 			main.cpp\

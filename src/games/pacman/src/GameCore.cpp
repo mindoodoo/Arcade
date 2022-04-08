@@ -15,15 +15,7 @@ Pacman::GameCore::GameCore()
     this->_highScore = 0;  // TODO: Read from file where we save scores
     this->_gfx = nullptr;
 
-    this->_levelConf = {
-        "./assets/pacman/asciiTileset.csv",
-        "./assets/pacman/NibblerTestTileset.png",
-        "./assets/pacman/arial.ttf",
-        64,
-        64,
-        30,
-        30
-    };
+    this->_levelConf = parseGfx("./assets/pacman/graphics_cfg.csv");
 }
 
 void Pacman::GameCore::showMenu()
