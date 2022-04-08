@@ -64,10 +64,18 @@ void Core::mainLoop()
                     for (size_t x = 0; x < this->_menuMap[y].size(); x++)
                         this->_gfx->drawTile(this->_menuMap[y][x].tile, x, y);
 
-                size_t i = 0;
+                int i = 0;
+                rgb_t textColor = {123, 60, 0};
+                rgb_t selectedColor = {181, 49, 33};
+
+                this->_gfx->drawText("GAMES:", 10, 10, textColor);
+
                 for (const auto &meta: this->_games) {
-                    std::string line = std::to_string(i) + ". " + meta.name;
-                    this->_gfx->drawText(i == this->_selectedGame ? line + " - selected" : line, 0, 0 + i);
+                    std::string name = meta.name;
+                    name[0] = toupper(name[0]);
+                    
+                    this->_gfx->drawTile(i == this->_selectedGame ? GAME_SELECTED : GAME_UNSELECTED, 7, 13 + i * 2);
+                    this->_gfx->drawText(name, 9, 13 + i * 2, i == this->_selectedGame ? selectedColor : textColor);
                     i++;
                 }
 
