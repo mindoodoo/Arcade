@@ -16,7 +16,7 @@ namespace Nibbler
     class Level : public virtual ILevel
     {
         public:
-            explicit Level(IGraphicsLib **gfx, gfx_config_t levelConf);
+            explicit Level(IGraphicsLib **gfx, int level);
 
             ~Level();
 

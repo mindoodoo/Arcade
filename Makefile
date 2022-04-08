@@ -10,7 +10,8 @@ CORE_SRC =  src/core/main.cpp \
 	src/core/loader/LdLoader.cpp\
 	src/shared/ArcadeError.cpp\
 	src/shared/csv.cpp \
-	src/shared/mapParser.cpp
+	src/shared/mapParser.cpp \
+	src/shared/gfxParser.cpp
 
 CORE_NAME = arcade
 

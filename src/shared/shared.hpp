@@ -10,6 +10,8 @@
 #include <vector>
 #include <string>
 
+#include "IGraphicsLib.hpp"
+
 #define GAME_ID 48
 #define GFX_iD 93
 
@@ -27,4 +29,4 @@ std::vector<std::string> splitStr(std::string str, std::string sep);
 
 std::vector<std::vector<gfx_tile_t>> parseMap(const std::string &path);
 
-std::vector<std::vector<gfx_tile_t>> parseMap(const std::string &path);
+gfx_config_t parseGfx(const std::string &path, size_t index = 0);

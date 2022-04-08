@@ -17,10 +17,12 @@ typedef struct {
     std::string asciiTilesetPath;
     std::string graphicalTilesetPath;
     std::string fontFolderPath;
+    std::string mapPath;
     int tileWidth; // In px
     int tileHeight; // In px
     int windowWidth; // In tiles
     int windowHeight; // In tiles
+    int scale;
 } gfx_config_t;
 
 typedef struct {
@@ -47,7 +49,7 @@ class IGraphicsLib
         virtual void display() = 0;
 
         // Clear screen/window
-        virtual void flush(void) = 0;
+        virtual void flush() = 0;
 
         // Draw tile of index tile_index, at x tile and y tile
         // (tile is the unit)

@@ -1,0 +1,2 @@
+asciiTilesetPath,graphicalTilesetPath,fontFolderPath,mapPath,tileWidth,tileHeight,windowWidth,windowHeight,scale
+z,./assets/core/CoreTileset.png,./assets/core/Minecraft.ttf,./assets/core/coreMap.csv,16,16,40,40,1

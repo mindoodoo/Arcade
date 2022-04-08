@@ -20,4 +20,6 @@
 #define TERRAIN_FLOOR 8
 #define NIBBLER_CORNER 9
 
+#define CONFIG_PATH "./assets/nibbler/graphics_cfg.csv"
+
 #include <string>

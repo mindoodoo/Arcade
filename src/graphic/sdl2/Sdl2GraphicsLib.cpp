@@ -13,11 +13,14 @@ Sdl2GraphicsLib::Sdl2GraphicsLib()
         "",
         "",
         "",
+        "",
+        0,
         0,
         0,
         0,
         0
     };
+
     this->_name = NAME;
     this->_renderer = NULL;
     this->_window = NULL;
@@ -64,12 +67,12 @@ void Sdl2GraphicsLib::loadConfig(void)
     //     SDL_DestroyRenderer(this->_renderer);
     this->_renderer = SDL_CreateRenderer(this->_window, -1, SDL_RENDERER_ACCELERATED);
     SDL_SetRenderDrawBlendMode(this->_renderer, SDL_BLENDMODE_BLEND);
-    
+
     //font loading
     this->_font = TTF_OpenFont(this->_config.fontFolderPath.c_str(), this->_config.tileWidth);
     if (this->_font == NULL)
         std::cout << "failed loading font" << std::endl;
-    
+
     //tileset loading
     this->loadTileset();
 }
@@ -98,10 +101,10 @@ void Sdl2GraphicsLib::loadTileset()
         // Get tileset width and height in tiles
         x = this->_tilesetSurface->w / this->_config.tileWidth;
         y = this->_tilesetSurface->h / this->_config.tileHeight;
-        
+
         SDL_FreeSurface(this->_tilesetSurface);
-        
-        for (int i = 0; i < y; i++){ 
+
+        for (int i = 0; i < y; i++){
             for (int j = 0; j < x; j++) {
                 // Update targeted part of the image
                 tileRect.x = j * this->_config.tileWidth;
@@ -118,7 +121,7 @@ void Sdl2GraphicsLib::loadTileset()
                 this->_tiles.push_back(newTexture);
             }
         }
-    }   
+    }
 }
 
 std::queue<char> &Sdl2GraphicsLib::getInput()
@@ -144,7 +147,7 @@ void Sdl2GraphicsLib::recordInputs()
         else if (event.type == SDL_KEYDOWN) {
             pressedKey = event.key.keysym.sym;
 			this->_inputQueue.push(pressedKey);
-        }   
+        }
 	}
 
     std::this_thread::sleep_for(std::chrono::milliseconds(100)); // This should change
@@ -162,7 +165,7 @@ void Sdl2GraphicsLib::flush()
 
 void Sdl2GraphicsLib::drawTile(int tile_index, int x, int y, int orientation)
 {
-    
+
 	SDL_Rect dest = {x *  this->_config.tileWidth , y *  this->_config.tileHeight,
     this->_config.tileWidth, this->_config.tileHeight};
     SDL_RenderCopyEx(this->_renderer, this->_tiles[tile_index], NULL, &dest, orientation * 90.0f , NULL, SDL_FLIP_NONE);
@@ -180,7 +183,7 @@ void Sdl2GraphicsLib::drawText(const std::string &txt, int x, int y, rgb_t color
     textLocation.w = this->_textSurface->w;
     textLocation.h = this->_textSurface->h;
 
-    SDL_RenderCopy(this->_renderer, this->_textTexture, NULL, &textLocation);    
+    SDL_RenderCopy(this->_renderer, this->_textTexture, NULL, &textLocation);
     SDL_FreeSurface(this->_textSurface);
 }
 
@@ -188,7 +191,3 @@ std::string Sdl2GraphicsLib::getName()
 {
     return this->_name;
 }
-
-
-
-

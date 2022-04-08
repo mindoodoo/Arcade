@@ -27,18 +27,10 @@ Core::Core(const std::string &gfxPath)
         this->loadAvailableLibs();
 
         // Init gfx config for menu
-        this->_config = {
-            "",
-            "./assets/core/CoreTileset.png",
-            "./assets/core/Minecraft.ttf",
-            16,
-            16,
-            40,
-            40
-        };
+        this->_config = parseGfx("./assets/core/graphics_cfg.csv");
 
         // Parse core menu map
-        this->_menuMap = parseMap("./assets/core/coreMapTest.csv");
+        this->_menuMap = parseMap(this->_config.mapPath);
         this->_config.windowWidth = this->_menuMap[0].size();
         this->_config.windowHeight = this->_menuMap.size();
 
