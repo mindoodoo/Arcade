@@ -30,7 +30,7 @@ Core::Core(const std::string &gfxPath)
         this->_config = {
             "",
             "./assets/core/CoreTileset.png",
-            "./assets/core/arial.ttf",
+            "./assets/core/Minecraft.ttf",
             16,
             16,
             40,
@@ -38,7 +38,7 @@ Core::Core(const std::string &gfxPath)
         };
 
         // Parse core menu map
-        this->_menuMap = parseMap("./assets/core/coreMap.csv");
+        this->_menuMap = parseMap("./assets/core/coreMapTest.csv");
         this->_config.windowWidth = this->_menuMap[0].size();
         this->_config.windowHeight = this->_menuMap.size();
 
@@ -265,6 +265,7 @@ void Core::displayScores()
     for (size_t i = 0; i < 10; i++) {
         std::string score = i < scores.size() ? std::to_string(scores[i]) : "";
         std::string line = std::to_string(i + 1) + ".\t" + score;
+        this->_gfx->drawTile(QUESTION_CUBE, 19, i + offset + 1);
         this->_gfx->drawText(line, 20, i + offset + 1);
     }
 }
