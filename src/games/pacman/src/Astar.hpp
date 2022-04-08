@@ -25,10 +25,8 @@ class Node
         coordinates_t position;
 
         int g;
-
         int h;
-
-        int f;
+        int f = 0;
 };
 
 std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end, map_t map);

@@ -44,52 +44,60 @@ std::deque<coordinates_t> returnPath(Node currentNode)
 
 std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end, map_t map)
 {
+    // Start / End
     Node startNode = Node(nullptr, start);
     Node endNode = Node(nullptr, end);
 
-    std::cout << "from " << start.first << " " << start.second << std::endl;
+    // Possible relative pos
+    // Used to initiate neighbours
+    std::deque<std::pair<int, int>> possiblePos;
 
-    std::cout << "to " << end.first << " " << end.second << std::endl;
+    // Init lists
     std::deque<Node> openList;
     std::deque<Node> closedList;
 
+    // Add start node to the list
     openList.push_back(startNode);
 
-    int outerIterations = 0;
+    int totalIterations = 0;
     size_t max_iterations = map[0].size() * map.size();
 
-    std::deque<std::pair<int, int>> adjacentSquares;
-    adjacentSquares.push_front({0, -1});
-    adjacentSquares.push_front({0, 1});
-    adjacentSquares.push_front({-1, 0});
-    adjacentSquares.push_front({1, 0});
+    // Initialize neighbour list
+    possiblePos.push_front({0, -1}); // Why push front and not push back ?
+    possiblePos.push_front({0, 1}); // When does it acount for walled nodes ?
+    possiblePos.push_front({-1, 0});
+    possiblePos.push_front({1, 0});
 
     while (!openList.empty()) {
-        outerIterations += 1;
+        // Inc total Iteration
+        totalIterations += 1;
 
         // Get the current node
         Node currNode = openList.front();
-        openList.pop_front();
+
+        // Remove from openList
+        openList.pop_front(); // Is this the smallest f ?
+        // ... and add to closed list
         closedList.push_back(currNode);
 
-        if (outerIterations > max_iterations) {
-            // if we hit this point return the path such as it is
-            // it will not contain the destination
-
-            std::cerr << "giving up on pathfinding too many iterations" << std::endl;
+        // Timeour check
+        if (totalIterations > max_iterations) {
+            std::cerr << "Pathfinding timeout... Too many iterations" << std::endl;
             return returnPath(currNode);
         }
 
-        // Found the goal
+        // Check if at target
         if (currNode == endNode) {
             std::cerr << "AT GOAL" << std::endl;
             return returnPath(currNode);
         }
 
-        // Generate children
-        std::deque<Node> children;
+        // Generate neighbours
+        std::deque<Node> neighbours;
 
-        for (std::pair<int, int> posOffset: adjacentSquares) {
+        ///////////////////////////////////
+
+        for (std::pair<int, int> posOffset: possiblePos) {
             // Adjacent squares
 
             // Get node position
@@ -112,10 +120,10 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
             // Create new node
             Node newNode = Node(&currNode, nodePosition);
 
-            children.push_back(newNode);
+            neighbours.push_back(newNode);
         }
 
-        for (Node child: children) {
+        for (Node child: neighbours) {
 
 //            int check1 = 0;
 //            for (auto item: closedList) {
