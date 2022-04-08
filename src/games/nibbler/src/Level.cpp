@@ -20,13 +20,14 @@ Nibbler::Level::Level(IGraphicsLib **gfx, gfx_config_t levelConf)
 
     this->_scene = new Terrain("./assets/nibbler/map1.csv", gfx);
     std::pair<int, int> dimensions = this->_scene->getMapDimensions();
-    this->_levelConf.windowWidth = dimensions.first;
-    this->_levelConf.windowHeight = dimensions.second;
 
-    this->_gameHeight = dimensions.first;
-    this->_gameWidth = dimensions.second;
+    this->_gameHeight = dimensions.second;
+    this->_gameWidth = dimensions.first;
 
-    this->_nibbler = new Player(this->_gameHeight / 2, this->_gameWidth / 2, this->_scene, gfx);
+    this->_levelConf.windowWidth = this->_gameWidth;
+    this->_levelConf.windowHeight = this->_gameHeight;
+
+    this->_nibbler = new Player(this->_gameWidth / 2, this->_gameHeight / 2, this->_scene, gfx);
 
     this->_gfx = gfx;
 
@@ -130,7 +131,8 @@ std::pair<int, int> Nibbler::Level::randomLocation()
     y = random() % (this->_gameHeight - 2) + 1;
 
     if (!this->isTileEmpty(x, y)) {
-        std::pair<int, int> pair = circleScan(30, x, y);
+        std::pair<int, int> dim = this->_scene->getMapDimensions();
+        std::pair<int, int> pair = circleScan(dim.first > dim.second ? dim.first : dim.second, x, y);
 
         if (pair.first == -1)
             this->_state = LEVEL::VICTORY;
@@ -140,7 +142,7 @@ std::pair<int, int> Nibbler::Level::randomLocation()
     return {x, y};
 }
 
-#define B(a)  a > 30 ?  30 : a
+#define B(a)  a > r ?  r : a
 #define A(b)  b < 0 ?  0 : b
 
 std::pair<int, int> Nibbler::Level::circleScan(int r, int x, int y)
