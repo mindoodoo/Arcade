@@ -35,7 +35,7 @@ void Pacman::BaseGhost::move(size_t x, size_t y)
 
 void Pacman::BaseGhost::draw()
 {
-    GFX->drawTile(PACMAN_HEAD, this->_x, this->_y);
+    GFX->drawTile(GHOST, this->_x, this->_y);
 }
 
 Pacman::BaseGhost::BaseGhost(Pacman::Terrain *scene, IGraphicsLib **gfx)
