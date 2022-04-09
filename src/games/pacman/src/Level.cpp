@@ -61,10 +61,12 @@ int Pacman::Level::frame()
     if (this->_scene->getMap()[this->_pacman->getY()][this->_pacman->getX()].tile == PACGUM) {
         this->_score++;
         this->_scene->setTile(this->_pacman->getX(), this->_pacman->getY(), TERRAIN_FLOOR);
+    } else if (this->_scene->getMap()[this->_pacman->getY()][this->_pacman->getX()].tile == BASICALLY_COCAINE) {
+
     }
 
-//    if (this->_ghosts->checkCollision(this->_pacman->getX(), this->_pacman->getY()))
-//        return LEVEL::DEFEAT;
+    if (this->_ghosts->checkCollision(this->_pacman->getX(), this->_pacman->getY()))
+        return LEVEL::DEFEAT;
 
     this->_scene->draw();
     this->_pacman->draw();

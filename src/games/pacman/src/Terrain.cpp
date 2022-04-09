@@ -19,7 +19,8 @@ Pacman::Terrain::Terrain(IGraphicsLib **gfx)
 
     this->_gfx = gfx;
     this->_walkable.push_back(TERRAIN_FLOOR);
-    this->_walkable.push_back(25);
+    this->_walkable.push_back(PACGUM);
+    this->_walkable.push_back(BASICALLY_COCAINE);
 }
 
 bool Pacman::Terrain::validLocation(size_t x, size_t y)
