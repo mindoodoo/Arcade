@@ -16,7 +16,7 @@ namespace Pacman
         public:
             BlinkyGhost(Terrain *scene, IGraphicsLib **gfx, Player *pacman);
 
-            ~BlinkyGhost();
+            ~BlinkyGhost() = default;
 
             void move(size_t x, size_t y) override;
 

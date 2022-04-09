@@ -45,14 +45,14 @@ void Pacman::Player::move()
 
         if (overflowCheckX < 0)
             this->_x = this->_scene->getWidth() - 1;
-        else if (overflowCheckX >= this->_scene->getWidth())
+        else if (overflowCheckX >= (int)this->_scene->getWidth())
             this->_x = 0;
         else
             this->_x += this->_xOffset;
 
         if (overflowCheckY < 0)
             this->_y = this->_scene->getHeight() - 1;
-        else if (overflowCheckY >= this->_scene->getHeight())
+        else if (overflowCheckY >= (int)this->_scene->getHeight())
             this->_y = 0;
         else
             this->_y += this->_yOffset;

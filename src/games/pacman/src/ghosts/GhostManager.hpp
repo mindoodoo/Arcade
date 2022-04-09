@@ -31,6 +31,8 @@ namespace Pacman
 
             void cycleState();
 
+            void makeVulnerable();
+
         private:
             BlinkyGhost *blinky;
             PinkyGhost *pinky;
@@ -43,5 +45,6 @@ namespace Pacman
 
             int *score;
             Player *pacman;
+            Terrain *_scene;
     };
 }

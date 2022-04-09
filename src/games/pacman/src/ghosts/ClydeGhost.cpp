@@ -28,7 +28,7 @@ Pacman::ClydeGhost::ClydeGhost(Terrain *scene, IGraphicsLib **gfx, Player *pacma
     this->_movementTile = this->_movementTiles.frontfacing;
 }
 
-void Pacman::ClydeGhost::move(size_t x, size_t y)
+void Pacman::ClydeGhost::move(size_t x [[maybe_unused]], size_t y [[maybe_unused]])
 {
     std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
 

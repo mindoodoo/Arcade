@@ -17,41 +17,66 @@ Pacman::BaseGhost::BaseGhost(Pacman::Terrain *scene, IGraphicsLib **gfx, Player 
     this->setState(GhostState::SLEEPING);
     this->stateChangeTimer = std::chrono::system_clock::now();
     this->_initialSleepSeconds = 10;
-    this->_huntedSpeed = 150;
+    this->_huntedSpeed = 325;
+    this->_retreatingSpeed = 450;
     this->_normalSpeed = 250;
     this->_currentSpeed = this->_normalSpeed;
+    this->_vulnerable = false; // to check if ghost has already been eaten
 }
 
 void Pacman::BaseGhost::setState(Pacman::GhostState state)
 {
+    if (state == GhostState::DEFEATED && !this->_vulnerable)
+        return;
+
     this->_state = state;
 
     if (state == GhostState::HUNTED)
         this->_currentSpeed = this->_huntedSpeed;
     if (state == GhostState::HUNTING)
         this->_currentSpeed = this->_normalSpeed;
+    if (state == GhostState::DEFEATED) {
+        this->_vulnerable = false;
+        this->returnToSpawn();
+        this->_currentSpeed = this->_retreatingSpeed;
+    }
 
     this->stateChangeTimer = std::chrono::system_clock::now();
 }
 
 void Pacman::BaseGhost::masterMove(size_t x, size_t y)
 {
-    if (this->_state == GhostState::SLEEPING) {
+    if (this->_state == GhostState::SLEEPING)
         return;
+
+    coordinates_t currLoc = {this->_x, this->_y};
+
+    if (this->_state != GhostState::DEFEATED) {
+        if (this->_pacman->getState() == Player::State::SUPER) {
+            if (this->_path.empty()) {
+                coordinates_t randomLocation = this->_scene->randomLocation();
+                this->_path = calculateAStar(currLoc, randomLocation, this->_scene->getMap());
+            }
+        } else {
+            std::deque<coordinates_t> path = calculateAStar(currLoc, {x, y}, this->_scene->getMap());
+
+            if (!path.empty())
+                this->_path = path;
+            if (this->_path.empty())
+                return;
+        }
     }
-
-    std::deque<coordinates_t> path = calculateAStar(coordinates_t{this->_y, this->_x}, coordinates_t{y, x},
-                                                    this->_scene->getMap());
-
-    if (!path.empty())
-        this->_path = path;
-
-    if (this->_path.empty())
-        return;
 
     this->_y = this->_path.front().first < this->_scene->getHeight() ? this->_path.front().first : 1;
     this->_x = this->_path.front().second < this->_scene->getWidth() ? this->_path.front().second : 1;
     this->_path.pop_front();
+
+    if (this->_state == GhostState::DEFEATED) {
+        // changing path in setState
+        if (this->_path.empty()) {
+            this->_state = GhostState::HUNTING;
+        }
+    }
     this->setMovementTile();
 }
 
@@ -104,6 +129,21 @@ void Pacman::BaseGhost::setMovementTile()
         this->_movementTile = this->_movementTiles.left;
     else if (this->_y < this->_path.front().first)
         this->_movementTile = this->_movementTiles.backfacing;
-    else if (this->_y > this->_path.front().first)
+    else
         this->_movementTile = this->_movementTiles.frontfacing;
+}
+
+void Pacman::BaseGhost::returnToSpawn()
+{
+    this->_path = calculateAStar(this->getLocation(), this->start, this->_scene->getMap());
+}
+
+void Pacman::BaseGhost::setVulnerable(bool vulnerable)
+{
+    this->_vulnerable = vulnerable;
+}
+
+bool Pacman::BaseGhost::getVulnerable() const
+{
+    return this->_vulnerable;
 }

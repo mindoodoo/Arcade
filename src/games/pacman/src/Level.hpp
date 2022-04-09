@@ -24,7 +24,7 @@ namespace Pacman
         public:
             Level(IGraphicsLib **gfx, gfx_config_t levelConf);
 
-            ~Level() override = default;
+            ~Level() override;
 
             int frame() override;
 
@@ -32,6 +32,7 @@ namespace Pacman
 
             int getScore() const override;
 
+            void saveScore() const;
         private:
             Player *_pacman;
             Terrain *_scene;

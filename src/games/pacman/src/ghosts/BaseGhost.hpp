@@ -56,6 +56,12 @@ namespace Pacman
 
             void setMovementTile();
 
+            void returnToSpawn();
+
+            void setVulnerable(bool vulnerable);
+
+            bool getVulnerable() const;
+
         protected:
             GhostState _state;
 
@@ -93,6 +99,10 @@ namespace Pacman
 
             int _huntedSpeed;
 
+            int _retreatingSpeed;
+
             int _currentSpeed;
+
+            bool _vulnerable;
     };
 }

@@ -16,9 +16,9 @@ namespace Pacman
         public:
             InkyGhost(Pacman::Terrain *scene, IGraphicsLib **gfx, Player *pacman, int *score);
 
-            ~InkyGhost();
+            ~InkyGhost() = default;
 
-            void move(size_t x, size_t y, size_t blinkyX, size_t blinkyY);
+            void move(size_t x, size_t y, coordinates_t blinkyLoc);
 
             bool setActive() override;
 

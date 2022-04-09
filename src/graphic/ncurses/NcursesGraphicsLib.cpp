@@ -101,9 +101,8 @@ void NcursesGraphicsLib::flush()
     clear();
 }
 
-void NcursesGraphicsLib::drawTile(int tile_index, int x, int y, int orientation)
+void NcursesGraphicsLib::drawTile(int tile_index, int x, int y, int orientation [[maybe_unused]])
 {
-    (void) orientation; // Silences unused parameter warning
     if ((size_t) tile_index >=  this->_tileset.size())
         return;
     attron(COLOR_PAIR(this->_tileset[tile_index].color));

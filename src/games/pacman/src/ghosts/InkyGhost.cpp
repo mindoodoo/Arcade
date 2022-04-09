@@ -28,16 +28,16 @@ Pacman::InkyGhost::InkyGhost(Pacman::Terrain *scene, IGraphicsLib **gfx, Player 
     this->_score = score;
 }
 
-void Pacman::InkyGhost::move(size_t x, size_t y, size_t blinkyX, size_t blinkyY)
+void Pacman::InkyGhost::move(size_t x, size_t y, coordinates_t blinkyLoc)
 {
     std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
 
     if (std::chrono::duration_cast<std::chrono::milliseconds>(now - this->moveTimer).count() >= this->_normalSpeed) {
         y += 2;
 
-        std::pair<int, int> vector = {(blinkyX - x) * 2, (blinkyY - y) * 2};
+        std::pair<int, int> vector = {(blinkyLoc.first - x) * 2, (blinkyLoc.second - y) * 2};
 
-        this->masterMove(blinkyX + vector.first, blinkyY + vector.second);
+        this->masterMove(blinkyLoc.first + vector.first, blinkyLoc.second + vector.second);
         this->moveTimer = now;
     }
 }

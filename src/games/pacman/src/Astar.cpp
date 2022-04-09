@@ -40,11 +40,13 @@ std::deque<coordinates_t> returnPath(Node currentNode)
 
 std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end, map_t map)
 {
+    end = {end.second, end.first};
+    start = {start.second, start.first};
     // Set blocking tiles (walls)
     int _blockingTiles[20] = {
-        0,1,2,3,4,5,6,7,
-        10,12,13,14,15,16,17,
-        20,21,22,23,24
+        0, 1, 2, 3, 4, 5, 6, 7,
+        10, 12, 13, 14, 15, 16, 17,
+        20, 21, 22, 23, 24
     };
 
     // Start / End
@@ -62,7 +64,7 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
     // Add start node to the list
     openList.push_back(startNode);
 
-    int totalIterations = 0;
+    size_t totalIterations = 0;
     size_t max_iterations = map[0].size() * map.size();
 
     // Initialize neighbour list
@@ -130,8 +132,8 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
             // Calc G
             child.g = currNode.g + 1;
             // Calc H
-            child.h = std::abs((int)child.position.first - (int)endNode.position.first) +
-            std::abs((int)child.position.second - (int)endNode.position.second);
+            child.h = std::abs((int) child.position.first - (int) endNode.position.first) +
+                      std::abs((int) child.position.second - (int) endNode.position.second);
             // Sum F = G + H
             child.f = child.g + child.h;
 

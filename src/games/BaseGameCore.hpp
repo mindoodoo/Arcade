@@ -26,7 +26,7 @@ class BaseGameCore : public virtual IGameLib
     public:
         BaseGameCore();
 
-        ~BaseGameCore() = default;
+        ~BaseGameCore() override = default;
 
         int frame() override;
 

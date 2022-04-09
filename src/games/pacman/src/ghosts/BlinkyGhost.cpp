@@ -10,8 +10,9 @@
 Pacman::BlinkyGhost::BlinkyGhost(Terrain *scene, IGraphicsLib **gfx, Player *pacman)
     : BaseGhost(scene, gfx, pacman)
 {
-    this->_x = 9;
-    this->_y = 11;
+    this->start = {9, 11};
+    this->_x = this->start.first;
+    this->_y = this->start.second;
     this->_initialSleepSeconds = 10;
     this->_id = BLINKY;
     this->_normalSpeed = 250;
@@ -30,7 +31,7 @@ void Pacman::BlinkyGhost::move(size_t x, size_t y)
 {
     std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
 
-    if (std::chrono::duration_cast<std::chrono::milliseconds>(now - this->moveTimer).count() >= this->_normalSpeed) {
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(now - this->moveTimer).count() >= this->_currentSpeed) {
         this->masterMove(x, y);
         this->moveTimer = now;
     }

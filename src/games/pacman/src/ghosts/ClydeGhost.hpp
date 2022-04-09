@@ -16,7 +16,7 @@ namespace Pacman
         public:
             ClydeGhost(Terrain *scene, IGraphicsLib **gfx, Player *pacman);
 
-            ~ClydeGhost();
+            ~ClydeGhost() = default;
 
             void move(size_t x, size_t y) override;
     };

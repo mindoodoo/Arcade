@@ -20,6 +20,8 @@ Pacman::GhostManager::GhostManager(Pacman::Terrain *scene, IGraphicsLib **gfx, P
 
     this->pacman = pacman;
 
+    this->_scene = scene;
+
     this->globalState = GhostState::HUNTING;
 }
 
@@ -46,11 +48,9 @@ void Pacman::GhostManager::move()
 
     this->cycleState();
 
-    auto blinkyLoc = this->blinky->getLocation();
-
     this->blinky->move(x, y);
     this->pinky->move(x, y);
-    this->inky->move(x, y, blinkyLoc.second, blinkyLoc.first);
+    this->inky->move(x, y, this->blinky->getLocation());
     this->clyde->move(x, y);
 }
 
@@ -84,10 +84,17 @@ void Pacman::GhostManager::cycleState()
 
     for (auto ghost: this->_ghosts) {
         ghost->setActive();
-        if (this->pacman->getState() == Player::State::SUPER && ghost->getState() != GhostState::HUNTED) {
+        if (this->pacman->getState() == Player::State::SUPER && ghost->getVulnerable()) {
             ghost->setState(GhostState::HUNTED);
         } else if (this->pacman->getState() == Player::State::NORMAL && ghost->getState() == GhostState::HUNTED) {
             ghost->setState(GhostState::HUNTING);
         }
+    }
+}
+
+void Pacman::GhostManager::makeVulnerable()
+{
+    for (auto ghost: this->_ghosts) {
+        ghost->setVulnerable(true);
     }
 }

@@ -5,6 +5,7 @@
 ** Description
 */
 
+#include <fstream>
 #include "Level.hpp"
 
 Pacman::Level::Level(IGraphicsLib **gfx, gfx_config_t levelConf)
@@ -87,8 +88,24 @@ void Pacman::Level::checkItemCollision()
     } else if (map[pacmanY][pacmanX].tile == BASICALLY_COCAINE) {
         this->cocainePillsCount--;
         this->_pacman->setState(Player::State::SUPER);
+        this->_ghosts->makeVulnerable();
         this->_scene->setTile(pacmanX, pacmanY, TERRAIN_FLOOR);
         if (this->cocainePillsCount <= 0)
             this->_state = LEVEL::VICTORY;
     }
+}
+
+void Pacman::Level::saveScore() const
+{
+    std::fstream file("./assets/pacman/scoreboard", std::ios::app);
+
+    if (file.tellg() > 0)
+        file << ",";
+    file << std::to_string(this->_score);
+    file.close();
+}
+
+Pacman::Level::~Level()
+{
+    this->saveScore();
 }
