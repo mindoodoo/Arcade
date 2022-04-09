@@ -12,7 +12,7 @@
 
 #define RANGE(a) a.begin(), a.end()
 
-Nibbler::Terrain::Terrain(const std::string& tileMapPath, IGraphicsLib **gfx)
+Nibbler::Terrain::Terrain(const std::string &tileMapPath, IGraphicsLib **gfx)
 {
     // Set gfx pointer used for drawing
     this->_gfx = gfx;

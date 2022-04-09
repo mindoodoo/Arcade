@@ -22,9 +22,9 @@ namespace Pacman
     class Level : virtual public ILevel
     {
         public:
-            Level(IGraphicsLib **gfx, gfx_config_t levelConf);
+            Level(IGraphicsLib **gfx, size_t level);
 
-            ~Level() override;
+            ~Level() override = default;
 
             int frame() override;
 

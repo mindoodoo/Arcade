@@ -55,7 +55,12 @@ void Pacman::BaseGhost::masterMove(size_t x, size_t y)
         if (this->_pacman->getState() == Player::State::SUPER) {
             if (this->_path.empty()) {
                 coordinates_t randomLocation = this->_scene->randomLocation();
-                this->_path = calculateAStar(currLoc, randomLocation, this->_scene->getMap());
+                std::deque<coordinates_t> path = calculateAStar(currLoc, randomLocation, this->_scene->getMap());
+
+                if (!path.empty())
+                    this->_path = path;
+                if (this->_path.empty())
+                    return;
             }
         } else {
             std::deque<coordinates_t> path = calculateAStar(currLoc, {x, y}, this->_scene->getMap());
@@ -67,8 +72,14 @@ void Pacman::BaseGhost::masterMove(size_t x, size_t y)
         }
     }
 
-    this->_y = this->_path.front().first < this->_scene->getHeight() ? this->_path.front().first : 1;
-    this->_x = this->_path.front().second < this->_scene->getWidth() ? this->_path.front().second : 1;
+    if (this->_path.front().first >= this->_scene->getHeight() ||
+        this->_path.front().second >= this->_scene->getWidth()) {
+        this->_x = this->start.first;
+        this->_y = this->start.second;
+    } else {
+        this->_y = this->_path.front().first;
+        this->_x = this->_path.front().second;
+    }
     this->_path.pop_front();
 
     if (this->_state == GhostState::DEFEATED) {
@@ -123,13 +134,13 @@ void Pacman::BaseGhost::setMovementTile()
 {
     if (this->_state == GhostState::HUNTED)
         this->_movementTile = GHOST_HUNTED;
-    else if (this->_x < this->_path.front().second)
+    else if (!this->_path.empty() && this->_x < this->_path.front().second)
         this->_movementTile = this->_movementTiles.right;
-    else if (this->_x > this->_path.front().second)
+    else if (!this->_path.empty() && this->_x >= this->_path.front().second)
         this->_movementTile = this->_movementTiles.left;
-    else if (this->_y < this->_path.front().first)
+    else if (!this->_path.empty() && this->_y < this->_path.front().first)
         this->_movementTile = this->_movementTiles.backfacing;
-    else
+    else if (!this->_path.empty() && this->_y <= this->_path.front().first)
         this->_movementTile = this->_movementTiles.frontfacing;
 }
 

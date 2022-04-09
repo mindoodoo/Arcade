@@ -11,11 +11,12 @@ Pacman::GameCore::GameCore()
 {
     this->_state = GS_MENU;
     this->_game = nullptr;
-    this->_level = 0;
+    this->_level = 1;
     this->_highScore = 0;  // TODO: Read from file where we save scores
     this->_gfx = nullptr;
 
-    this->_levelConf = parseGfx("./assets/pacman/graphics_cfg.csv");
+    this->_levelConf = parseGfx(CONFIG_PATH);
+    this->_maxLevels = csvToTable(CONFIG_PATH).size();
 }
 
 void Pacman::GameCore::showMenu()
@@ -36,7 +37,7 @@ void Pacman::GameCore::showGameOver()
 
 void Pacman::GameCore::startGame()
 {
-    this->_game = new Level(this->_gfx, this->_levelConf);
+    this->_game = new Level(this->_gfx, this->_level);
 }
 
 gfx_config_t Pacman::GameCore::getConfig()

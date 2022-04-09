@@ -50,4 +50,7 @@ class BaseGameCore : public virtual IGameLib
         ILevel *_game;
 
         IGraphicsLib **_gfx;
+
+        size_t _level;
+        size_t _maxLevels;
 };

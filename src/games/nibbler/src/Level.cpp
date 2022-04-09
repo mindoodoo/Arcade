@@ -5,13 +5,8 @@
 ** Description
 */
 
-#include <ncurses.h>
-#include <utility>
-#include <fstream>
-#include <iostream>
+
 #include "Level.hpp"
-#include "GameCore.hpp"
-#include "../include/NibblerMacros.hpp"
 
 Nibbler::Level::Level(IGraphicsLib **gfx, int level)
 {
@@ -126,6 +121,9 @@ std::pair<int, int> Nibbler::Level::randomLocation()
 {
     size_t x;
     size_t y;
+
+
+    srandom(std::chrono::system_clock::now().time_since_epoch().count());
 
     x = random() % (this->_gameWidth - 2) + 1;
     y = random() % (this->_gameHeight - 2) + 1;

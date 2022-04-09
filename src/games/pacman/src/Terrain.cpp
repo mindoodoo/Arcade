@@ -5,22 +5,21 @@
 ** Description
 */
 
+
 #include "Terrain.hpp"
 
 #define RANGE(a) a.begin(), a.end()
 
-Pacman::Terrain::Terrain(IGraphicsLib **gfx)
+Pacman::Terrain::Terrain(const std::string &tileMapPath, IGraphicsLib **gfx)
 {
-
-    this->_map = parseMap("./assets/pacman/pacmanMap.csv");
+    this->_map = parseMap(tileMapPath);
 
     this->_height = this->_map.size();
     this->_width = this->_map[0].size();
 
     this->_gfx = gfx;
-    this->_walkable.push_back(TERRAIN_FLOOR);
-    this->_walkable.push_back(PACGUM);
-    this->_walkable.push_back(BASICALLY_COCAINE);
+
+    this->_walkable = {TERRAIN_FLOOR, PACGUM, BASICALLY_COCAINE};
 }
 
 bool Pacman::Terrain::validLocation(size_t x, size_t y)
@@ -65,6 +64,8 @@ std::pair<size_t, size_t> Pacman::Terrain::randomLocation()
 {
     size_t x;
     size_t y;
+
+    srandom(std::chrono::system_clock::now().time_since_epoch().count());
 
     do {
         x = random() % (this->_map.size() - 2) + 1;

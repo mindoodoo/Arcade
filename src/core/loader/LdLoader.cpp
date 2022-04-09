@@ -15,7 +15,7 @@ LDLoader<T>::~LDLoader()
 template<class T>
 void LDLoader<T>::loadLib(const std::string &libPath)
 {
-    int res;
+    int res = 0;
 
     if (this->_handle)
         res = LDLoader<void>::close(this->_handle);

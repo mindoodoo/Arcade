@@ -27,8 +27,6 @@ namespace Pacman
             gfx_config_t getConfig() override;
         private:
             gfx_config_t _levelConf;
-
-            int _level;
     };
 
 }

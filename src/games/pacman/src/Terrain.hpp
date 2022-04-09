@@ -14,6 +14,8 @@
 #include "../include/PacmanMacros.hpp"
 #include "../../../shared/IGraphicsLib.hpp"
 #include "../../../shared/shared.hpp"
+#include <chrono>
+#include <iostream>
 
 /**
  * first = id of the tile
@@ -31,7 +33,7 @@ namespace Pacman
             /**
              * @param gfx
              */
-            explicit Terrain(IGraphicsLib **gfx);
+            explicit Terrain(const std::string &tileMapPath, IGraphicsLib **gfx);
 
             ~Terrain() = default;
 

@@ -11,8 +11,9 @@ Nibbler::GameCore::GameCore()
     : BaseGameCore()
 {
     this->_highScore = 0;  // TODO: Read from file where we save scores
-
+    this->_level = 1;
     this->_levelConf = parseGfx(CONFIG_PATH);
+    this->_maxLevels = csvToTable(CONFIG_PATH).size();
 }
 
 void Nibbler::GameCore::showMenu()
@@ -32,7 +33,7 @@ void Nibbler::GameCore::showGameOver()
 
 void Nibbler::GameCore::startGame()
 {
-    this->_game = new Level(this->_gfx, 1);
+    this->_game = new Level(this->_gfx, this->_level);
 }
 
 gfx_config_t Nibbler::GameCore::getConfig()

@@ -44,3 +44,5 @@
 #define PINKY 2
 #define INKY 3
 #define CLYDE 4
+
+#define CONFIG_PATH "./assets/pacman/graphics_cfg.csv"

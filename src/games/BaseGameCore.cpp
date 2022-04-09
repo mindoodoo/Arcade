@@ -13,6 +13,8 @@ BaseGameCore::BaseGameCore()
     this->_state = GS_MENU;
     this->_game = nullptr;
     this->_gfx = nullptr;
+    this->_level = 0;
+    this->_maxLevels = 0;
 }
 
 int BaseGameCore::frame()
@@ -34,7 +36,10 @@ int BaseGameCore::frame()
         } else if (levelState == LEVEL::VICTORY) {
             this->setHighScore(this->_game->getScore());
             this->_state = GS_MENU;
+            delete this->_game;
             this->_game = nullptr;
+            if (this->_level < this->_maxLevels)
+                this->_level++;
             GFX->flush();
         }
     } else {

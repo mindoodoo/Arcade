@@ -10,6 +10,11 @@
 #include "Player.hpp"
 #include "../../../shared/IGraphicsLib.hpp"
 #include "../../ILevel.hpp"
+#include "GameCore.hpp"
+#include <utility>
+#include <fstream>
+#include <iostream>
+#include <chrono>
 
 namespace Nibbler
 {

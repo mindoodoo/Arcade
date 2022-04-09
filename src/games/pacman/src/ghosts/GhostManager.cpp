@@ -69,9 +69,10 @@ bool Pacman::GhostManager::checkCollision()
     for (auto ghost: this->_ghosts) {
         std::pair<size_t, size_t> loc = ghost->getLocation();
         if (loc.first == x && loc.second == y) {
-            if (this->pacman->getState() == Player::State::SUPER)
+            if (this->pacman->getState() == Player::State::SUPER) {
+                *this->score += 20;
                 ghost->setState(GhostState::DEFEATED);
-            else
+            } else
                 return true;
         }
     }
