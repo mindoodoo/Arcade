@@ -16,7 +16,9 @@ Pacman::PinkyGhost::PinkyGhost(Terrain *scene, IGraphicsLib **gfx, Player *pacma
     this->_y = this->start.second;
     this->_initialSleepSeconds = 15;
     this->_id = PINKY;
-
+    this->_normalSpeed = 250;
+    this->_currentSpeed = this->_normalSpeed;
+    this->moveTimer = std::chrono::system_clock::now();
     this->_movementTiles = {
         PINKY_GHOST_RIGHT,
         PINKY_GHOST_LEFT,
@@ -28,7 +30,11 @@ Pacman::PinkyGhost::PinkyGhost(Terrain *scene, IGraphicsLib **gfx, Player *pacma
 
 void Pacman::PinkyGhost::move(size_t x, size_t y)
 {
+    std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
 
-    std::pair<char, char> dir = this->_pacman->getDirection();
-    this->masterMove(x + dir.first * 4, y + dir.second * 4);
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(now - this->moveTimer).count() >= this->_normalSpeed) {
+        std::pair<char, char> dir = this->_pacman->getDirection();
+        this->masterMove(x + dir.first * 4, y + dir.second * 4);
+        this->moveTimer = now;
+    }
 }

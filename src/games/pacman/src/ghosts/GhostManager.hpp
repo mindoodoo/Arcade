@@ -17,21 +17,31 @@ namespace Pacman
 {
     class GhostManager
     {
-        public:
-            GhostManager(Terrain *_scene, IGraphicsLib **_gfx, Player *pacman);
 
-            std::vector<Pacman::BaseGhost *> getGhosts();
+        public:
+            GhostManager(Terrain *_scene, IGraphicsLib **_gfx, Player *pacman, int *score);
 
             Pacman::BaseGhost *getGhost(int id);
 
-            void move(int x, int y);
+            void move();
 
             void draw();
 
-            bool checkCollision(size_t x, size_t y);
+            bool checkCollision();
+
+            void cycleState();
 
         private:
+            BlinkyGhost *blinky;
+            PinkyGhost *pinky;
+            InkyGhost *inky;
+            ClydeGhost *clyde;
 
-            std::vector<Pacman::BaseGhost *> _ghosts;
+            GhostState globalState;
+
+            std::vector<BaseGhost *> _ghosts;
+
+            int *score;
+            Player *pacman;
     };
 }

@@ -17,25 +17,26 @@ Pacman::BaseGhost::BaseGhost(Pacman::Terrain *scene, IGraphicsLib **gfx, Player 
     this->setState(GhostState::SLEEPING);
     this->stateChangeTimer = std::chrono::system_clock::now();
     this->_initialSleepSeconds = 10;
+    this->_huntedSpeed = 150;
+    this->_normalSpeed = 250;
+    this->_currentSpeed = this->_normalSpeed;
 }
 
 void Pacman::BaseGhost::setState(Pacman::GhostState state)
 {
     this->_state = state;
 
+    if (state == GhostState::HUNTED)
+        this->_currentSpeed = this->_huntedSpeed;
+    if (state == GhostState::HUNTING)
+        this->_currentSpeed = this->_normalSpeed;
+
     this->stateChangeTimer = std::chrono::system_clock::now();
 }
 
 void Pacman::BaseGhost::masterMove(size_t x, size_t y)
 {
-    std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
-
     if (this->_state == GhostState::SLEEPING) {
-        if (std::chrono::duration_cast<std::chrono::seconds>(now - this->stateChangeTimer).count() >=
-            this->_initialSleepSeconds) {
-            this->setState(GhostState::HUNTING);
-        } else
-            this->_movementTile = this->_movementTiles.frontfacing;
         return;
     }
 
@@ -48,17 +49,10 @@ void Pacman::BaseGhost::masterMove(size_t x, size_t y)
     if (this->_path.empty())
         return;
 
-    if (this->_x < this->_path.front().second)
-        this->_movementTile = this->_movementTiles.right;
-    else if (this->_x > this->_path.front().second)
-        this->_movementTile = this->_movementTiles.left;
-    else if (this->_y < this->_path.front().first)
-        this->_movementTile = this->_movementTiles.backfacing;
-    else if (this->_y > this->_path.front().first)
-        this->_movementTile = this->_movementTiles.frontfacing;
     this->_y = this->_path.front().first < this->_scene->getHeight() ? this->_path.front().first : 1;
     this->_x = this->_path.front().second < this->_scene->getWidth() ? this->_path.front().second : 1;
     this->_path.pop_front();
+    this->setMovementTile();
 }
 
 void Pacman::BaseGhost::draw()
@@ -79,4 +73,37 @@ int Pacman::BaseGhost::getID() const
 std::pair<size_t, size_t> Pacman::BaseGhost::getLocation()
 {
     return {this->_x, this->_y};
+}
+
+bool Pacman::BaseGhost::setActive()
+{
+    if (this->_state == GhostState::SLEEPING) {
+        std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
+        if (std::chrono::duration_cast<std::chrono::seconds>(now - this->stateChangeTimer).count() >=
+            this->_initialSleepSeconds) {
+            this->setState(GhostState::HUNTING);
+            return true;
+        } else
+            this->_movementTile = this->_movementTiles.frontfacing;
+    }
+    return false;
+}
+
+Pacman::GhostState Pacman::BaseGhost::getState() const
+{
+    return this->_state;
+}
+
+void Pacman::BaseGhost::setMovementTile()
+{
+    if (this->_state == GhostState::HUNTED)
+        this->_movementTile = GHOST_HUNTED;
+    else if (this->_x < this->_path.front().second)
+        this->_movementTile = this->_movementTiles.right;
+    else if (this->_x > this->_path.front().second)
+        this->_movementTile = this->_movementTiles.left;
+    else if (this->_y < this->_path.front().first)
+        this->_movementTile = this->_movementTiles.backfacing;
+    else if (this->_y > this->_path.front().first)
+        this->_movementTile = this->_movementTiles.frontfacing;
 }

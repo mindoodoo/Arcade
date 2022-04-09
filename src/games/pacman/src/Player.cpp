@@ -19,6 +19,7 @@ Pacman::Player::Player(size_t start_x, size_t start_y, Pacman::Terrain *scene, I
     this->_xOffset = 0;
     this->_yOffset = -1;
     this->_playerMovementTime = std::chrono::system_clock::now();
+    this->druggedDuration_s = 10;
 }
 
 void Pacman::Player::draw()
@@ -28,10 +29,14 @@ void Pacman::Player::draw()
 
 void Pacman::Player::move()
 {
+    auto now = std::chrono::system_clock::now();
+
+    if (std::chrono::duration_cast<std::chrono::seconds>(now - this->_druggedTimer).count() >= 10)
+        this->setState(State::NORMAL);
+
     if (!this->_scene->validLocation(this->_x + this->_xOffset, this->_y + this->_yOffset))
         return;
 
-    auto now = std::chrono::system_clock::now();
     if (std::chrono::duration_cast<std::chrono::milliseconds>(now - this->_playerMovementTime).count() >= 200) {
         this->_playerMovementTime = now;
 
@@ -73,4 +78,16 @@ void Pacman::Player::turn(char xOffset, char yOffset)
 std::pair<char, char> Pacman::Player::getDirection()
 {
     return {this->_xOffset, this->_yOffset};
+}
+
+Pacman::Player::State Pacman::Player::getState() const
+{
+    return this->_state;
+}
+
+void Pacman::Player::setState(Pacman::Player::State state)
+{
+    if (state == State::SUPER)
+        this->_druggedTimer = std::chrono::system_clock::now();
+    this->_state = state;
 }

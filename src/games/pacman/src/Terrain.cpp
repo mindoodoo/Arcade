@@ -73,3 +73,16 @@ std::pair<size_t, size_t> Pacman::Terrain::randomLocation()
 
     return {x, y};
 }
+
+int Pacman::Terrain::tileCount(int tile)
+{
+    int counter = 0;
+
+    for (size_t y = 0; y < this->_map.size(); y++) {
+        for (size_t x = 0; x < this->_map[y].size(); x++) {
+            if (this->_map[y][x].tile == tile)
+                counter++;
+        }
+    }
+    return counter;
+}

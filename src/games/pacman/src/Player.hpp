@@ -15,6 +15,8 @@ namespace Pacman
 {
     class Player
     {
+
+        public:
             enum State
             {
                 NORMAL = 0,
@@ -22,7 +24,6 @@ namespace Pacman
                 DEAD = 2
             };
 
-        public:
             Player(size_t start_x, size_t start_y, Terrain *scene, IGraphicsLib **gfx);
 
             ~Player() = default;
@@ -38,6 +39,11 @@ namespace Pacman
             size_t getY() const;
 
             std::pair<char, char> getDirection();
+
+            State getState() const;
+
+            void setState(State state);
+
         private:
             size_t _x;
             size_t _y;
@@ -51,5 +57,9 @@ namespace Pacman
             char _yOffset;
 
             std::chrono::time_point<std::chrono::system_clock> _playerMovementTime;
+
+            std::chrono::time_point<std::chrono::system_clock> _druggedTimer;
+
+            int druggedDuration_s;
     };
 }

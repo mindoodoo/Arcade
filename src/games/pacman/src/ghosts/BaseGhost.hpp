@@ -40,6 +40,8 @@ namespace Pacman
 
             void setState(GhostState state);
 
+            GhostState getState() const;
+
             void masterMove(size_t x, size_t y);
 
             virtual void move(size_t x, size_t y);
@@ -49,6 +51,10 @@ namespace Pacman
             int getID() const;
 
             std::pair<size_t, size_t> getLocation();
+
+            virtual bool setActive();
+
+            void setMovementTile();
 
         protected:
             GhostState _state;
@@ -67,6 +73,7 @@ namespace Pacman
             };
 
             std::chrono::time_point<std::chrono::system_clock> stateChangeTimer{};
+            std::chrono::time_point<std::chrono::system_clock> moveTimer{};
 
             std::deque<coordinates_t> _path;
 
@@ -81,5 +88,11 @@ namespace Pacman
             Player *_pacman;
 
             coordinates_t start;
+
+            int _normalSpeed;
+
+            int _huntedSpeed;
+
+            int _currentSpeed;
     };
 }

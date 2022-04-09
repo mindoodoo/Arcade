@@ -7,37 +7,51 @@
 
 #include "GhostManager.hpp"
 
-std::vector<Pacman::BaseGhost *> Pacman::GhostManager::getGhosts()
+Pacman::GhostManager::GhostManager(Pacman::Terrain *scene, IGraphicsLib **gfx, Player *pacman, int *score)
 {
-    return this->_ghosts;
-}
+    this->blinky = new BlinkyGhost(scene, gfx, pacman);
+    this->pinky = new PinkyGhost(scene, gfx, pacman);
+    this->inky = new InkyGhost(scene, gfx, pacman, score);
+    this->clyde = new ClydeGhost(scene, gfx, pacman);
 
-Pacman::GhostManager::GhostManager(Pacman::Terrain *scene, IGraphicsLib **gfx, Player *pacman)
-{
-    this->_ghosts.push_back(new BlinkyGhost(scene, gfx, pacman));
-    this->_ghosts.push_back(new PinkyGhost(scene, gfx, pacman));
-    this->_ghosts.push_back(new InkyGhost(scene, gfx, pacman));
-    this->_ghosts.push_back(new ClydeGhost(scene, gfx, pacman));
+    this->_ghosts = {this->blinky, this->pinky, this->inky, this->clyde};
+
+    this->score = score;
+
+    this->pacman = pacman;
+
+    this->globalState = GhostState::HUNTING;
 }
 
 Pacman::BaseGhost *Pacman::GhostManager::getGhost(int id)
 {
-
-    for (auto ghost: this->_ghosts) {
-        if (ghost->getID() == id)
-            return ghost;
+    switch (id) {
+        case BLINKY:
+            return this->blinky;
+        case PINKY:
+            return this->pinky;
+        case INKY:
+            return this->inky;
+        case CLYDE:
+            return this->clyde;
+        default:
+            return nullptr;
     }
-    return nullptr;
 }
 
-void Pacman::GhostManager::move(int x, int y)
+void Pacman::GhostManager::move()
 {
-    auto blinkyLoc = this->getGhost(BLINKY)->getLocation();
+    size_t x = this->pacman->getX();
+    size_t y = this->pacman->getY();
 
-    this->getGhost(BLINKY)->move(x, y);
-    this->getGhost(PINKY)->move(x, y);
-    dynamic_cast<InkyGhost *>(this->getGhost(INKY))->move(x, y, blinkyLoc.second, blinkyLoc.first);
-    this->getGhost(CLYDE)->move(x, y);
+    this->cycleState();
+
+    auto blinkyLoc = this->blinky->getLocation();
+
+    this->blinky->move(x, y);
+    this->pinky->move(x, y);
+    this->inky->move(x, y, blinkyLoc.second, blinkyLoc.first);
+    this->clyde->move(x, y);
 }
 
 void Pacman::GhostManager::draw()
@@ -47,12 +61,33 @@ void Pacman::GhostManager::draw()
     }
 }
 
-bool Pacman::GhostManager::checkCollision(size_t x, size_t y)
+bool Pacman::GhostManager::checkCollision()
 {
+    size_t x = this->pacman->getX();
+    size_t y = this->pacman->getY();
+
     for (auto ghost: this->_ghosts) {
         std::pair<size_t, size_t> loc = ghost->getLocation();
-        if (loc.first == x && loc.second == y)
-            return true;
+        if (loc.first == x && loc.second == y) {
+            if (this->pacman->getState() == Player::State::SUPER)
+                ghost->setState(GhostState::DEFEATED);
+            else
+                return true;
+        }
     }
     return false;
+}
+
+void Pacman::GhostManager::cycleState()
+{
+    //    std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
+
+    for (auto ghost: this->_ghosts) {
+        ghost->setActive();
+        if (this->pacman->getState() == Player::State::SUPER && ghost->getState() != GhostState::HUNTED) {
+            ghost->setState(GhostState::HUNTED);
+        } else if (this->pacman->getState() == Player::State::NORMAL && ghost->getState() == GhostState::HUNTED) {
+            ghost->setState(GhostState::HUNTING);
+        }
+    }
 }

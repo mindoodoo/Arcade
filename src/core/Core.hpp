@@ -117,7 +117,7 @@ class Core
         std::deque<game_meta_t> _games;
         std::deque<graphic_meta_t> _graphics;
 
-        // holds the arcade state, refer to the var type for more info
+        // holds the arcade State, refer to the var type for more info
         ARCADE _state;
 
         // holds the index of the selected game

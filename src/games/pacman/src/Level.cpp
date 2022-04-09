@@ -16,8 +16,10 @@ Pacman::Level::Level(IGraphicsLib **gfx, gfx_config_t levelConf)
 
     this->_scene = new Terrain(gfx);
     this->_pacman = new Player(11, 13, this->_scene, gfx);
-    this->_ghosts = new GhostManager(this->_scene, this->_gfx, this->_pacman);
-    this->_ghostMovementTime = std::chrono::system_clock::now();
+    this->_ghosts = new GhostManager(this->_scene, this->_gfx, this->_pacman, &this->_score);
+    this->_state = LEVEL::RUNNING;
+
+    this->cocainePillsCount = this->_scene->tileCount(BASICALLY_COCAINE);
 }
 
 int Pacman::Level::frame()
@@ -47,35 +49,46 @@ int Pacman::Level::frame()
                 this->_pacman->turn(1, 0);
                 GFX->popInput();
                 break;
+            default:
+                break;
         }
     }
 
-    std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
-
-    if (std::chrono::duration_cast<std::chrono::milliseconds>(now - this->_ghostMovementTime).count() >= 250) {
-        this->_ghosts->move(this->_pacman->getX(), this->_pacman->getY());
-        this->_ghostMovementTime = now;
-    }
+    this->_ghosts->move();
 
     this->_pacman->move();
-    if (this->_scene->getMap()[this->_pacman->getY()][this->_pacman->getX()].tile == PACGUM) {
-        this->_score++;
-        this->_scene->setTile(this->_pacman->getX(), this->_pacman->getY(), TERRAIN_FLOOR);
-    } else if (this->_scene->getMap()[this->_pacman->getY()][this->_pacman->getX()].tile == BASICALLY_COCAINE) {
 
-    }
+    if (this->_ghosts->checkCollision())
+        this->_state = LEVEL::DEFEAT;
 
-    if (this->_ghosts->checkCollision(this->_pacman->getX(), this->_pacman->getY()))
-        return LEVEL::DEFEAT;
+    this->checkItemCollision();
 
     this->_scene->draw();
-    this->_pacman->draw();
     this->_ghosts->draw();
+    this->_pacman->draw();
 
-    return LEVEL::RUNNING;
+    return this->_state;
 }
 
 int Pacman::Level::getScore() const
 {
     return this->_score;
+}
+
+void Pacman::Level::checkItemCollision()
+{
+    size_t pacmanX = this->_pacman->getX();
+    size_t pacmanY = this->_pacman->getY();
+    map_t map = this->_scene->getMap();
+
+    if (map[pacmanY][pacmanX].tile == PACGUM) {
+        this->_score++;
+        this->_scene->setTile(pacmanX, pacmanY, TERRAIN_FLOOR);
+    } else if (map[pacmanY][pacmanX].tile == BASICALLY_COCAINE) {
+        this->cocainePillsCount--;
+        this->_pacman->setState(Player::State::SUPER);
+        this->_scene->setTile(pacmanX, pacmanY, TERRAIN_FLOOR);
+        if (this->cocainePillsCount <= 0)
+            this->_state = LEVEL::VICTORY;
+    }
 }

@@ -19,5 +19,6 @@ namespace Pacman
             ~BlinkyGhost();
 
             void move(size_t x, size_t y) override;
+
     };
 }

@@ -7,7 +7,7 @@
 
 #include "InkyGhost.hpp"
 
-Pacman::InkyGhost::InkyGhost(Pacman::Terrain *scene, IGraphicsLib **gfx, Player *pacman)
+Pacman::InkyGhost::InkyGhost(Pacman::Terrain *scene, IGraphicsLib **gfx, Player *pacman, int *score)
     : BaseGhost(scene, gfx, pacman)
 {
     this->start = {12, 11};
@@ -15,6 +15,9 @@ Pacman::InkyGhost::InkyGhost(Pacman::Terrain *scene, IGraphicsLib **gfx, Player 
     this->_y = this->start.second;
     this->_initialSleepSeconds = 10;
     this->_id = INKY;
+    this->_normalSpeed = 250;
+    this->_currentSpeed = this->_normalSpeed;
+    this->moveTimer = std::chrono::system_clock::now();
     this->_movementTiles = {
         INKY_GHOST_RIGHT,
         INKY_GHOST_LEFT,
@@ -22,13 +25,28 @@ Pacman::InkyGhost::InkyGhost(Pacman::Terrain *scene, IGraphicsLib **gfx, Player 
         INKY_GHOST_FRONTFACING
     };
     this->_movementTile = this->_movementTiles.frontfacing;
+    this->_score = score;
 }
 
 void Pacman::InkyGhost::move(size_t x, size_t y, size_t blinkyX, size_t blinkyY)
 {
-    y += 2;
+    std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
 
-    std::pair<int, int> vector = {(blinkyX - x) * 2, (blinkyY - y) * 2};
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(now - this->moveTimer).count() >= this->_normalSpeed) {
+        y += 2;
 
-    this->masterMove(blinkyX + vector.first, blinkyY + vector.second);
+        std::pair<int, int> vector = {(blinkyX - x) * 2, (blinkyY - y) * 2};
+
+        this->masterMove(blinkyX + vector.first, blinkyY + vector.second);
+        this->moveTimer = now;
+    }
+}
+
+bool Pacman::InkyGhost::setActive()
+{
+    if (*this->_score >= 30) {
+        this->setState(GhostState::HUNTING);
+        return true;
+    }
+    return false;
 }
