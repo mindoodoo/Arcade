@@ -7,9 +7,11 @@
 
 #pragma once
 
-#define PACMAN_PACGUM 6
-#define PACMAN_HEAD 0
-#define GHOST 4
+#define GHOST_LEFT 8
+#define GHOST_RIGHT 9
+#define GHOST_BACKFACING 18
+#define GHOST_FRONTFACING 19
 
-#define TERRAIN_WALL 5
-#define TERRAIN_FLOOR 8
+#define PACMAN_HEAD 28
+
+#define TERRAIN_FLOOR 11

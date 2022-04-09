@@ -12,7 +12,7 @@
 Pacman::Terrain::Terrain(IGraphicsLib **gfx)
 {
 
-    this->_map = parseMap("./assets/pacman/map1.csv");
+    this->_map = parseMap("./assets/pacman/pacmanMap.csv");
 
     this->_height = this->_map.size();
     this->_width = this->_map[0].size();

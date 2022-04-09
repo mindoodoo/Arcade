@@ -40,6 +40,13 @@ std::deque<coordinates_t> returnPath(Node currentNode)
 
 std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end, map_t map)
 {
+    // Set blocking tiles (walls)
+    int _blockingTiles[20] = {
+        0,1,2,3,4,5,6,7,
+        10,12,13,14,15,16,17,
+        20,21,22,23,24
+    };
+
     // Start / End
     Node startNode = Node(nullptr, start);
     Node endNode = Node(nullptr, end);
@@ -59,8 +66,8 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
     size_t max_iterations = map[0].size() * map.size();
 
     // Initialize neighbour list
-    possiblePos.push_front({0, -1}); // Why push front and not push back ?
-    possiblePos.push_front({0, 1}); // When does it acount for walled nodes ?
+    possiblePos.push_front({0, -1});
+    possiblePos.push_front({0, 1});
     possiblePos.push_front({-1, 0});
     possiblePos.push_front({1, 0});
 
@@ -72,7 +79,7 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
         Node currNode = openList.front();
 
         // Remove from openList
-        openList.pop_front(); // Is this the smallest f ?
+        openList.pop_front();
         // ... and add to closed list
         closedList.push_back(currNode);
 
@@ -101,8 +108,12 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
                 continue;
 
             // Make sure walkable terrain
-            if (map[nodePosition.first][nodePosition.second].tile == TERRAIN_WALL)
-                continue; // Maybe add to closed list ?
+            int isBlocked = 0;
+            for (int blockingTile: _blockingTiles)
+                if (map[nodePosition.first][nodePosition.second].tile == blockingTile)
+                    isBlocked = 1;
+            if (isBlocked)
+                continue;
 
             // Create new node
             Node newNode = Node(&closedList.back(), nodePosition);
@@ -113,7 +124,7 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
         // Actual loop
         for (Node child: neighbours) {
             // Search closed list if child exist
-            if (std::find(RANGE(closedList), child) != closedList.end()) // Does this work ?
+            if (std::find(RANGE(closedList), child) != closedList.end())
                 continue;
 
             // Calc G

@@ -25,6 +25,14 @@ void Pacman::BaseGhost::move(size_t x, size_t y)
     if (this->_path.empty())
        return;
 
+    if (this->_x < this->_path.front().second)
+        this->_movementTile = GHOST_RIGHT;
+    if (this->_x > this->_path.front().second)
+        this->_movementTile = GHOST_LEFT;
+    if (this->_y < this->_path.front().first)
+        this->_movementTile = GHOST_BACKFACING;
+    if (this->_y > this->_path.front().first)
+        this->_movementTile = GHOST_FRONTFACING;
    this->_y = this->_path.front().first < this->_scene->getHeight() ? this->_path.front().first : 1;
    this->_x = this->_path.front().second < this->_scene->getWidth() ? this->_path.front().second : 1;
    this->_path.pop_front();
@@ -32,7 +40,12 @@ void Pacman::BaseGhost::move(size_t x, size_t y)
 
 void Pacman::BaseGhost::draw()
 {
-    GFX->drawTile(GHOST, this->_x, this->_y);
+    int tile = GHOST_FRONTFACING;
+
+    // Get correct tile
+    
+
+    GFX->drawTile(tile, this->_x, this->_y);
 }
 
 Pacman::BaseGhost::BaseGhost(Pacman::Terrain *scene, IGraphicsLib **gfx)

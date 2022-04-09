@@ -37,6 +37,8 @@ namespace Pacman
         protected:
             GhostState _state;
 
+            int _movementTile = GHOST_FRONTFACING;
+
             int stateChangeTimer{};
 
             int moveTimer{};
