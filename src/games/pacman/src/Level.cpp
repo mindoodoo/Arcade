@@ -6,7 +6,6 @@
 */
 
 #include "Level.hpp"
-#include "../../BaseGameCore.hpp"
 
 Pacman::Level::Level(IGraphicsLib **gfx, gfx_config_t levelConf)
 {
@@ -16,8 +15,8 @@ Pacman::Level::Level(IGraphicsLib **gfx, gfx_config_t levelConf)
     this->_levelConf = std::move(levelConf);
 
     this->_scene = new Terrain(gfx);
-    this->_ghost = new BaseGhost(this->_scene, this->_gfx);
-    this->_pacman = new Player(10, 14, this->_scene, gfx);
+    this->_pacman = new Player(11, 13, this->_scene, gfx);
+    this->_ghosts = new GhostManager(this->_scene, this->_gfx, this->_pacman);
     this->_ghostMovementTime = std::chrono::system_clock::now();
 }
 
@@ -27,7 +26,6 @@ int Pacman::Level::frame()
 
     std::queue<char> inputs = GFX->getInput();
 
-    this->_score++;
     if (!inputs.empty()) {
         char c = inputs.back();
         switch (c) {
@@ -54,15 +52,23 @@ int Pacman::Level::frame()
 
     std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
 
-    if (std::chrono::duration_cast<std::chrono::milliseconds>(now - this->_ghostMovementTime).count() >= 200) {
-        this->_ghost->move(this->_pacman->getX(), this->_pacman->getY());
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(now - this->_ghostMovementTime).count() >= 250) {
+        this->_ghosts->move(this->_pacman->getX(), this->_pacman->getY());
         this->_ghostMovementTime = now;
     }
 
     this->_pacman->move();
+    if (this->_scene->getMap()[this->_pacman->getY()][this->_pacman->getX()].tile == PACGUM) {
+        this->_score++;
+        this->_scene->setTile(this->_pacman->getX(), this->_pacman->getY(), TERRAIN_FLOOR);
+    }
+
+    if (this->_ghosts->checkCollision(this->_pacman->getX(), this->_pacman->getY()))
+        return LEVEL::DEFEAT;
+
     this->_scene->draw();
     this->_pacman->draw();
-    this->_ghost->draw();
+    this->_ghosts->draw();
 
     return LEVEL::RUNNING;
 }
