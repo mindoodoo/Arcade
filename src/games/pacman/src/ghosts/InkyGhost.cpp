@@ -14,6 +14,13 @@ Pacman::InkyGhost::InkyGhost(Pacman::Terrain *scene, IGraphicsLib **gfx, Player 
     this->_y = 11;
     this->_initialSleepSeconds = 10;
     this->_id = INKY;
+
+    this->_movementTiles = {
+        INKY_GHOST_RIGHT,
+        INKY_GHOST_LEFT,
+        INKY_GHOST_BACKFACING,
+        INKY_GHOST_BACKFACING
+    };
 }
 
 void Pacman::InkyGhost::move(size_t x, size_t y, size_t blinkyX, size_t blinkyY)

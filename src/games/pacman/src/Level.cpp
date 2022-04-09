@@ -63,6 +63,9 @@ int Pacman::Level::frame()
         this->_scene->setTile(this->_pacman->getX(), this->_pacman->getY(), TERRAIN_FLOOR);
     }
 
+    if (this->_ghosts->checkCollision(this->_pacman->getX(), this->_pacman->getY()))
+        return LEVEL::DEFEAT;
+
     this->_scene->draw();
     this->_pacman->draw();
     this->_ghosts->draw();

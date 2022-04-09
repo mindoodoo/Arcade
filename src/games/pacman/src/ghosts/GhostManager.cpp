@@ -46,3 +46,13 @@ void Pacman::GhostManager::draw()
         ghost->draw();
     }
 }
+
+bool Pacman::GhostManager::checkCollision(size_t x, size_t y)
+{
+    for (auto ghost: this->_ghosts) {
+        std::pair<size_t, size_t> loc = ghost->getLocation();
+        if (loc.first == x && loc.second == y)
+            return true;
+    }
+    return false;
+}

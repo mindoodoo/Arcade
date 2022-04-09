@@ -14,6 +14,13 @@ Pacman::BlinkyGhost::BlinkyGhost(Terrain *scene, IGraphicsLib **gfx, Player *pac
     this->_y = 11;
     this->_initialSleepSeconds = 10;
     this->_id = BLINKY;
+
+    this->_movementTiles = {
+        BLINKY_GHOST_RIGHT,
+        BLINKY_GHOST_LEFT,
+        BLINKY_GHOST_BACKFACING,
+        BLINKY_GHOST_BACKFACING
+    };
 }
 
 void Pacman::BlinkyGhost::move(size_t x, size_t y)

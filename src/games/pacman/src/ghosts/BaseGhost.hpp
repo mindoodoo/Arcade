@@ -25,6 +25,14 @@ namespace Pacman
         SLEEPING = 4
     };
 
+    typedef struct
+    {
+        int right;
+        int left;
+        int backfacing;
+        int frontfacing;
+    } directions_t;
+
     class BaseGhost
     {
         public:
@@ -41,14 +49,22 @@ namespace Pacman
             int getID() const;
 
             std::pair<size_t, size_t> getLocation();
+
         protected:
             GhostState _state;
 
             int _id;
 
-            int _movementTile = GHOST_FRONTFACING;
+            int _movementTile = BLINKY_GHOST_FRONTFACING;
 
             int _initialSleepSeconds = 10;
+
+            directions_t _movementTiles = {
+                PINKY_GHOST_RIGHT,
+                PINKY_GHOST_LEFT,
+                PINKY_GHOST_BACKFACING,
+                PINKY_GHOST_BACKFACING
+            };
 
             std::chrono::time_point<std::chrono::system_clock> stateChangeTimer{};
 

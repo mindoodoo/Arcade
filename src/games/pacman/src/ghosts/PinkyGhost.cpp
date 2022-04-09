@@ -15,6 +15,13 @@ Pacman::PinkyGhost::PinkyGhost(Terrain *scene, IGraphicsLib **gfx, Player *pacma
     this->_y = 11;
     this->_initialSleepSeconds = 15;
     this->_id = PINKY;
+
+    this->_movementTiles = {
+        PINKY_GHOST_RIGHT,
+        PINKY_GHOST_LEFT,
+        PINKY_GHOST_BACKFACING,
+        PINKY_GHOST_BACKFACING
+    };
 }
 
 void Pacman::PinkyGhost::move(size_t x, size_t y)

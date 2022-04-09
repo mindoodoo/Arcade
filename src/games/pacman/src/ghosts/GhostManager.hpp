@@ -27,6 +27,8 @@ namespace Pacman
 
             void draw();
 
+            bool checkCollision(size_t x, size_t y);
+
         private:
 
             std::vector<Pacman::BaseGhost *> _ghosts;

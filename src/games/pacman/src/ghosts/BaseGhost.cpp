@@ -35,7 +35,8 @@ void Pacman::BaseGhost::masterMove(size_t x, size_t y)
             this->_initialSleepSeconds) {
             this->setState(GhostState::HUNTING);
         } else
-            return;
+            this->_movementTile = this->_movementTiles.frontfacing;
+        return;
     }
 
     std::deque<coordinates_t> path = calculateAStar(coordinates_t{this->_y, this->_x}, coordinates_t{y, x},
@@ -48,13 +49,13 @@ void Pacman::BaseGhost::masterMove(size_t x, size_t y)
         return;
 
     if (this->_x < this->_path.front().second)
-        this->_movementTile = GHOST_RIGHT;
+        this->_movementTile = this->_movementTiles.right;
     else if (this->_x > this->_path.front().second)
-        this->_movementTile = GHOST_LEFT;
+        this->_movementTile = this->_movementTiles.left;
     else if (this->_y < this->_path.front().first)
-        this->_movementTile = GHOST_BACKFACING;
+        this->_movementTile = this->_movementTiles.backfacing;
     else if (this->_y > this->_path.front().first)
-        this->_movementTile = GHOST_FRONTFACING;
+        this->_movementTile = this->_movementTiles.frontfacing;
     this->_y = this->_path.front().first < this->_scene->getHeight() ? this->_path.front().first : 1;
     this->_x = this->_path.front().second < this->_scene->getWidth() ? this->_path.front().second : 1;
     this->_path.pop_front();
