@@ -21,6 +21,7 @@ Pacman::InkyGhost::InkyGhost(Pacman::Terrain *scene, IGraphicsLib **gfx, Player 
         INKY_GHOST_BACKFACING,
         INKY_GHOST_BACKFACING
     };
+    this->_movementTile = this->_movementTiles.frontfacing;
 }
 
 void Pacman::InkyGhost::move(size_t x, size_t y, size_t blinkyX, size_t blinkyY)

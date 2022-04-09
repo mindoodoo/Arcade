@@ -22,6 +22,7 @@ Pacman::PinkyGhost::PinkyGhost(Terrain *scene, IGraphicsLib **gfx, Player *pacma
         PINKY_GHOST_BACKFACING,
         PINKY_GHOST_BACKFACING
     };
+    this->_movementTile = this->_movementTiles.frontfacing;
 }
 
 void Pacman::PinkyGhost::move(size_t x, size_t y)

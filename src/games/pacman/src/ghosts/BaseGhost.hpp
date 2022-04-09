@@ -55,7 +55,7 @@ namespace Pacman
 
             int _id;
 
-            int _movementTile = BLINKY_GHOST_FRONTFACING;
+            int _movementTile;
 
             int _initialSleepSeconds = 10;
 
