@@ -32,11 +32,10 @@ graphicals:
 	make -C ./src/graphic/sdl2 --no-print-directory
 
 clean:
-	find -regex ".*\.o" -delete;
+	rm -rf;
 
 fclean: clean;
-	find -regex "./$(CORE_NAME)" -delete;
-	find -regex ".*/*.so" -delete;
+	rm -rf $(CORE_NAME);
 
 re: fclean
 	@make $(NAME) --no-print-directory
