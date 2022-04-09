@@ -21,7 +21,6 @@ all: core games graphicals
 
 core:
 	g++ $(CORE_SRC) $(CFLAGS) -o $(CORE_NAME)
-	@make clean
 
 games:
 	make -C ./src/games/nibbler --no-print-directory
@@ -29,14 +28,14 @@ games:
 
 graphicals:
 	make -C ./src/graphic/ncurses --no-print-directory
-	make -C ./src/graphic/sfml
-	make -C ./src/graphic/sdl2
+	make -C ./src/graphic/sfml --no-print-directory
+	make -C ./src/graphic/sdl2 --no-print-directory
 
 clean:
-	find -regex ".*/.*\.o" -delete;
+	find -regex ".*\.o" -delete;
 
 fclean: clean;
-	find -regex "./$(NAME)" -delete;
+	find -regex "./$(CORE_NAME)" -delete;
 	find -regex ".*/*.so" -delete;
 
 re: fclean

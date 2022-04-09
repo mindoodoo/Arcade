@@ -32,6 +32,7 @@
 #define PACMAN_HEAD 28
 
 #define PACGUM 25
+#define BASICALLY_COCAINE 26
 
 #define TERRAIN_FLOOR 11
 
