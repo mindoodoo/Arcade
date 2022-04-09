@@ -8,9 +8,10 @@
 #pragma once
 
 #include "chrono"
-#include "Terrain.hpp"
-#include "Astar.hpp"
-#include "../include/PacmanMacros.hpp"
+#include "../Terrain.hpp"
+#include "../Astar.hpp"
+#include "../../include/PacmanMacros.hpp"
+#include "../Player.hpp"
 #include <utility>
 
 namespace Pacman
@@ -27,21 +28,31 @@ namespace Pacman
     class BaseGhost
     {
         public:
-            BaseGhost(Terrain *_scene, IGraphicsLib **_gfx);
+            BaseGhost(Terrain *_scene, IGraphicsLib **_gfx, Player *pacman);
 
             void setState(GhostState state);
 
-            void move(size_t x, size_t y);
+            void masterMove(size_t x, size_t y);
+
+            virtual void move(size_t x, size_t y);
 
             void draw();
+
+            int getID() const;
+
+            std::pair<size_t, size_t> getLocation();
         protected:
             GhostState _state;
 
+            int _id;
+
             int _movementTile = GHOST_FRONTFACING;
 
-            int stateChangeTimer{};
+            int _initialSleepSeconds = 10;
 
-            int moveTimer{};
+            std::chrono::time_point<std::chrono::system_clock> stateChangeTimer{};
+
+            std::deque<coordinates_t> _path;
 
             size_t _x;
 
@@ -51,6 +62,6 @@ namespace Pacman
 
             IGraphicsLib **_gfx;
 
-            std::deque<coordinates_t> _path;
+            Player *_pacman;
     };
 }

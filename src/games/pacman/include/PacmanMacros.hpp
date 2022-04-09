@@ -14,4 +14,13 @@
 
 #define PACMAN_HEAD 28
 
+#define PACGUM 25
+
 #define TERRAIN_FLOOR 11
+
+
+#define BASIC 0
+#define BLINKY 1
+#define PINKY 2
+#define INKY 3
+#define CLYDE 4

@@ -36,6 +36,8 @@ namespace Pacman
             size_t getX() const;
 
             size_t getY() const;
+
+            std::pair<char, char> getDirection();
         private:
             size_t _x;
             size_t _y;

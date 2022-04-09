@@ -20,8 +20,12 @@ SRC = 	src/GameCore.cpp\
 		src/Terrain.cpp\
 		src/Player.cpp\
 		src/Astar.cpp\
-		src/BaseGhost.cpp\
-		src/make.cpp\
+		src/ghosts/BaseGhost.cpp \
+		src/ghosts/GhostManager.cpp \
+		src/ghosts/BlinkyGhost.cpp \
+		src/ghosts/PinkyGhost.cpp \
+		src/ghosts/InkyGhost.cpp \
+		src/make.cpp \
 		../../shared/mapParser.cpp \
 		../BaseGameCore.cpp \
 		../../shared/csv.cpp \

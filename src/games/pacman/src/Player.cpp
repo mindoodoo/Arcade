@@ -35,8 +35,8 @@ void Pacman::Player::move()
     if (std::chrono::duration_cast<std::chrono::milliseconds>(now - this->_playerMovementTime).count() >= 200) {
         this->_playerMovementTime = now;
 
-        int overflowCheckX = this->_x + this->_xOffset;
-        int overflowCheckY = this->_y + this->_yOffset;
+        int overflowCheckX = (int) this->_x + this->_xOffset;
+        int overflowCheckY = (int) this->_y + this->_yOffset;
 
         if (overflowCheckX < 0)
             this->_x = this->_scene->getWidth() - 1;
@@ -68,4 +68,9 @@ void Pacman::Player::turn(char xOffset, char yOffset)
 {
     this->_yOffset = yOffset;
     this->_xOffset = xOffset;
+}
+
+std::pair<char, char> Pacman::Player::getDirection()
+{
+    return {this->_xOffset, this->_yOffset};
 }

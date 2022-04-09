@@ -13,7 +13,9 @@
 #include "../../ILevel.hpp"
 #include "Terrain.hpp"
 #include "Player.hpp"
-#include "BaseGhost.hpp"
+#include "ghosts/BaseGhost.hpp"
+#include "ghosts/GhostManager.hpp"
+#include "../../BaseGameCore.hpp"
 
 namespace Pacman
 {
@@ -42,7 +44,7 @@ namespace Pacman
             Player *_pacman;
             Terrain *_scene;
 
-            BaseGhost *_ghost;
+            GhostManager *_ghosts;
             //        std::vector<Item *> _items;
             //            size_t _gameHeight;
             //            size_t _gameWidth;

@@ -19,6 +19,7 @@ Pacman::Terrain::Terrain(IGraphicsLib **gfx)
 
     this->_gfx = gfx;
     this->_walkable.push_back(TERRAIN_FLOOR);
+    this->_walkable.push_back(25);
 }
 
 bool Pacman::Terrain::validLocation(size_t x, size_t y)
@@ -52,4 +53,9 @@ size_t Pacman::Terrain::getWidth() const
 map_t Pacman::Terrain::getMap() const
 {
     return this->_map;
+}
+
+void Pacman::Terrain::setTile(size_t x, size_t y, int tile)
+{
+    this->_map[y][x].tile = tile;
 }
