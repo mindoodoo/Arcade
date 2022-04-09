@@ -11,8 +11,9 @@
 Pacman::PinkyGhost::PinkyGhost(Terrain *scene, IGraphicsLib **gfx, Player *pacman)
     : BaseGhost(scene, gfx, pacman)
 {
-    this->_x = 10;
-    this->_y = 11;
+    this->start = {10, 11};
+    this->_x = this->start.first;
+    this->_y = this->start.second;
     this->_initialSleepSeconds = 15;
     this->_id = PINKY;
 
@@ -20,7 +21,7 @@ Pacman::PinkyGhost::PinkyGhost(Terrain *scene, IGraphicsLib **gfx, Player *pacma
         PINKY_GHOST_RIGHT,
         PINKY_GHOST_LEFT,
         PINKY_GHOST_BACKFACING,
-        PINKY_GHOST_BACKFACING
+        PINKY_GHOST_FRONTFACING
     };
     this->_movementTile = this->_movementTiles.frontfacing;
 }

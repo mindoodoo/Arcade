@@ -130,8 +130,8 @@ std::deque<coordinates_t> calculateAStar(coordinates_t start, coordinates_t end,
             // Calc G
             child.g = currNode.g + 1;
             // Calc H
-            child.h = std::abs(child.position.first - endNode.position.first) +
-            std::abs(child.position.second - endNode.position.second);
+            child.h = std::abs((int)child.position.first - (int)endNode.position.first) +
+            std::abs((int)child.position.second - (int)endNode.position.second);
             // Sum F = G + H
             child.f = child.g + child.h;
 

@@ -14,11 +14,10 @@ std::vector<Pacman::BaseGhost *> Pacman::GhostManager::getGhosts()
 
 Pacman::GhostManager::GhostManager(Pacman::Terrain *scene, IGraphicsLib **gfx, Player *pacman)
 {
-    //    this->_ghosts = std::vector<Pacman::BaseGhost *>(0);
-
     this->_ghosts.push_back(new BlinkyGhost(scene, gfx, pacman));
     this->_ghosts.push_back(new PinkyGhost(scene, gfx, pacman));
     this->_ghosts.push_back(new InkyGhost(scene, gfx, pacman));
+    this->_ghosts.push_back(new ClydeGhost(scene, gfx, pacman));
 }
 
 Pacman::BaseGhost *Pacman::GhostManager::getGhost(int id)
@@ -38,6 +37,7 @@ void Pacman::GhostManager::move(int x, int y)
     this->getGhost(BLINKY)->move(x, y);
     this->getGhost(PINKY)->move(x, y);
     dynamic_cast<InkyGhost *>(this->getGhost(INKY))->move(x, y, blinkyLoc.second, blinkyLoc.first);
+    this->getGhost(CLYDE)->move(x, y);
 }
 
 void Pacman::GhostManager::draw()

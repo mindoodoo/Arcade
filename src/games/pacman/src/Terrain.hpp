@@ -46,6 +46,8 @@ namespace Pacman
             map_t getMap() const;
 
             void setTile(size_t x, size_t y, int tile);
+
+            std::pair<size_t, size_t> randomLocation();
         private:
             map_t _map;
 

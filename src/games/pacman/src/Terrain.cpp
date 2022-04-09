@@ -59,3 +59,16 @@ void Pacman::Terrain::setTile(size_t x, size_t y, int tile)
 {
     this->_map[y][x].tile = tile;
 }
+
+std::pair<size_t, size_t> Pacman::Terrain::randomLocation()
+{
+    size_t x;
+    size_t y;
+
+    do {
+        x = random() % (this->_map.size() - 2) + 1;
+        y = random() % (this->_map[0].size() - 2) + 1;
+    } while (!this->validLocation(x, y));
+
+    return {x, y};
+}

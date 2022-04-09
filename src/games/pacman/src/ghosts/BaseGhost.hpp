@@ -63,7 +63,7 @@ namespace Pacman
                 PINKY_GHOST_RIGHT,
                 PINKY_GHOST_LEFT,
                 PINKY_GHOST_BACKFACING,
-                PINKY_GHOST_BACKFACING
+                PINKY_GHOST_FRONTFACING
             };
 
             std::chrono::time_point<std::chrono::system_clock> stateChangeTimer{};
@@ -79,5 +79,7 @@ namespace Pacman
             IGraphicsLib **_gfx;
 
             Player *_pacman;
+
+            coordinates_t start;
     };
 }

@@ -19,7 +19,7 @@ Pacman::BlinkyGhost::BlinkyGhost(Terrain *scene, IGraphicsLib **gfx, Player *pac
         BLINKY_GHOST_RIGHT,
         BLINKY_GHOST_LEFT,
         BLINKY_GHOST_BACKFACING,
-        BLINKY_GHOST_BACKFACING
+        BLINKY_GHOST_FRONTFACING
     };
 
     this->_movementTile = this->_movementTiles.frontfacing;
