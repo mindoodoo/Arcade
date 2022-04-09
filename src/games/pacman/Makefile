@@ -25,6 +25,7 @@ SRC = 	src/GameCore.cpp\
 		src/ghosts/BlinkyGhost.cpp \
 		src/ghosts/PinkyGhost.cpp \
 		src/ghosts/InkyGhost.cpp \
+		src/ghosts/ClydeGhost.cpp \
 		src/make.cpp \
 		../../shared/mapParser.cpp \
 		../BaseGameCore.cpp \

@@ -11,6 +11,7 @@
 #include "BlinkyGhost.hpp"
 #include "PinkyGhost.hpp"
 #include "InkyGhost.hpp"
+#include "ClydeGhost.hpp"
 
 namespace Pacman
 {
