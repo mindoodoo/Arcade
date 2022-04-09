@@ -44,6 +44,8 @@ namespace Pacman
             size_t getWidth() const;
 
             map_t getMap() const;
+
+            void setTile(size_t x, size_t y, int tile);
         private:
             map_t _map;
 
