@@ -176,6 +176,7 @@ void Core::handleMenuInputs()
             break;
         case 'q': // quits the program
             this->_state = ARCADE::HALT;
+            this->_gfx->popInput();
     }
 }
 
