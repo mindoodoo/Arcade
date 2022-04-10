@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     coreInstance->mainLoop();
 
 
-    delete coreInstance;
+    // delete coreInstance;
 
     return 0;
 }

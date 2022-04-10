@@ -29,5 +29,6 @@ namespace Nibbler
             gfx_config_t getConfig() override;
         private:
             gfx_config_t _levelConf;
+            std::vector<std::vector<gfx_tile_t>> _menuMap;
     };
 }
