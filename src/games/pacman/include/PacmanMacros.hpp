@@ -28,8 +28,7 @@
 #define CLYDE_GHOST_BACKFACING 45
 
 #define GHOST_HUNTED 36
-
-
+#define GHOST_DEFEATED 29
 
 #define PACMAN_HEAD 28
 

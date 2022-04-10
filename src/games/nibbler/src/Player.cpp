@@ -27,6 +27,12 @@ void Nibbler::Player::appendSegment()
     this->_body.push_back({.x = this->_pastTile.x, .y = this->_pastTile.y});
 }
 
+void Nibbler::Player::popSegment()
+{
+    if (this->_body.size() > 1)
+        this->_body.pop_front();
+}
+
 void Nibbler::Player::turn(int xOffset, int yOffset)
 {
     if (!(xOffset == 0 || yOffset == 0)) {

@@ -9,6 +9,7 @@
 
 #include <utility>
 #include "../../../shared/IGraphicsLib.hpp"
+#include "../include/NibblerMacros.hpp"
 
 namespace Nibbler {
     class Player;
@@ -24,7 +25,7 @@ namespace Nibbler {
 
             bool itemCollision(int x, int y) const;
 
-            virtual void effect(Player *nibbler) = 0;
+            virtual void effect(Player *nibbler, int *score) = 0;
 
             void relocate(int x, int y);
 

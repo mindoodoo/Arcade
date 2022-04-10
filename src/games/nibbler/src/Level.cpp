@@ -7,6 +7,7 @@
 
 
 #include "Level.hpp"
+#include "MegaFruit.hpp"
 
 Nibbler::Level::Level(IGraphicsLib **gfx, size_t level)
 {
@@ -28,7 +29,8 @@ Nibbler::Level::Level(IGraphicsLib **gfx, size_t level)
 
     this->_state = LEVEL::RUNNING;
 
-    this->generateItems(ITEM_FRUIT1, this->_gameHeight * this->_gameWidth * 0.1);
+    this->generateItems(ITEM_FRUIT1, this->_gameHeight * this->_gameWidth * 0.05);
+    this->generateItems(ITEM_FRUIT2, this->_gameHeight * this->_gameWidth * 0.02);
 }
 
 void Nibbler::Level::draw()
@@ -83,10 +85,9 @@ void Nibbler::Level::checkItemCollision()
 
     for (Item *item: this->_items) {
         if (item->itemCollision(head.x, head.y)) {
-            item->effect(this->_nibbler);
+            item->effect(this->_nibbler, &this->_score);
             std::pair<int, int> coords = this->randomLocation();
             item->relocate(coords.first, coords.second);
-            this->_score++;
             break;
         }
     }
@@ -101,6 +102,12 @@ void Nibbler::Level::generateItems(int item_id, size_t amount)
         switch (item_id) {
             case ITEM_FRUIT1:
                 item = new Fruit(coords.first, coords.second, this->_gfx);
+                break;
+            case ITEM_FRUIT2:
+                item = new MegaFruit(coords.first, coords.second, this->_gfx);
+                break;
+            default:
+                break;
         }
 
         this->_items.push_back(item);

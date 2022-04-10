@@ -20,6 +20,7 @@ SRC = 	src/GameCore.cpp \
 		src/Player.cpp \
 		src/Terrain.cpp \
 		src/Fruit.cpp \
+		src/MegaFruit.cpp \
 		src/Item.cpp \
 		src/make.cpp \
 		../../shared/mapParser.cpp \
