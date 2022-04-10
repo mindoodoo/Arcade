@@ -26,6 +26,8 @@ class LDLoader
 
         void loadLib(const std::string &libpath);
 
+        void closeLoadedLib();
+
         /**
          * encapsulation for dlopen
          * throws dlerror() if return value is null
