@@ -165,7 +165,7 @@ void SfmlGraphicsLib::recordInputs()
             // If other special keys needed add if
         }
     }
-    std::this_thread::sleep_for(std::chrono::milliseconds(75)); // This should change
+    std::this_thread::sleep_for(std::chrono::milliseconds(100)); // This should change
 }
 
 std::string SfmlGraphicsLib::getName()

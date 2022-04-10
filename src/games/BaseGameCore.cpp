@@ -5,6 +5,7 @@
 ** Description
 */
 
+#include <iostream>
 #include "BaseGameCore.hpp"
 
 BaseGameCore::BaseGameCore()
