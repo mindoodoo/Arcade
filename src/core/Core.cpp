@@ -53,7 +53,6 @@ void Core::mainLoop()
             if (this->_state == ARCADE::GAME) {
                 if (this->_gamePtr->frame() != 0) {
                     this->_gfx->checkConfig(this->_config);
-                    this->_gfx->flush();
                     this->loadAvailableLibs();
                     this->_state = ARCADE::MENU;
                 }
@@ -87,6 +86,7 @@ void Core::mainLoop()
             this->_gfx->display();
         }
     } catch (std::exception &err) {
+        std::cerr << err.what() << std::endl;
         delete this->_gfx;
         delete this->_gamePtr;
         this->_state = ARCADE::HALT;
@@ -95,10 +95,8 @@ void Core::mainLoop()
 
 void Core::launchGame()
 {
-    if (this->_selectedGame >= this->_games.size()) {
-        delete this->_gfx;
+    if (this->_selectedGame >= this->_games.size())
         throw Error::GameNotFound(this->_selectedGame);
-    }
 
     this->_gameLoader.loadLib(this->_games[this->_selectedGame].path);
 
@@ -300,6 +298,7 @@ void Core::loadGraphics()
 {
     delete this->_gfx;
 
+    this->_gfxLoader.clear();
     this->_gfxLoader.loadLib(this->_graphics[this->_selectedGraphics].path);
     this->_gfx = this->_gfxLoader.getInstance();
 

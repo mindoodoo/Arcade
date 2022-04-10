@@ -24,7 +24,7 @@ NcursesGraphicsLib::NcursesGraphicsLib()
     };
     // Init ncurses
     initscr();
-    raw();
+    cbreak();
     noecho();
     curs_set(0);
     halfdelay(1);
@@ -75,7 +75,7 @@ int getColor(std::string colorName)
 
 void NcursesGraphicsLib::loadConfig()
 {
-    if (this->_config.asciiTilesetPath == "")
+    if (this->_config.asciiTilesetPath.empty())
         return;
 
     std::vector<std::string> stringVector = csvToVector(this->_config.asciiTilesetPath);

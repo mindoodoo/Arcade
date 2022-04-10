@@ -49,6 +49,8 @@ class LDLoader {
          * @return 0 if success, something else on error
          */
         static int close(void *handle);
+
+        void clear();
     private:
         T *(*_lib_factory)();
         void *_handle = nullptr;

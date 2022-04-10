@@ -71,6 +71,13 @@ int LDLoader<T>::close(void *handle)
     return 84;
 }
 
+template<class T>
+void LDLoader<T>::clear()
+{
+    this->_handle = nullptr;
+    this->_lib_factory = nullptr;
+}
+
 template
 class LDLoader<IGraphicsLib>;
 
