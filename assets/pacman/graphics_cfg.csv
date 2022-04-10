@@ -1,4 +1,4 @@
 asciiTilesetPath,graphicalTilesetPath,fontFolderPath,mapPath,tileWidth,tileHeight,windowWidth,windowHeight,scale
-./assets/pacman/asciiTileset.csv,./assets/pacman/PacmanTileset.png,./assets/nibbler/arial.ttf,"",16,16,80,80,1
+./assets/pacman/asciiTileset.csv,./assets/pacman/PacmanMenuTileset.png,./assets/nibbler/arial.ttf,./assets/pacman/pacmanMenuMap.csv,16,16,40,60,1
 ./assets/pacman/asciiTileset.csv,./assets/pacman/PacmanTileset.png,./assets/nibbler/arial.ttf,./assets/pacman/pacmanMap.csv,16,16,40,40,1
 ./assets/pacman/asciiTileset.csv,./assets/pacman/PacmanTileset.png,./assets/nibbler/arial.ttf,./assets/pacman/map1.csv,16,16,40,40,1
