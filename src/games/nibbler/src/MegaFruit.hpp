@@ -7,17 +7,16 @@
 
 #pragma once
 
-#include <utility>
 #include "Item.hpp"
 
 namespace Nibbler
 {
     class Player;
 
-    class Fruit : virtual public Item
+    class MegaFruit : virtual public Item
     {
         public:
-            Fruit(int x, int y, IGraphicsLib **gfx);
+            MegaFruit(int x, int y, IGraphicsLib **gfx);
 
             void effect(Player *nibbler, int *score) override;
     };

@@ -15,7 +15,8 @@
 
 namespace Nibbler
 {
-    typedef struct {
+    typedef struct
+    {
         int x;
         int y;
     } segment_t;
@@ -29,6 +30,8 @@ namespace Nibbler
 
             void appendSegment();
 
+            void popSegment();
+
             void turn(int xOffset, int yOffset);
 
             int moveForward();
@@ -38,7 +41,9 @@ namespace Nibbler
             segment_t tail();
 
             int getTileOrientation(int bodyIndex) const;
+
             int getCornerOrientation(int bodyIndex) const;
+
             void draw();
 
             bool nibblerCollision(int x, int y);
