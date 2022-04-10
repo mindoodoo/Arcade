@@ -134,6 +134,8 @@ void Pacman::BaseGhost::setMovementTile()
 {
     if (this->_state == GhostState::HUNTED)
         this->_movementTile = GHOST_HUNTED;
+    else if (this->_state == GhostState::DEFEATED)
+        this->_movementTile = GHOST_DEFEATED;
     else if (!this->_path.empty() && this->_x < this->_path.front().second)
         this->_movementTile = this->_movementTiles.right;
     else if (!this->_path.empty() && this->_x >= this->_path.front().second)
