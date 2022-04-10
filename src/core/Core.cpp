@@ -309,7 +309,6 @@ void Core::loadGraphics()
     this->_gfx = this->_gfxLoader.getInstance();
 
     if (this->_state == ARCADE::GAME) {
-        std::cout << "oy cheeky wanker" << std::endl;
         this->_gfx->checkConfig(this->_gamePtr->getConfig());
     } else
         this->_gfx->checkConfig(this->_config);
