@@ -103,7 +103,7 @@ void NcursesGraphicsLib::flush()
 
 void NcursesGraphicsLib::drawTile(int tile_index, int x, int y, int orientation [[maybe_unused]])
 {
-    if ((size_t) tile_index >=  this->_tileset.size())
+    if ((size_t) tile_index >= this->_tileset.size())
         return;
     attron(COLOR_PAIR(this->_tileset[tile_index].color));
     mvaddch(y, x * 2, this->_tileset[tile_index].c);
@@ -145,7 +145,8 @@ void NcursesGraphicsLib::display()
 
 void NcursesGraphicsLib::popInput()
 {
-    this->_inputQueue.pop();
+    if (!this->_inputQueue.empty())
+        this->_inputQueue.pop();
 }
 
 void NcursesGraphicsLib::recordInputs()

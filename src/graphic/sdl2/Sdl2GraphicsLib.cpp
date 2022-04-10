@@ -22,11 +22,13 @@ Sdl2GraphicsLib::Sdl2GraphicsLib()
     };
 
     this->_name = NAME;
-    this->_renderer = NULL;
-    this->_window = NULL;
-    this->_textTexture = NULL;
-    this->_tilesetTexture = NULL;
-    this->_font = NULL;
+    this->_renderer = nullptr;
+    this->_window = nullptr;
+    this->_textTexture = nullptr;
+    this->_tilesetTexture = nullptr;
+    this->_font = nullptr;
+    this->_textSurface = nullptr;
+    this->_tilesetSurface = nullptr;
     TTF_Init();
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Init(SDL_INIT_EVENTS);
@@ -59,17 +61,20 @@ void Sdl2GraphicsLib::loadConfig()
 
     if (this->_window)
         SDL_DestroyWindow(this->_window);
-    if (this->_renderer)
-        SDL_DestroyRenderer(this->_renderer);
 
     this->_window = SDL_CreateWindow("GAME", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                      this->_config.windowWidth * this->_config.tileWidth,
                                      this->_config.windowHeight * this->_config.tileHeight, SDL_WINDOW_SHOWN);
 
+    if (this->_renderer)
+        SDL_DestroyRenderer(this->_renderer);
+
     this->_renderer = SDL_CreateRenderer(this->_window, -1, SDL_RENDERER_ACCELERATED);
-//    SDL_SetRenderDrawBlendMode(this->_renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawBlendMode(this->_renderer, SDL_BLENDMODE_BLEND);
 
     //font loading
+    if (this->_font)
+        TTF_CloseFont(this->_font);
     this->_font = TTF_OpenFont(this->_config.fontFolderPath.c_str(), this->_config.tileWidth);
     if (this->_font == nullptr)
         std::cout << "failed loading font" << std::endl;
@@ -89,7 +94,7 @@ void Sdl2GraphicsLib::loadTileset()
     int x;
     int y;
 
-    if (this->_config.graphicalTilesetPath == "")
+    if (this->_config.graphicalTilesetPath.empty())
         return;
 
     this->_tilesetSurface = IMG_Load(this->_config.graphicalTilesetPath.c_str());
@@ -119,8 +124,8 @@ void Sdl2GraphicsLib::loadTileset()
                 SDL_SetTextureBlendMode(newTexture, SDL_BLENDMODE_BLEND);
 
                 SDL_SetRenderTarget(this->_renderer, newTexture);
-                SDL_RenderCopy(this->_renderer, this->_tilesetTexture, &tileRect, NULL);
-                SDL_SetRenderTarget(this->_renderer, NULL);
+                SDL_RenderCopy(this->_renderer, this->_tilesetTexture, &tileRect, nullptr);
+                SDL_SetRenderTarget(this->_renderer, nullptr);
                 this->_tiles.push_back(newTexture);
             }
         }
@@ -134,7 +139,8 @@ std::queue<char> &Sdl2GraphicsLib::getInput()
 
 void Sdl2GraphicsLib::popInput()
 {
-    this->_inputQueue.pop();
+    if (!this->_inputQueue.empty())
+        this->_inputQueue.pop();
 }
 
 void Sdl2GraphicsLib::recordInputs()
@@ -152,7 +158,7 @@ void Sdl2GraphicsLib::recordInputs()
         }
     }
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(100)); // This should change
+    std::this_thread::sleep_for(std::chrono::milliseconds(75)); // This should change
 }
 
 void Sdl2GraphicsLib::display()

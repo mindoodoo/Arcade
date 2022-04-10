@@ -26,16 +26,17 @@ class SfmlGraphicsLib : public virtual IGraphicsLib
     public:
         // Constructor
         SfmlGraphicsLib();
-        ~SfmlGraphicsLib();
+
+        ~SfmlGraphicsLib() override;
 
         //config / view setup
 
         // Updates screen with buffer (called at the end of all draw tiles)
-        virtual void display() override;
+        void display() override;
         // Clear screen/window
 
         //Runtime methods
-        void flush(void)  override;
+        void flush()  override;
         void drawTile(int tile_index, int x, int y, int orientation = ORIENT_TOP) override;
         void drawText(const std::string &txt, int x, int y, rgb_t color) override;
 
@@ -47,13 +48,13 @@ class SfmlGraphicsLib : public virtual IGraphicsLib
          * Saves all inputs to process to a queue
          * Call in Core at the beginning of everything
          */
-        virtual void recordInputs() override;
-        virtual void popInput() override;
+        void recordInputs() override;
+        void popInput() override;
 
         // Checks if game config is currently loaded config
         // If not : calls config loading methods
-        virtual void checkConfig(const gfx_config_t &config) override;
-        void loadConfig(void);
+        void checkConfig(const gfx_config_t &config) override;
+        void loadConfig();
         void loadTileset();
 
         std::string getName() override;

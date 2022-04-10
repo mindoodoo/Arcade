@@ -26,3 +26,7 @@ Error::GameNotFound::GameNotFound(size_t id)
     : Arcade("Game number " + std::to_string(id) + " not found.")
 {
 }
+
+Error::NoGraphicsLib::NoGraphicsLib(const std::string &path) : Arcade("This is not a graphics library: " + path)
+{
+}

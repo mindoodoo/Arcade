@@ -123,7 +123,7 @@ void SfmlGraphicsLib::checkConfig(const gfx_config_t &config)
     }
 }
 
-void SfmlGraphicsLib::loadConfig(void)
+void SfmlGraphicsLib::loadConfig()
 {
     // Font stuff
     this->_font.loadFromFile(
@@ -144,7 +144,8 @@ void SfmlGraphicsLib::loadConfig(void)
 
 void SfmlGraphicsLib::popInput()
 {
-    this->_inputQueue.pop();
+    if (!this->_inputQueue.empty())
+        this->_inputQueue.pop();
 }
 
 void SfmlGraphicsLib::recordInputs()
@@ -164,7 +165,7 @@ void SfmlGraphicsLib::recordInputs()
             // If other special keys needed add if
         }
     }
-    std::this_thread::sleep_for(std::chrono::milliseconds(100)); // This should change
+    std::this_thread::sleep_for(std::chrono::milliseconds(75)); // This should change
 }
 
 std::string SfmlGraphicsLib::getName()

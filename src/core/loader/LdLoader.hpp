@@ -14,8 +14,9 @@
 #include "IGraphicsLib.hpp"
 #include <filesystem>
 
-template <class T>
-class LDLoader {
+template<class T>
+class LDLoader
+{
     public:
         LDLoader() = default;
 
@@ -51,7 +52,13 @@ class LDLoader {
         static int close(void *handle);
 
         void clear();
+
+        int getId();
+
     private:
         T *(*_lib_factory)();
+
         void *_handle = nullptr;
+
+        int _id = 0;
 };

@@ -27,6 +27,8 @@ void LDLoader<T>::loadLib(const std::string &libPath)
 
     this->_lib_factory = (T *(*)()) LDLoader<void>::getSymbol(this->_handle, "make");
 
+    this->_id = *(int *) LDLoader<void>::getSymbol(this->_handle, "id");
+
     std::cout << "Library \"" << libPath << "\" loaded." << std::endl;
 }
 
@@ -76,6 +78,12 @@ void LDLoader<T>::clear()
 {
     this->_handle = nullptr;
     this->_lib_factory = nullptr;
+}
+
+template<class T>
+int LDLoader<T>::getId()
+{
+    return this->_id;
 }
 
 template

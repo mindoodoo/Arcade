@@ -21,7 +21,8 @@ Core::Core(const std::string &gfxPath)
         this->_state = ARCADE::MENU;
 
         this->_gfxLoader.loadLib(gfxPath);
-
+        if (this->_gfxLoader.getId() != GFX_iD)
+            throw Error::NoGraphicsLib(gfxPath);
         // Get instances of game and gfx libraries
         this->_gfx = this->_gfxLoader.getInstance();
 
@@ -87,8 +88,6 @@ void Core::mainLoop()
         }
     } catch (std::exception &err) {
         std::cerr << err.what() << std::endl;
-        delete this->_gfx;
-        delete this->_gamePtr;
         this->_state = ARCADE::HALT;
     }
 }
@@ -209,12 +208,15 @@ void Core::handleArcadeInputs()
             break;
         case 'r': // reload list of libs
             this->loadAvailableLibs();
+            this->_gfx->popInput();
             break;
         case 'j':
             this->graphicsRotateLeft();
+            this->_gfx->popInput();
             break;
         case 'l':
             this->graphicsRotateRight();
+            this->_gfx->popInput();
             break;
     }
 }
@@ -300,6 +302,9 @@ void Core::loadGraphics()
 
     this->_gfxLoader.clear();
     this->_gfxLoader.loadLib(this->_graphics[this->_selectedGraphics].path);
+    if (this->_gfxLoader.getId() != GFX_iD)
+        throw Error::GameNotFound(this->_selectedGame);
+
     this->_gfx = this->_gfxLoader.getInstance();
 
     if (this->_state == ARCADE::GAME)

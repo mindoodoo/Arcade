@@ -33,4 +33,10 @@ namespace Error
         public:
             explicit GameNotFound(size_t id);
     };
+
+    class NoGraphicsLib : virtual public Arcade
+    {
+        public:
+            explicit NoGraphicsLib(const std::string &path);
+    };
 }
