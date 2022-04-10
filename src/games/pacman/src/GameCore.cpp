@@ -27,6 +27,8 @@ void Pacman::GameCore::showMenu()
 {
     rgb_t textColor = {236,236,14};
 
+    GFX->checkConfig(this->_levelConf);
+
     // Draw core map
     for (size_t y = 0; y < this->_menuMap.size(); y++)
         for (size_t x = 0; x < this->_menuMap[y].size(); x++)
