@@ -265,7 +265,7 @@ void Core::displayScores()
     this->_gfx->drawText("SCORES:", 47, offset - 1, textColor);
 
     for (size_t i = 0; i < 5; i++) {
-        std::string score = i < scores.size() ? std::to_string(scores[i]) : "";
+        std::string score = i < scores.size() ? std::to_string(scores[i]) : " ";
         this->_gfx->drawTile(SMALL_CLOUD, 46, i * 2 + offset + 1);
         this->_gfx->drawText(score, 48, i * 2 + offset + 1, textColor);
     }
