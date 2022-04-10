@@ -71,6 +71,10 @@ size_t Pacman::Player::getY() const
 
 void Pacman::Player::turn(char xOffset, char yOffset)
 {
+    // Check direction is valid before turning so that pacman does not have the ability to stop
+    if (!this->_scene->validLocation(this->_x + xOffset, this->_y + yOffset))
+        return;
+
     this->_yOffset = yOffset;
     this->_xOffset = xOffset;
 }

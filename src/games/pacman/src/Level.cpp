@@ -57,7 +57,6 @@ int Pacman::Level::frame()
     }
 
     this->_ghosts->move();
-
     this->_pacman->move();
 
     if (this->_ghosts->checkCollision())
