@@ -21,7 +21,7 @@ namespace Nibbler
     class Level : public virtual ILevel
     {
         public:
-            explicit Level(IGraphicsLib **gfx, int level);
+            explicit Level(IGraphicsLib **gfx, size_t level);
 
             ~Level();
 

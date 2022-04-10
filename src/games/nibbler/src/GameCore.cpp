@@ -13,9 +13,9 @@ Nibbler::GameCore::GameCore()
     this->_highScore = 0;  // TODO: Read from file where we save scores
     this->_level = 1;
     this->_state = GS_MENU;
-    
+
     this->_levelConf = parseGfx(CONFIG_PATH);
-    this->_maxLevels = csvToTable(CONFIG_PATH).size();
+    this->_maxLevels = csvToTable(CONFIG_PATH).size() - 2;
 
     this->_menuMap = parseMap(this->_levelConf.mapPath);
     this->_levelConf.windowWidth = this->_menuMap[0].size();
@@ -41,7 +41,7 @@ void Nibbler::GameCore::showMenu()
 void Nibbler::GameCore::showGameOver()
 {
     GFX->checkConfig(this->_levelConf);
-    
+
     rgb_t textColor = {240,24,24};
 
     // Draw core map

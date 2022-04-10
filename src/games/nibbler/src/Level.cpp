@@ -8,7 +8,7 @@
 
 #include "Level.hpp"
 
-Nibbler::Level::Level(IGraphicsLib **gfx, int level)
+Nibbler::Level::Level(IGraphicsLib **gfx, size_t level)
 {
     this->_score = 0;
     this->_levelConf = parseGfx(CONFIG_PATH, level);
@@ -68,8 +68,10 @@ int Nibbler::Level::frame()
                 break;
         }
     }
+
     if (!this->_nibbler->moveForward())
-        this->_state = LEVEL::DEFEAT;
+        this->_state = this->_score >= 200 ? LEVEL::VICTORY : LEVEL::DEFEAT;
+
     this->checkItemCollision();
     this->draw();
     return this->_state;
@@ -121,7 +123,6 @@ std::pair<int, int> Nibbler::Level::randomLocation()
 {
     size_t x;
     size_t y;
-
 
     srandom(std::chrono::system_clock::now().time_since_epoch().count());
 

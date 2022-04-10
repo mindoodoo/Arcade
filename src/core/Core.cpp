@@ -277,9 +277,9 @@ void Core::graphicsRotateLeft()
     if (this->_graphics.size() <= 1)
         return;
 
-    if (this->_selectedGraphics > 0)
-        this->_selectedGraphics--;
-    else
+    this->_selectedGraphics--;
+
+    if (this->_selectedGraphics > (this->_graphics.size() - 1))
         this->_selectedGraphics = this->_graphics.size() - 1;
 
     this->loadGraphics();
@@ -290,10 +290,10 @@ void Core::graphicsRotateRight()
     if (this->_graphics.size() <= 1)
         return;
 
-    if (this->_selectedGraphics == (this->_graphics.size() - 1))
+    this->_selectedGraphics++;
+
+    if (this->_selectedGraphics > (this->_graphics.size() - 1))
         this->_selectedGraphics = 0;
-    else
-        this->_selectedGraphics++;
     this->loadGraphics();
 }
 
@@ -308,8 +308,9 @@ void Core::loadGraphics()
 
     this->_gfx = this->_gfxLoader.getInstance();
 
-    if (this->_state == ARCADE::GAME)
+    if (this->_state == ARCADE::GAME) {
+        std::cout << "oy cheeky wanker" << std::endl;
         this->_gfx->checkConfig(this->_gamePtr->getConfig());
-    else
+    } else
         this->_gfx->checkConfig(this->_config);
 }

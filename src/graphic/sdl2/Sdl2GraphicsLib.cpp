@@ -158,7 +158,7 @@ void Sdl2GraphicsLib::recordInputs()
         }
     }
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(75)); // This should change
+    std::this_thread::sleep_for(std::chrono::milliseconds(100)); // This should change
 }
 
 void Sdl2GraphicsLib::display()

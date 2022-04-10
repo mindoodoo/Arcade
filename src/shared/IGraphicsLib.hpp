@@ -73,8 +73,11 @@ class IGraphicsLib
 
         virtual void popInput() = 0;
 
-        // Checks if game config is currently loaded config
-        // If not : calls config loading methods
+        /**
+         * Checks if game config is currently loaded config
+         * If not : loads config
+         * @param config
+         */
         virtual void checkConfig(const gfx_config_t &config) = 0;
 
         virtual std::string getName() = 0;
