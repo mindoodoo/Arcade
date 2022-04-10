@@ -86,6 +86,16 @@ int LDLoader<T>::getId()
     return this->_id;
 }
 
+template<class T>
+void LDLoader<T>::closeLoadedLib()
+{
+    if (this->_handle) {
+        LDLoader<void>::close(this->_handle);
+        this->_handle = nullptr;
+        this->_lib_factory = nullptr;
+    }
+}
+
 template
 class LDLoader<IGraphicsLib>;
 

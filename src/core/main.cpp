@@ -15,11 +15,15 @@ int main(int argc, char *argv[])
         return 84;
     }
 
-    Core *coreInstance = new Core(argv[1]);
-    coreInstance->mainLoop();
+    try {
+        Core *coreInstance = new Core(argv[1]);
 
+        coreInstance->mainLoop();
 
-     delete coreInstance;
-
+        delete coreInstance;
+    } catch (std::exception &err) {
+        std::cerr << err.what() << std::endl;
+        return 84;
+    }
     return 0;
 }

@@ -15,32 +15,27 @@
 
 Core::Core(const std::string &gfxPath)
 {
-    try {
-        this->_selectedGame = 0;
-        this->_selectedGraphics = 0;
-        this->_state = ARCADE::MENU;
+    this->_selectedGame = 0;
+    this->_selectedGraphics = 0;
+    this->_state = ARCADE::MENU;
 
-        this->_gfxLoader.loadLib(gfxPath);
-        if (this->_gfxLoader.getId() != GFX_iD)
-            throw Error::NoGraphicsLib(gfxPath);
-        // Get instances of game and gfx libraries
-        this->_gfx = this->_gfxLoader.getInstance();
+    this->_gfxLoader.loadLib(gfxPath);
+    if (this->_gfxLoader.getId() != GFX_iD)
+        throw Error::NoGraphicsLib(gfxPath);
+    // Get instances of game and gfx libraries
+    this->_gfx = this->_gfxLoader.getInstance();
 
-        this->loadAvailableLibs();
+    this->loadAvailableLibs();
 
-        // Init gfx config for menu
-        this->_config = parseGfx("./assets/core/graphics_cfg.csv");
+    // Init gfx config for menu
+    this->_config = parseGfx("./assets/core/graphics_cfg.csv");
 
-        // Parse core menu map
-        this->_menuMap = parseMap(this->_config.mapPath);
-        this->_config.windowWidth = this->_menuMap[0].size();
-        this->_config.windowHeight = this->_menuMap.size();
+    // Parse core menu map
+    this->_menuMap = parseMap(this->_config.mapPath);
+    this->_config.windowWidth = this->_menuMap[0].size();
+    this->_config.windowHeight = this->_menuMap.size();
 
-        this->_gamePtr = nullptr;
-    } catch (std::exception &err) {
-        std::cerr << err.what() << std::endl;
-        exit(84);
-    }
+    this->_gamePtr = nullptr;
 }
 
 void Core::mainLoop()
@@ -224,6 +219,9 @@ void Core::handleArcadeInputs()
 
 Core::~Core()
 {
+    this->_gfxLoader.closeLoadedLib();
+    this->_gameLoader.closeLoadedLib();
+
     delete this->_gfx;
     delete this->_gamePtr;
 }
@@ -308,9 +306,8 @@ void Core::loadGraphics()
 
     this->_gfx = this->_gfxLoader.getInstance();
 
-    if (this->_state == ARCADE::GAME) {
-        std::cout << "oy cheeky wanker" << std::endl;
+    if (this->_state == ARCADE::GAME)
         this->_gfx->checkConfig(this->_gamePtr->getConfig());
-    } else
+    else
         this->_gfx->checkConfig(this->_config);
 }
