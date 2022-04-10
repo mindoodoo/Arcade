@@ -1,3 +1,4 @@
 asciiTilesetPath,graphicalTilesetPath,fontFolderPath,mapPath,tileWidth,tileHeight,windowWidth,windowHeight,scale
 ./assets/nibbler/asciiMenuTileset.csv,./assets/nibbler/NibblerMenuTileset.png,./assets/nibbler/arial.ttf,./assets/nibbler/nibblerMenuMap.csv,16,16,40,40,1
 ./assets/nibbler/asciiTileset.csv,./assets/nibbler/NibblerTileset.png,./assets/nibbler/arial.ttf,./assets/nibbler/map1.csv,16,16,40,40,1
+./assets/nibbler/asciiTileset.csv,./assets/nibbler/NibblerTileset.png,./assets/nibbler/arial.ttf,./assets/nibbler/map2.csv,16,16,70,70,1
