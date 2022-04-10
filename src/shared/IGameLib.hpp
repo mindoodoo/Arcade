@@ -23,5 +23,5 @@ class IGameLib {
 
         virtual gfx_config_t getConfig() = 0;
     protected:
-        IGraphicsLib **_gfx;
+        IGraphicsLib **_gfx = nullptr;
 };
