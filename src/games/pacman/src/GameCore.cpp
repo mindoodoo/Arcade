@@ -34,14 +34,23 @@ void Pacman::GameCore::showMenu()
 
     GFX->drawText("WELCOME TO PACMAN !", 24, 10, textColor);
     GFX->drawText("Press S to start playing...", 24, 12, textColor);
-    GFX->drawText("Press Q to return to menu...", 24, 13, textColor);
+    GFX->drawText("Press Q to return to main menu...", 24, 13, textColor);
 }
 
 void Pacman::GameCore::showGameOver()
 {
-    GFX->drawText("YOU LOST, PRESS S TO TRY AGAIN", 0, 0);
-    GFX->drawText("PRESS Q TO QUIT", 0, 1);
-    GFX->drawText("HIGHSCORE: " + std::to_string(this->_highScore), 0, 2);
+    GFX->checkConfig(this->_levelConf);
+    
+    rgb_t textColor = {236,236,14};
+
+    // Draw core map
+    for (size_t y = 0; y < this->_menuMap.size(); y++)
+        for (size_t x = 0; x < this->_menuMap[y].size(); x++)
+            GFX->drawTile(this->_menuMap[y][x].tile, x, y);
+
+    GFX->drawText("Game Over...", 24, 10, textColor);
+    GFX->drawText("Press S to play again...", 24, 12, textColor);
+    GFX->drawText("Press Q to return to main menu...", 24, 13, textColor);
 }
 
 void Pacman::GameCore::startGame()
